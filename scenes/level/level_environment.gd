@@ -36,11 +36,11 @@ func _init() -> void:
 	var environment := Environment.new()
 	environment.background_mode = Environment.BG_COLOR
 	environment.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
-	environment.ambient_light_energy = 0.3
+	environment.ambient_light_energy = 0.45
 	_world_environment.environment = environment
 	# The light comes from the top left, a little in front.
 	_light.rotation_degrees = Vector3(-55, -35, 0)
-	_light.light_energy = 0.55
+	_light.light_energy = 0.15
 	_light.directional_shadow_mode = DirectionalLight3D.SHADOW_ORTHOGONAL
 	_light.directional_shadow_max_distance = 40.0
 	_light.shadow_blur = 1.5
