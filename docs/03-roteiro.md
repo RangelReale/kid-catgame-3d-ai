@@ -34,3 +34,5 @@ Depois disso:
 
 - Testar no Retroid e ver se precisa desligar as sombras.
 - Exportar para Windows e Mac.
+- Jogar no Meta Quest 3 em realidade virtual. O plano está em
+  [04-realidade-virtual.md](04-realidade-virtual.md).
