@@ -1,0 +1,166 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/airplane/airplane.gd" id="1_airplane"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_body"]
+albedo_color = Color(0.97, 0.97, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_blue"]
+albedo_color = Color(0.3, 0.55, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_wing"]
+albedo_color = Color(0.85, 0.88, 0.95, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_cockpit"]
+albedo_color = Color(0.35, 0.5, 0.7, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_window"]
+albedo_color = Color(0.55, 0.8, 0.95, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_wheel"]
+albedo_color = Color(0.2, 0.2, 0.22, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_pink"]
+albedo_color = Color(1, 0.55, 0.75, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_dark"]
+albedo_color = Color(0.15, 0.1, 0.15, 1)
+
+[sub_resource type="CapsuleMesh" id="Mesh_body"]
+radius = 0.35
+height = 3.9
+
+[sub_resource type="BoxMesh" id="Mesh_stripe"]
+size = Vector3(3.5, 0.08, 0.72)
+
+[sub_resource type="BoxMesh" id="Mesh_cockpit"]
+size = Vector3(0.32, 0.16, 0.5)
+
+[sub_resource type="PrismMesh" id="Mesh_tail"]
+size = Vector3(0.5, 0.75, 0.06)
+
+[sub_resource type="BoxMesh" id="Mesh_wing"]
+size = Vector3(0.7, 0.05, 3.0)
+
+[sub_resource type="BoxMesh" id="Mesh_tail_wing"]
+size = Vector3(0.35, 0.04, 1.0)
+
+[sub_resource type="CylinderMesh" id="Mesh_wheel"]
+top_radius = 0.125
+bottom_radius = 0.125
+height = 0.1
+
+[sub_resource type="BoxMesh" id="Mesh_window"]
+size = Vector3(0.19, 0.19, 0.04)
+
+[sub_resource type="BoxMesh" id="Mesh_cat_face"]
+size = Vector3(0.15, 0.14, 0.02)
+
+[sub_resource type="PrismMesh" id="Mesh_cat_ear"]
+size = Vector3(0.06, 0.06, 0.02)
+
+[sub_resource type="BoxMesh" id="Mesh_cat_eye"]
+size = Vector3(0.03, 0.03, 0.01)
+
+[node name="Airplane" type="Node3D"]
+script = ExtResource("1_airplane")
+
+[node name="Visual" type="Node3D" parent="."]
+
+[node name="WingBack" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0.1, 0.45, 0)
+mesh = SubResource("Mesh_wing")
+surface_material_override/0 = SubResource("Mat_wing")
+
+[node name="TailWing" type="MeshInstance3D" parent="Visual"]
+position = Vector3(-1.8, 0.78, 0)
+mesh = SubResource("Mesh_tail_wing")
+surface_material_override/0 = SubResource("Mat_wing")
+
+[node name="WheelBackLeft" type="MeshInstance3D" parent="Visual"]
+position = Vector3(-0.94, 0.125, -0.2)
+rotation = Vector3(1.5708, 0, 0)
+mesh = SubResource("Mesh_wheel")
+surface_material_override/0 = SubResource("Mat_wheel")
+
+[node name="WheelBackRight" type="MeshInstance3D" parent="Visual"]
+position = Vector3(-0.94, 0.125, 0.2)
+rotation = Vector3(1.5708, 0, 0)
+mesh = SubResource("Mesh_wheel")
+surface_material_override/0 = SubResource("Mat_wheel")
+
+[node name="WheelFront" type="MeshInstance3D" parent="Visual"]
+position = Vector3(1.25, 0.125, 0)
+rotation = Vector3(1.5708, 0, 0)
+mesh = SubResource("Mesh_wheel")
+surface_material_override/0 = SubResource("Mat_wheel")
+
+[node name="Tail" type="MeshInstance3D" parent="Visual"]
+position = Vector3(-1.8, 1.15, 0)
+rotation = Vector3(0, 0, 0.4)
+mesh = SubResource("Mesh_tail")
+surface_material_override/0 = SubResource("Mat_blue")
+
+[node name="Body" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0, 0.6, 0)
+rotation = Vector3(0, 0, 1.5708)
+mesh = SubResource("Mesh_body")
+surface_material_override/0 = SubResource("Mat_body")
+
+[node name="Stripe" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0, 0.4, 0)
+mesh = SubResource("Mesh_stripe")
+surface_material_override/0 = SubResource("Mat_blue")
+
+[node name="Cockpit" type="MeshInstance3D" parent="Visual"]
+position = Vector3(1.6, 0.75, 0)
+rotation = Vector3(0, 0, -0.45)
+mesh = SubResource("Mesh_cockpit")
+surface_material_override/0 = SubResource("Mat_cockpit")
+
+[node name="Window1" type="MeshInstance3D" parent="Visual"]
+position = Vector3(-0.94, 0.66, 0.34)
+mesh = SubResource("Mesh_window")
+surface_material_override/0 = SubResource("Mat_window")
+
+[node name="Window2" type="MeshInstance3D" parent="Visual"]
+position = Vector3(-0.5, 0.66, 0.34)
+mesh = SubResource("Mesh_window")
+surface_material_override/0 = SubResource("Mat_window")
+
+[node name="Window3" type="MeshInstance3D" parent="Visual"]
+position = Vector3(-0.06, 0.66, 0.34)
+mesh = SubResource("Mesh_window")
+surface_material_override/0 = SubResource("Mat_window")
+
+[node name="Cat" type="Node3D" parent="Visual/Window3"]
+position = Vector3(0, -0.01, 0.025)
+
+[node name="Face" type="MeshInstance3D" parent="Visual/Window3/Cat"]
+mesh = SubResource("Mesh_cat_face")
+surface_material_override/0 = SubResource("Mat_pink")
+
+[node name="EarLeft" type="MeshInstance3D" parent="Visual/Window3/Cat"]
+position = Vector3(-0.045, 0.09, 0)
+mesh = SubResource("Mesh_cat_ear")
+surface_material_override/0 = SubResource("Mat_pink")
+
+[node name="EarRight" type="MeshInstance3D" parent="Visual/Window3/Cat"]
+position = Vector3(0.045, 0.09, 0)
+mesh = SubResource("Mesh_cat_ear")
+surface_material_override/0 = SubResource("Mat_pink")
+
+[node name="Eye" type="MeshInstance3D" parent="Visual/Window3/Cat"]
+position = Vector3(0.03, 0.015, 0.012)
+mesh = SubResource("Mesh_cat_eye")
+surface_material_override/0 = SubResource("Mat_dark")
+
+[node name="Window4" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0.375, 0.66, 0.34)
+mesh = SubResource("Mesh_window")
+surface_material_override/0 = SubResource("Mat_window")
+
+[node name="Window5" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0.81, 0.66, 0.34)
+mesh = SubResource("Mesh_window")
+surface_material_override/0 = SubResource("Mat_window")
