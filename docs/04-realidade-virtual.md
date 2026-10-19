@@ -23,7 +23,8 @@ verdade, na frente da criança. A versão já abriu num Quest 3 de verdade
   por 1 segundo traz a caixa de volta para a frente da cabeça. O recentro do
   próprio Quest (segurar o botão Meta) faz o mesmo.
 - **Controles.** O direcional de qualquer controle anda para os lados e
-  nada para baixo. A, X ou um gatilho pulam. Eles apertam as mesmas ações
+  nada para baixo. A ou um gatilho pulam. X também pula, mas quando o gato
+  nada ou voa livre (fases 4 e 8), X desce. Eles apertam as mesmas ações
   do teclado, então nenhuma regra do jogo mudou.
 - **Corte nas bordas.** O chão e as colinas das fases são mais largos que a
   caixa. Painéis invisíveis em volta da caixa apagam o que fica do lado de
@@ -78,7 +79,7 @@ do `adb logcat` mostra os quadros por segundo.
 
 - Conforto: a velocidade com que a fase desliza, a distância e a altura da
   caixa.
-- Os controles: andar, pular, nadar e trazer a caixa de volta com o grip.
+- O direcional para baixo e o X descendo na água (fase 4) e no voo (fase 8).
 - A velocidade nas fases mais pesadas, como a 16.
 - O flash da foto das princesas (fase 14), que no óculos é uma bola branca
   em volta da cabeça.

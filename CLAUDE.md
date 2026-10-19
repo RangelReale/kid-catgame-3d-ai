@@ -70,8 +70,8 @@ está no começo de `tools/tests/demo_drive.gd`.
 
 ## Regras
 
-- Nunca trabalhe em `master`. Crie um branch antes de qualquer mudança e faça
-  commits nele. Faça o merge em `master` e o push só quando o pai pedir.
+- Neste repositório, não crie branches. Faça os commits direto em `master`.
+  Faça o push só quando o pai pedir.
 - Não edite a pasta `.godot/` nem os arquivos `.import`. O Godot os gera.
 - Fases são dados: cada fase é um `.tscn`. Não monte fases por código.
 - O gato, os monstrinhos e a bandeira ficam no plano z = 0. A profundidade é

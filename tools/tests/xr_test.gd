@@ -105,7 +105,7 @@ func _test_controllers() -> void:
 	input.apply(Vector2(0.3, 0), false)
 	_check("a small push does nothing",
 			not Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"), null)
-	input.apply(Vector2(0.8, -0.8), true)
+	input.apply(Vector2(0.8, 0.8), true)
 	_check("thumbstick right and down, with a button, walks right, swims down and jumps",
 			Input.is_action_pressed("move_right") and Input.is_action_pressed("move_down")
 			and Input.is_action_pressed("jump"), null)
@@ -113,6 +113,13 @@ func _test_controllers() -> void:
 	_check("letting go releases every action",
 			not Input.is_action_pressed("move_right") and not Input.is_action_pressed("move_down")
 			and not Input.is_action_pressed("jump"), null)
+	input.apply(Vector2.ZERO, false, true, false)
+	_check("X jumps when the cat walks",
+			Input.is_action_pressed("jump") and not Input.is_action_pressed("move_down"), null)
+	input.apply(Vector2.ZERO, false, true, true)
+	_check("X goes down when the cat swims or flies",
+			Input.is_action_pressed("move_down") and not Input.is_action_pressed("jump"), null)
+	input.apply(Vector2.ZERO, false)
 	input.free()
 	await process_frame
 
