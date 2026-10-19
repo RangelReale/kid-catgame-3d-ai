@@ -26,6 +26,18 @@ extends Node3D
 		fog_density = value
 		_update()
 
+## In the headset the real room shows behind the level, so the background
+## becomes this colour instead of the sky: fully transparent in the headset,
+## or a plain room grey on a computer screen. The diorama rig sets both.
+var passthrough: bool = false:
+	set(value):
+		passthrough = value
+		_update()
+var passthrough_color: Color = Color(0, 0, 0, 0):
+	set(value):
+		passthrough_color = value
+		_update()
+
 var _world_environment := WorldEnvironment.new()
 var _light := DirectionalLight3D.new()
 
@@ -49,7 +61,7 @@ func _init() -> void:
 
 func _update() -> void:
 	var environment := _world_environment.environment
-	environment.background_color = sky_color
+	environment.background_color = passthrough_color if passthrough else sky_color
 	environment.ambient_light_color = ambient_color
 	environment.fog_enabled = fog
 	environment.fog_light_color = sky_color

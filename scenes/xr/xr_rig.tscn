@@ -1,0 +1,31 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/xr/xr_rig.gd" id="1_rig"]
+[ext_resource type="Script" path="res://scenes/xr/stage.gd" id="2_stage"]
+[ext_resource type="Script" path="res://scenes/xr/xr_input.gd" id="3_input"]
+
+[node name="XRRig" type="Node3D"]
+script = ExtResource("1_rig")
+
+[node name="Stage" type="Node3D" parent="."]
+script = ExtResource("2_stage")
+
+[node name="PreviewCamera" type="Camera3D" parent="."]
+fov = 60.0
+far = 200.0
+
+[node name="XROrigin3D" type="XROrigin3D" parent="."]
+current = false
+
+[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
+far = 400.0
+
+[node name="LeftHand" type="XRController3D" parent="XROrigin3D"]
+tracker = &"left_hand"
+
+[node name="RightHand" type="XRController3D" parent="XROrigin3D"]
+tracker = &"right_hand"
+
+[node name="Input" type="Node" parent="." node_paths=PackedStringArray("controllers")]
+script = ExtResource("3_input")
+controllers = [NodePath("../XROrigin3D/LeftHand"), NodePath("../XROrigin3D/RightHand")]

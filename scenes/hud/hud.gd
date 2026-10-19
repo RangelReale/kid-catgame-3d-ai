@@ -25,8 +25,12 @@ func _on_joy_connection_changed(_device: int, _connected: bool) -> void:
 	_update_visibility()
 
 
-## Shows the touch buttons only on a touch screen with no controller.
+## Shows the touch buttons only on a touch screen with no controller and no
+## headset.
 func _update_visibility() -> void:
 	var has_touch := DisplayServer.is_touchscreen_available() \
 			or Input.emulate_touch_from_mouse
-	_touch_buttons.visible = has_touch and Input.get_connected_joypads().is_empty()
+	# In the headset the buttons cannot be seen or touched.
+	var xr := XRServer.find_interface("OpenXR")
+	var headset := xr != null and xr.is_initialized()
+	_touch_buttons.visible = has_touch and Input.get_connected_joypads().is_empty() 			and not headset

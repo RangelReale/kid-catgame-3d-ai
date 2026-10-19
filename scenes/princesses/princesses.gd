@@ -36,6 +36,9 @@ func _on_body_entered(body: Node3D) -> void:
 
 ## Covers the screen in white and fades it away, like a camera flash.
 func _flash() -> void:
+	if get_viewport().use_xr:
+		_flash_headset()
+		return
 	var layer := CanvasLayer.new()
 	layer.layer = 10
 	var white := ColorRect.new()
@@ -45,3 +48,27 @@ func _flash() -> void:
 	layer.add_child(white)
 	add_child(layer)
 	create_tween().tween_property(white, "modulate:a", 0.0, flash_duration)
+
+
+## A headset does not show 2D layers, so the flash is a small white ball
+## around the player's head that fades away.
+func _flash_headset() -> void:
+	var camera := get_viewport().get_camera_3d()
+	if camera == null:
+		return
+	var material := StandardMaterial3D.new()
+	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	material.no_depth_test = true
+	material.cull_mode = BaseMaterial3D.CULL_DISABLED
+	material.albedo_color = Color.WHITE
+	var sphere := SphereMesh.new()
+	sphere.radius = 1.0
+	sphere.height = 2.0
+	sphere.material = material
+	var ball := MeshInstance3D.new()
+	ball.mesh = sphere
+	camera.add_child(ball)
+	var tween := create_tween()
+	tween.tween_property(material, "albedo_color:a", 0.0, flash_duration)
+	tween.tween_callback(ball.queue_free)

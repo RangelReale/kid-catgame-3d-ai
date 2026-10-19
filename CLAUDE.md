@@ -14,7 +14,9 @@ O ratão e o monstro gigante têm barra de vida e liberam a bandeira. A fase 11
 montanha-russa, torre e pescaria. Depois da última fase, o jogo volta à
 primeira. As teclas de 1 a 9 e o 0 pulam para as fases 1 a 10; com Ctrl, para
 as fases 11 a 20. Os próximos passos estão no [roteiro](docs/03-roteiro.md).
-Atualize esta seção a cada marco.
+Há também uma versão para o Meta Quest 3, em que a fase vira uma maquete na
+sala ([docs/04-realidade-virtual.md](docs/04-realidade-virtual.md)); ela já
+abriu num Quest 3 de verdade. Atualize esta seção a cada marco.
 
 ## Quem pede as mudanças
 
@@ -58,6 +60,10 @@ lugar de `godot` sempre que a saída importa.
 | Testar as peças das fases | o mesmo comando com `group_a_test.gd`, `group_b_test.gd` e `group_c_test.gd` |
 | Ver se abre sem erros | `godot --path . --quit-after 120 -- --level N` |
 | Exportar para Android | `godot --headless --path . --export-debug "Android" build/android/catgame3d.apk` |
+| Ver a maquete do óculos na tela | `godot --path . -- --xr-preview` |
+| Testar a maquete do óculos | `godot --headless --path . -s tools/tests/xr_test.gd` |
+| Baixar o plugin do óculos (uma vez) | `sh tools/install_xr_plugin.sh` |
+| Exportar para o Quest 3 | `godot --headless --path . --install-android-build-template --export-debug "Quest" build/quest/catgame3d-quest.apk` |
 
 Para ver o jogo sem jogar, grave quadros com o passeio automático. O comando
 está no começo de `tools/tests/demo_drive.gd`.
@@ -72,6 +78,9 @@ está no começo de `tools/tests/demo_drive.gd`.
   só para a aparência.
 - 1 unidade vale 32 pixels do jogo 2D, e y cresce para cima. As fórmulas
   estão em [docs/02-arquitetura.md](docs/02-arquitetura.md).
+- Não leia a câmera da tela nem o tamanho da tela no código do jogo. No
+  óculos, a câmera é a cabeça. Use a câmera da fase só como dados (alvo e
+  limites), como faz o rig em `scenes/xr/`.
 - Use o bloco (`scenes/level/block.gd`) para chão, caixas, plataformas e
   paredes.
 - Leia entradas por ações (`move_left`, `move_right`, `move_down`, `jump`),

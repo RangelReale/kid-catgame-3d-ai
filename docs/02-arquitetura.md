@@ -14,6 +14,7 @@ project.godot          configuração: tela, ações de entrada, renderizador
 scenes/
   main.tscn            a cena que o jogo abre; tem a lista de fases e os botões
   hud/                 botões de toque (2D, copiados do jogo 2D)
+  xr/                  a versão do óculos: a maquete (rig), a caixa e os controles
   camera/              a câmera que segue o gato
   level/               peças de fase: bloco, plataforma móvel de mão única,
                        luz e céu, céu distante, balanço, pintura
@@ -23,7 +24,9 @@ scenes/
   goal/                a bandeira de chegada
   sun/, cloud/         o sol e as nuvens do céu
 assets/                ícone e sons
-tools/tests/           teste automático e passeio automático para gravar quadros
+tools/tests/           testes automáticos e passeio automático para gravar quadros
+tools/install_xr_plugin.sh  baixa o plugin OpenXR Vendors (fora do Git)
+addons/                plugin OpenXR Vendors, baixado pelo script acima
 docs/                  estes documentos (o Godot ignora a pasta)
 ```
 
@@ -91,6 +94,21 @@ isso o chão das fases é mais largo que a fase.
 5. Coloque decoração ao fundo (z negativo) para dar profundidade.
 6. Ponha a fase na lista `levels` de `scenes/main.tscn`.
 
+## Versão do óculos
+
+Detalhes em [04-realidade-virtual.md](04-realidade-virtual.md). Em resumo:
+
+- `scenes/main.gd` vê se o OpenXR está ligado. Se estiver, ou se o jogo
+  começar com `-- --xr-preview`, acrescenta o rig `scenes/xr/xr_rig.tscn` e
+  avisa o rig a cada fase nova (sinal `level_loaded`).
+- O rig desliga a câmera da fase, mas usa o alvo e os limites dela. Por isso
+  as fases não mudam para o óculos.
+- A caixa (`scenes/xr/stage.gd`) tem painéis com o shader
+  `scenes/xr/holdout.gdshader`, que deixam transparente tudo o que fica atrás
+  deles. No óculos, o transparente mostra a sala.
+- O céu (`scenes/level/sky.gd`) e a luz (`scenes/level/level_environment.gd`)
+  têm um modo para o óculos, que o rig liga.
+
 ## Testes
 
 - `godot_console --headless --path . -s tools/tests/movement_test.gd` testa o
@@ -98,6 +116,10 @@ isso o chão das fases é mais largo que a fase.
   sereia. `group_a_test.gd`, `group_b_test.gd` e `group_c_test.gd` testam as
   peças das fases 5 a 16: homem bravo, chefes, passarinhos, malas, avião,
   cama elástica, brinquedos que carregam o gato, princesas e peixes.
+- `tools/tests/xr_test.gd` testa a maquete do óculos pela prévia: a janela
+  segue o gato e para nos limites, a câmera da fase desliga, o céu vai para
+  o fundo da caixa, os controles apertam as ações e a caixa aparece na
+  frente da cabeça.
 - `tools/tests/demo_drive.gd` joga sozinho por alguns segundos. Com o
   gravador de vídeo do Godot (`--write-movie`), ele grava quadros para ver o
   jogo sem jogar. O comando está no começo do arquivo.
