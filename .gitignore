@@ -1,0 +1,13 @@
+# Godot: cache e arquivos gerados
+.godot/
+*.translation
+
+# Modelo de build do Android, instalado pelo editor
+/android/
+
+# Jogos exportados
+/build/
+
+# Sistema
+.DS_Store
+Thumbs.db

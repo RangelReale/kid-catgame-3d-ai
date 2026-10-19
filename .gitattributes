@@ -1,0 +1,12 @@
+# Finais de linha iguais no Windows e no Mac
+* text=auto eol=lf
+
+# Arquivos binários
+*.png binary
+*.jpg binary
+*.webp binary
+*.wav binary
+*.ogg binary
+*.mp3 binary
+*.ttf binary
+*.otf binary

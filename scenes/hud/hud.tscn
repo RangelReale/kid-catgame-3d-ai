@@ -1,0 +1,99 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scenes/hud/hud.gd" id="1_hud"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_button"]
+radius = 28.0
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_hud")
+
+[node name="TouchButtons" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="LeftCorner" type="Control" parent="TouchButtons"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="Left" type="TouchScreenButton" parent="TouchButtons/LeftCorner"]
+position = Vector2(36, -36)
+shape = SubResource("CircleShape2D_button")
+passby_press = true
+action = "move_left"
+
+[node name="Visual" type="Node2D" parent="TouchButtons/LeftCorner/Left"]
+
+[node name="Circle" type="Polygon2D" parent="TouchButtons/LeftCorner/Left/Visual"]
+color = Color(1, 1, 1, 0.5)
+polygon = PackedVector2Array(24, 0, 22.2, 9.2, 17, 17, 9.2, 22.2, 0, 24, -9.2, 22.2, -17, 17, -22.2, 9.2, -24, 0, -22.2, -9.2, -17, -17, -9.2, -22.2, 0, -24, 9.2, -22.2, 17, -17, 22.2, -9.2)
+
+[node name="Arrow" type="Polygon2D" parent="TouchButtons/LeftCorner/Left/Visual"]
+color = Color(0.35, 0.25, 0.45, 0.8)
+polygon = PackedVector2Array(-11, 0, 1, -11, 1, -4, 10, -4, 10, 4, 1, 4, 1, 11)
+
+[node name="Right" type="TouchScreenButton" parent="TouchButtons/LeftCorner"]
+position = Vector2(100, -36)
+shape = SubResource("CircleShape2D_button")
+passby_press = true
+action = "move_right"
+
+[node name="Visual" type="Node2D" parent="TouchButtons/LeftCorner/Right"]
+
+[node name="Circle" type="Polygon2D" parent="TouchButtons/LeftCorner/Right/Visual"]
+color = Color(1, 1, 1, 0.5)
+polygon = PackedVector2Array(24, 0, 22.2, 9.2, 17, 17, 9.2, 22.2, 0, 24, -9.2, 22.2, -17, 17, -22.2, 9.2, -24, 0, -22.2, -9.2, -17, -17, -9.2, -22.2, 0, -24, 9.2, -22.2, 17, -17, 22.2, -9.2)
+
+[node name="Arrow" type="Polygon2D" parent="TouchButtons/LeftCorner/Right/Visual"]
+color = Color(0.35, 0.25, 0.45, 0.8)
+polygon = PackedVector2Array(11, 0, -1, -11, -1, -4, -10, -4, -10, 4, -1, 4, -1, 11)
+
+[node name="RightCorner" type="Control" parent="TouchButtons"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="Jump" type="TouchScreenButton" parent="TouchButtons/RightCorner"]
+position = Vector2(-36, -36)
+shape = SubResource("CircleShape2D_button")
+action = "jump"
+
+[node name="Visual" type="Node2D" parent="TouchButtons/RightCorner/Jump"]
+
+[node name="Circle" type="Polygon2D" parent="TouchButtons/RightCorner/Jump/Visual"]
+color = Color(1, 1, 1, 0.5)
+polygon = PackedVector2Array(24, 0, 22.2, 9.2, 17, 17, 9.2, 22.2, 0, 24, -9.2, 22.2, -17, 17, -22.2, 9.2, -24, 0, -22.2, -9.2, -17, -17, -9.2, -22.2, 0, -24, 9.2, -22.2, 17, -17, 22.2, -9.2)
+
+[node name="Arrow" type="Polygon2D" parent="TouchButtons/RightCorner/Jump/Visual"]
+color = Color(0.35, 0.25, 0.45, 0.8)
+polygon = PackedVector2Array(0, -11, 11, 1, 4, 1, 4, 10, -4, 10, -4, 1, -11, 1)
+
+[node name="Down" type="TouchScreenButton" parent="TouchButtons/RightCorner"]
+position = Vector2(-100, -36)
+shape = SubResource("CircleShape2D_button")
+action = "move_down"
+
+[node name="Visual" type="Node2D" parent="TouchButtons/RightCorner/Down"]
+
+[node name="Circle" type="Polygon2D" parent="TouchButtons/RightCorner/Down/Visual"]
+color = Color(1, 1, 1, 0.5)
+polygon = PackedVector2Array(24, 0, 22.2, 9.2, 17, 17, 9.2, 22.2, 0, 24, -9.2, 22.2, -17, 17, -22.2, 9.2, -24, 0, -22.2, -9.2, -17, -17, -9.2, -22.2, 0, -24, 9.2, -22.2, 17, -17, 22.2, -9.2)
+
+[node name="Arrow" type="Polygon2D" parent="TouchButtons/RightCorner/Down/Visual"]
+color = Color(0.35, 0.25, 0.45, 0.8)
+polygon = PackedVector2Array(0, 11, 11, -1, 4, -1, 4, -10, -4, -10, -4, -1, -11, -1)

@@ -1,0 +1,135 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/sun/sun.gd" id="1_sun"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_rays"]
+shading_mode = 0
+albedo_color = Color(1, 0.7, 0.15, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_face"]
+shading_mode = 0
+albedo_color = Color(1, 0.88, 0.25, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_brown"]
+shading_mode = 0
+albedo_color = Color(0.45, 0.25, 0.1, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_cheek"]
+shading_mode = 0
+albedo_color = Color(1, 0.6, 0.55, 1)
+
+[sub_resource type="PrismMesh" id="Mesh_ray"]
+size = Vector3(0.6, 0.7, 0.1)
+
+[sub_resource type="SphereMesh" id="Mesh_face"]
+radius = 1.1
+height = 2.2
+
+[sub_resource type="SphereMesh" id="Mesh_eye"]
+radius = 0.1
+height = 0.2
+
+[sub_resource type="SphereMesh" id="Mesh_cheek"]
+radius = 0.15
+height = 0.3
+
+[sub_resource type="BoxMesh" id="Mesh_smile"]
+size = Vector3(0.3, 0.08, 0.05)
+
+[node name="Sun" type="Node3D"]
+script = ExtResource("1_sun")
+
+[node name="Visual" type="Node3D" parent="."]
+
+[node name="Rays" type="Node3D" parent="Visual"]
+
+[node name="Ray1" type="MeshInstance3D" parent="Visual/Rays"]
+position = Vector3(1.5, 0, 0)
+rotation = Vector3(0, 0, -1.5708)
+mesh = SubResource("Mesh_ray")
+surface_material_override/0 = SubResource("Mat_rays")
+
+[node name="Ray2" type="MeshInstance3D" parent="Visual/Rays"]
+position = Vector3(1.0607, 1.0607, 0)
+rotation = Vector3(0, 0, -0.7854)
+mesh = SubResource("Mesh_ray")
+surface_material_override/0 = SubResource("Mat_rays")
+
+[node name="Ray3" type="MeshInstance3D" parent="Visual/Rays"]
+position = Vector3(0, 1.5, 0)
+mesh = SubResource("Mesh_ray")
+surface_material_override/0 = SubResource("Mat_rays")
+
+[node name="Ray4" type="MeshInstance3D" parent="Visual/Rays"]
+position = Vector3(-1.0607, 1.0607, 0)
+rotation = Vector3(0, 0, 0.7854)
+mesh = SubResource("Mesh_ray")
+surface_material_override/0 = SubResource("Mat_rays")
+
+[node name="Ray5" type="MeshInstance3D" parent="Visual/Rays"]
+position = Vector3(-1.5, 0, 0)
+rotation = Vector3(0, 0, 1.5708)
+mesh = SubResource("Mesh_ray")
+surface_material_override/0 = SubResource("Mat_rays")
+
+[node name="Ray6" type="MeshInstance3D" parent="Visual/Rays"]
+position = Vector3(-1.0607, -1.0607, 0)
+rotation = Vector3(0, 0, 2.3562)
+mesh = SubResource("Mesh_ray")
+surface_material_override/0 = SubResource("Mat_rays")
+
+[node name="Ray7" type="MeshInstance3D" parent="Visual/Rays"]
+position = Vector3(0, -1.5, 0)
+rotation = Vector3(0, 0, 3.1416)
+mesh = SubResource("Mesh_ray")
+surface_material_override/0 = SubResource("Mat_rays")
+
+[node name="Ray8" type="MeshInstance3D" parent="Visual/Rays"]
+position = Vector3(1.0607, -1.0607, 0)
+rotation = Vector3(0, 0, -2.3562)
+mesh = SubResource("Mesh_ray")
+surface_material_override/0 = SubResource("Mat_rays")
+
+[node name="Face" type="MeshInstance3D" parent="Visual"]
+scale = Vector3(1, 1, 0.5)
+mesh = SubResource("Mesh_face")
+surface_material_override/0 = SubResource("Mat_face")
+
+[node name="EyeLeft" type="MeshInstance3D" parent="Visual"]
+position = Vector3(-0.35, 0.25, 0.5)
+mesh = SubResource("Mesh_eye")
+surface_material_override/0 = SubResource("Mat_brown")
+
+[node name="EyeRight" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0.35, 0.25, 0.5)
+mesh = SubResource("Mesh_eye")
+surface_material_override/0 = SubResource("Mat_brown")
+
+[node name="CheekLeft" type="MeshInstance3D" parent="Visual"]
+position = Vector3(-0.62, -0.1, 0.4)
+scale = Vector3(1, 1, 0.4)
+mesh = SubResource("Mesh_cheek")
+surface_material_override/0 = SubResource("Mat_cheek")
+
+[node name="CheekRight" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0.62, -0.1, 0.4)
+scale = Vector3(1, 1, 0.4)
+mesh = SubResource("Mesh_cheek")
+surface_material_override/0 = SubResource("Mat_cheek")
+
+[node name="SmileLeft" type="MeshInstance3D" parent="Visual"]
+position = Vector3(-0.24, -0.33, 0.47)
+rotation = Vector3(0, 0, -0.45)
+mesh = SubResource("Mesh_smile")
+surface_material_override/0 = SubResource("Mat_brown")
+
+[node name="SmileMiddle" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0, -0.42, 0.47)
+mesh = SubResource("Mesh_smile")
+surface_material_override/0 = SubResource("Mat_brown")
+
+[node name="SmileRight" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0.24, -0.33, 0.47)
+rotation = Vector3(0, 0, 0.45)
+mesh = SubResource("Mesh_smile")
+surface_material_override/0 = SubResource("Mat_brown")
