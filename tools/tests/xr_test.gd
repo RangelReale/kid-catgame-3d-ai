@@ -1,0 +1,117 @@
+extends SceneTree
+
+## Checks the diorama rig of the headset version, using its computer-screen
+## preview, so no headset is needed. Run it with:
+##   godot_console --headless --path . -s tools/tests/xr_test.gd
+## It prints each check and quits with code 1 when any check fails.
+
+const RigScene := preload("res://scenes/xr/xr_rig.tscn")
+const MainScene := preload("res://scenes/main.tscn")
+const CameraScript := preload("res://scenes/camera/follow_camera.gd")
+
+var _failures: int = 0
+
+
+func _initialize() -> void:
+	_run.call_deferred()
+
+
+func _run() -> void:
+	await _test_window_limits()
+	await _test_level_takeover(9, "Player")
+	await _test_level_takeover(11, "Airplane")
+	print("FAILED: %d check(s)" % _failures if _failures > 0 else "ALL PASSED")
+	quit(1 if _failures > 0 else 0)
+
+
+## The window follows the target but never shows past the level's limits.
+func _test_window_limits() -> void:
+	var rig := RigScene.instantiate()
+	rig.preview = true
+	root.add_child(rig)
+	var level := _fake_level(Rect2(0, -1, 60, 10001))
+	root.add_child(level)
+	rig.attach_level(level)
+	_check("the window follows the cat in the middle of a level",
+			rig.focus_for(Vector3(30, 1, 0)).is_equal_approx(Vector2(30, 3.75)),
+			rig.focus_for(Vector3(30, 1, 0)))
+	_check("the window stops at the left edge",
+			rig.focus_for(Vector3(2, 0, 0)).is_equal_approx(Vector2(8, 3.75)),
+			rig.focus_for(Vector3(2, 0, 0)))
+	_check("the window stops at the right edge",
+			rig.focus_for(Vector3(59, 0, 0)).is_equal_approx(Vector2(52, 3.75)),
+			rig.focus_for(Vector3(59, 0, 0)))
+	level.free()
+	level = _fake_level(Rect2(0, -1, 10, 10001))
+	root.add_child(level)
+	rig.attach_level(level)
+	_check("a level narrower than the window stays in the middle",
+			is_equal_approx(rig.focus_for(Vector3(1, 0, 0)).x, 5.0),
+			rig.focus_for(Vector3(1, 0, 0)))
+	level.free()
+	level = _fake_level(Rect2(0, -1, 15, 33.75))
+	root.add_child(level)
+	rig.attach_level(level)
+	_check("the window stops at the top of a tall level",
+			is_equal_approx(rig.focus_for(Vector3(7, 31, 0)).y, 28.0),
+			rig.focus_for(Vector3(7, 31, 0)))
+	level.free()
+	rig.free()
+	await process_frame
+
+
+## Loads a real level in the preview and checks that the rig took it over.
+func _test_level_takeover(number: int, target_name: String) -> void:
+	var main := MainScene.instantiate()
+	main.xr_preview = true
+	root.add_child(main)
+	main._load_level(number - 1)
+	for frame in 10:
+		await process_frame
+	var level: Node = main._level
+	var rig: Node3D = main.get_node("XRRig")
+	var camera: Camera3D = level.get_node("Camera")
+	var prefix := "level %d: " % number
+	_check(prefix + "the flat camera is switched off",
+			not camera.current and camera.process_mode == Node.PROCESS_MODE_DISABLED, camera.current)
+	_check(prefix + "the preview camera shows the diorama",
+			rig.get_node("PreviewCamera").current, null)
+	_check(prefix + "the window follows the " + target_name,
+			rig._target == level.get_node(target_name), rig._target)
+	var target: Node3D = level.get_node(target_name)
+	var goal: Vector2 = rig.focus_for(target.global_position)
+	_check(prefix + "the window is where it should be",
+			Vector2(rig.global_position.x, rig.global_position.y).distance_to(goal) < 0.5,
+			[rig.global_position, goal])
+	var sky := level.get_node_or_null("Sky")
+	if sky != null:
+		_check(prefix + "the sky sits in the box", sky.anchor == rig, sky.anchor)
+	var environment := level.get_node("Environment")
+	_check(prefix + "the background is the room, not the sky",
+			environment.passthrough, environment.passthrough)
+	main.queue_free()
+	await process_frame
+
+
+## A level with only a camera that follows a cat-shaped node.
+func _fake_level(limits: Rect2) -> Node3D:
+	var level := Node3D.new()
+	var target := Node3D.new()
+	target.name = "Player"
+	level.add_child(target)
+	var camera := Camera3D.new()
+	camera.name = "Camera"
+	camera.set_script(CameraScript)
+	camera.target = target
+	camera.limit_left = limits.position.x
+	camera.limit_bottom = limits.position.y
+	camera.limit_right = limits.end.x
+	camera.limit_top = limits.end.y
+	level.add_child(camera)
+	return level
+
+
+func _check(name: String, ok: bool, value: Variant) -> void:
+	print("%s  %s  (%s)" % ["PASS" if ok else "FAIL", name, value])
+	if not ok:
+		_failures += 1

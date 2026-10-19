@@ -1,8 +1,15 @@
 extends Node
 
+## Emitted after a level is loaded and added, so the diorama rig of the
+## headset can take it over.
+signal level_loaded(level: Node)
+
 ## The levels, in the order they are played. After the last one, the game
 ## goes back to the first.
 @export var levels: Array[PackedScene] = []
+## Shows the level as a diorama box, like in the headset, on a computer
+## screen. `godot --path . -- --xr-preview` turns it on too.
+@export var xr_preview: bool = false
 
 var _level_index: int = 0
 var _level: Node
@@ -10,10 +17,12 @@ var _level: Node
 
 ## `godot --path . -- --level 3` starts at the third level, to test it quickly.
 func _ready() -> void:
+	var args := OS.get_cmdline_user_args()
+	if xr_preview or args.has("--xr-preview"):
+		_add_xr_rig(true)
 	if levels.is_empty():
 		return
 	var start := 0
-	var args := OS.get_cmdline_user_args()
 	var level_arg := args.find("--level")
 	if level_arg >= 0 and level_arg + 1 < args.size():
 		start = clampi(args[level_arg + 1].to_int() - 1, 0, levels.size() - 1)
@@ -49,6 +58,14 @@ func _load_level(index: int) -> void:
 	for catcher in get_tree().get_nodes_in_group("catcher"):
 		if _level.is_ancestor_of(catcher):
 			catcher.caught.connect(_on_caught)
+	level_loaded.emit(_level)
+
+
+func _add_xr_rig(preview: bool) -> void:
+	var rig: Node = load("res://scenes/xr/xr_rig.tscn").instantiate()
+	rig.preview = preview
+	add_child(rig)
+	level_loaded.connect(rig.attach_level)
 
 
 func _on_goal_reached() -> void:
