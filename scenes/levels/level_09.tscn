@@ -1,0 +1,222 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/level/level_environment.gd" id="1_environment"]
+[ext_resource type="Script" path="res://scenes/level/block.gd" id="2_block"]
+[ext_resource type="Script" path="res://scenes/camera/follow_camera.gd" id="3_camera"]
+[ext_resource type="Script" path="res://scenes/level/sky.gd" id="4_sky"]
+[ext_resource type="PackedScene" path="res://scenes/sun/sun.tscn" id="5_sun"]
+[ext_resource type="PackedScene" path="res://scenes/cloud/cloud.tscn" id="6_cloud"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="7_player"]
+[ext_resource type="PackedScene" path="res://scenes/goal/goal.tscn" id="9_goal"]
+[ext_resource type="Script" path="res://scenes/cloud_platform/cloud_platform.gd" id="10_cloud_platform"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_trunk"]
+albedo_color = Color(0.5, 0.33, 0.2, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_leaves"]
+albedo_color = Color(0.25, 0.7, 0.3, 1)
+
+[sub_resource type="CylinderMesh" id="Mesh_trunk"]
+top_radius = 0.12
+bottom_radius = 0.16
+height = 1.2
+
+[sub_resource type="SphereMesh" id="Mesh_leaves"]
+radius = 0.7
+height = 1.3
+
+[node name="Level09" type="Node3D"]
+
+[node name="Environment" type="Node3D" parent="."]
+script = ExtResource("1_environment")
+
+[node name="Camera" type="Camera3D" parent="." node_paths=PackedStringArray("target")]
+fov = 40.0
+script = ExtResource("3_camera")
+target = NodePath("../Player")
+limit_left = 0.0
+limit_right = 15.0
+limit_bottom = -1.0
+limit_top = 32.75
+
+[node name="Sky" type="Node3D" parent="."]
+script = ExtResource("4_sky")
+
+[node name="Sun" parent="Sky" instance=ExtResource("5_sun")]
+position = Vector3(17, 6, -30)
+
+[node name="FarCloud1" parent="." instance=ExtResource("6_cloud")]
+position = Vector3(-2, 26, -8)
+scale = Vector3(1.5, 1.5, 1.5)
+speed = 0.0
+wrap_half_width = 1000.0
+
+[node name="FarCloud2" parent="." instance=ExtResource("6_cloud")]
+position = Vector3(17, 18, -8)
+scale = Vector3(1.3, 1.3, 1.3)
+speed = 0.0
+wrap_half_width = 1000.0
+
+[node name="FarCloud3" parent="." instance=ExtResource("6_cloud")]
+position = Vector3(-1, 9, -8)
+scale = Vector3(1.2, 1.2, 1.2)
+speed = 0.0
+wrap_half_width = 1000.0
+
+[node name="Trees" type="Node3D" parent="."]
+
+[node name="Tree1" type="Node3D" parent="Trees"]
+position = Vector3(0.9375, 0, -2.5)
+scale = Vector3(1, 1, 1)
+
+[node name="Trunk" type="MeshInstance3D" parent="Trees/Tree1"]
+position = Vector3(0, 0.6, 0)
+mesh = SubResource("Mesh_trunk")
+surface_material_override/0 = SubResource("Mat_trunk")
+
+[node name="Leaves" type="MeshInstance3D" parent="Trees/Tree1"]
+position = Vector3(0, 1.5, 0)
+mesh = SubResource("Mesh_leaves")
+surface_material_override/0 = SubResource("Mat_leaves")
+
+[node name="LeavesTop" type="MeshInstance3D" parent="Trees/Tree1"]
+position = Vector3(0.1, 2.0, 0)
+scale = Vector3(0.7, 0.7, 0.7)
+mesh = SubResource("Mesh_leaves")
+surface_material_override/0 = SubResource("Mat_leaves")
+
+[node name="Tree2" type="Node3D" parent="Trees"]
+position = Vector3(4.6875, 0, -2.5)
+scale = Vector3(1.3, 1.3, 1.3)
+
+[node name="Trunk" type="MeshInstance3D" parent="Trees/Tree2"]
+position = Vector3(0, 0.6, 0)
+mesh = SubResource("Mesh_trunk")
+surface_material_override/0 = SubResource("Mat_trunk")
+
+[node name="Leaves" type="MeshInstance3D" parent="Trees/Tree2"]
+position = Vector3(0, 1.5, 0)
+mesh = SubResource("Mesh_leaves")
+surface_material_override/0 = SubResource("Mat_leaves")
+
+[node name="LeavesTop" type="MeshInstance3D" parent="Trees/Tree2"]
+position = Vector3(0.1, 2.0, 0)
+scale = Vector3(0.7, 0.7, 0.7)
+mesh = SubResource("Mesh_leaves")
+surface_material_override/0 = SubResource("Mat_leaves")
+
+[node name="Tree3" type="Node3D" parent="Trees"]
+position = Vector3(10.3125, 0, -2.5)
+scale = Vector3(0.9, 0.9, 0.9)
+
+[node name="Trunk" type="MeshInstance3D" parent="Trees/Tree3"]
+position = Vector3(0, 0.6, 0)
+mesh = SubResource("Mesh_trunk")
+surface_material_override/0 = SubResource("Mat_trunk")
+
+[node name="Leaves" type="MeshInstance3D" parent="Trees/Tree3"]
+position = Vector3(0, 1.5, 0)
+mesh = SubResource("Mesh_leaves")
+surface_material_override/0 = SubResource("Mat_leaves")
+
+[node name="LeavesTop" type="MeshInstance3D" parent="Trees/Tree3"]
+position = Vector3(0.1, 2.0, 0)
+scale = Vector3(0.7, 0.7, 0.7)
+mesh = SubResource("Mesh_leaves")
+surface_material_override/0 = SubResource("Mat_leaves")
+
+[node name="Floor" type="StaticBody3D" parent="."]
+position = Vector3(7.5, -0.5, -3)
+script = ExtResource("2_block")
+size = Vector3(30, 1, 10)
+color = Color(0.35, 0.65, 0.25, 1)
+
+[node name="CloudStep1" type="StaticBody3D" parent="."]
+position = Vector3(2.1875, 30.875, 0)
+script = ExtResource("10_cloud_platform")
+size = Vector3(2.5, 0.25, 1.5)
+one_way = true
+
+[node name="CloudStep2" type="StaticBody3D" parent="."]
+position = Vector3(7.5, 28.375, 0)
+script = ExtResource("10_cloud_platform")
+size = Vector3(2.5, 0.25, 1.5)
+one_way = true
+
+[node name="CloudStep3" type="StaticBody3D" parent="."]
+position = Vector3(12.5, 25.875, 0)
+script = ExtResource("10_cloud_platform")
+size = Vector3(2.5, 0.25, 1.5)
+one_way = true
+
+[node name="CloudStep4" type="StaticBody3D" parent="."]
+position = Vector3(7.5, 23.375, 0)
+script = ExtResource("10_cloud_platform")
+size = Vector3(2.5, 0.25, 1.5)
+one_way = true
+
+[node name="CloudStep5" type="StaticBody3D" parent="."]
+position = Vector3(2.5, 20.875, 0)
+script = ExtResource("10_cloud_platform")
+size = Vector3(2.5, 0.25, 1.5)
+one_way = true
+
+[node name="CloudStep6" type="StaticBody3D" parent="."]
+position = Vector3(7.5, 18.375, 0)
+script = ExtResource("10_cloud_platform")
+size = Vector3(2.5, 0.25, 1.5)
+one_way = true
+
+[node name="CloudStep7" type="StaticBody3D" parent="."]
+position = Vector3(12.5, 15.875, 0)
+script = ExtResource("10_cloud_platform")
+size = Vector3(2.5, 0.25, 1.5)
+one_way = true
+
+[node name="CloudStep8" type="StaticBody3D" parent="."]
+position = Vector3(7.5, 13.375, 0)
+script = ExtResource("10_cloud_platform")
+size = Vector3(2.5, 0.25, 1.5)
+one_way = true
+
+[node name="CloudStep9" type="StaticBody3D" parent="."]
+position = Vector3(2.5, 10.875, 0)
+script = ExtResource("10_cloud_platform")
+size = Vector3(2.5, 0.25, 1.5)
+one_way = true
+
+[node name="CloudStep10" type="StaticBody3D" parent="."]
+position = Vector3(7.5, 8.375, 0)
+script = ExtResource("10_cloud_platform")
+size = Vector3(2.5, 0.25, 1.5)
+one_way = true
+
+[node name="CloudStep11" type="StaticBody3D" parent="."]
+position = Vector3(12.5, 5.875, 0)
+script = ExtResource("10_cloud_platform")
+size = Vector3(2.5, 0.25, 1.5)
+one_way = true
+
+[node name="CloudStep12" type="StaticBody3D" parent="."]
+position = Vector3(7.5, 3.375, 0)
+script = ExtResource("10_cloud_platform")
+size = Vector3(2.5, 0.25, 1.5)
+one_way = true
+
+[node name="WallLeft" type="StaticBody3D" parent="."]
+position = Vector3(-0.25, 16.8125, 0)
+script = ExtResource("2_block")
+size = Vector3(0.5, 43.75, 4)
+show_mesh = false
+
+[node name="WallRight" type="StaticBody3D" parent="."]
+position = Vector3(15.25, 16.8125, 0)
+script = ExtResource("2_block")
+size = Vector3(0.5, 43.75, 4)
+show_mesh = false
+
+[node name="Goal" parent="." instance=ExtResource("9_goal")]
+position = Vector3(13.75, 0, 0)
+
+[node name="Player" parent="." instance=ExtResource("7_player")]
+position = Vector3(1.875, 31, 0)
