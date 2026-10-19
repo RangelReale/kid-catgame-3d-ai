@@ -64,6 +64,8 @@ lugar de `godot` sempre que a saída importa.
 | Testar a maquete do óculos | `godot --headless --path . -s tools/tests/xr_test.gd` |
 | Baixar o plugin do óculos (uma vez) | `sh tools/install_xr_plugin.sh` |
 | Exportar para o Quest 3 | `godot --headless --path . --install-android-build-template --export-debug "Quest" build/quest/catgame3d-quest.apk` |
+| Exportar para Windows | `godot --headless --path . --export-release "Windows" build/windows/catgame3d.exe` |
+| Publicar uma versão | no GitHub, Actions > Release > Run workflow ([docs/05-versoes.md](docs/05-versoes.md)) |
 
 Para ver o jogo sem jogar, grave quadros com o passeio automático. O comando
 está no começo de `tools/tests/demo_drive.gd`.

@@ -1,0 +1,141 @@
+# Builds the game and publishes a GitHub release. Run it by hand from the
+# Actions tab ("Release" > "Run workflow") and type the version, such as 1.0.0.
+# It creates the tag v<version> on the commit it ran on and attaches:
+#   - the Windows installer;
+#   - the Android APK (Retroid and phones);
+#   - the Meta Quest 3 APK.
+# The APKs are signed with the release key from the secrets
+# ANDROID_KEYSTORE_BASE64, ANDROID_KEYSTORE_USER and ANDROID_KEYSTORE_PASSWORD.
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Versão, no formato 1.2.3"
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+env:
+  GODOT_VERSION: 4.7.2
+  VERSION: ${{ inputs.version }}
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Check the version
+        run: |
+          if ! echo "$VERSION" | grep -Eq '^[0-9]+\.[0-9]{1,2}\.[0-9]{1,2}$'; then
+            echo "::error::The version must look like 1.2.3 (minor and patch below 100)."
+            exit 1
+          fi
+          if git ls-remote --exit-code --tags origin "refs/tags/v$VERSION" > /dev/null; then
+            echo "::error::The tag v$VERSION already exists."
+            exit 1
+          fi
+          IFS=. read -r major minor patch <<< "$VERSION"
+          echo "VERSION_CODE=$((major * 10000 + minor * 100 + patch))" >> "$GITHUB_ENV"
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Install NSIS
+        run: sudo apt-get update && sudo apt-get install -y nsis
+
+      - name: Cache Godot
+        id: cache-godot
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/godot
+            ~/.local/share/godot/export_templates
+          key: godot-${{ env.GODOT_VERSION }}
+
+      - name: Download Godot and its export templates
+        if: steps.cache-godot.outputs.cache-hit != 'true'
+        run: |
+          base="https://github.com/godotengine/godot-builds/releases/download/$GODOT_VERSION-stable"
+          mkdir -p ~/godot
+          curl -fsSL -o /tmp/godot.zip "$base/Godot_v$GODOT_VERSION-stable_linux.x86_64.zip"
+          unzip -q /tmp/godot.zip -d ~/godot
+          curl -fsSL -o /tmp/templates.tpz "$base/Godot_v$GODOT_VERSION-stable_export_templates.tpz"
+          unzip -q /tmp/templates.tpz -d /tmp/templates
+          mkdir -p ~/.local/share/godot/export_templates
+          mv /tmp/templates/templates ~/.local/share/godot/export_templates/$GODOT_VERSION.stable
+
+      - name: Set up Godot
+        run: |
+          echo "GODOT=$HOME/godot/Godot_v$GODOT_VERSION-stable_linux.x86_64" >> "$GITHUB_ENV"
+          mkdir -p ~/.config/godot
+          cat > ~/.config/godot/editor_settings-${GODOT_VERSION%.*}.tres <<EOF
+          [gd_resource type="EditorSettings" format=3]
+
+          [resource]
+          export/android/android_sdk_path = "$ANDROID_SDK_ROOT"
+          export/android/java_sdk_path = "$JAVA_HOME"
+          EOF
+
+      - name: Set up the release key
+        env:
+          KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          KEYSTORE_USER: ${{ secrets.ANDROID_KEYSTORE_USER }}
+          KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+        run: |
+          echo "$KEYSTORE_BASE64" | base64 -d > "$RUNNER_TEMP/release.keystore"
+          {
+            echo "GODOT_ANDROID_KEYSTORE_RELEASE_PATH=$RUNNER_TEMP/release.keystore"
+            echo "GODOT_ANDROID_KEYSTORE_RELEASE_USER=$KEYSTORE_USER"
+            echo "GODOT_ANDROID_KEYSTORE_RELEASE_PASSWORD=$KEYSTORE_PASSWORD"
+          } >> "$GITHUB_ENV"
+
+      - name: Put the version in the export presets
+        run: |
+          sed -i \
+            -e "s/^version\/name=.*/version\/name=\"$VERSION\"/" \
+            -e "s/^version\/code=.*/version\/code=$VERSION_CODE/" \
+            -e "s/^application\/file_version=.*/application\/file_version=\"$VERSION.0\"/" \
+            -e "s/^application\/product_version=.*/application\/product_version=\"$VERSION.0\"/" \
+            export_presets.cfg
+          grep -E "^(version|application/(file|product)_version)" export_presets.cfg
+
+      # The Windows and Android games are exported before the headset plugin
+      # is downloaded, so they do not carry it.
+      - name: Export Windows and Android
+        run: |
+          mkdir -p build/windows build/android build/quest build/release
+          "$GODOT" --headless --path . --import
+          "$GODOT" --headless --path . --export-release "Windows" build/windows/catgame3d.exe
+          "$GODOT" --headless --path . --export-release "Android" build/android/catgame3d.apk
+          test -f build/windows/catgame3d.exe
+          test -f build/android/catgame3d.apk
+
+      - name: Export Meta Quest 3
+        run: |
+          sh tools/install_xr_plugin.sh
+          "$GODOT" --headless --path . --import
+          "$GODOT" --headless --path . --install-android-build-template --export-release "Quest" build/quest/catgame3d-quest.apk
+          test -f build/quest/catgame3d-quest.apk
+
+      - name: Build the Windows installer
+        run: |
+          makensis -DVERSION="$VERSION" -DEXE="$PWD/build/windows/catgame3d.exe" \
+            -DOUTFILE="$PWD/build/release/catgame3d-$VERSION-windows-setup.exe" \
+            tools/installer/catgame3d.nsi
+          cp build/android/catgame3d.apk "build/release/catgame3d-$VERSION-android.apk"
+          cp build/quest/catgame3d-quest.apk "build/release/catgame3d-$VERSION-quest.apk"
+          ls -l build/release
+
+      - name: Create the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "v$VERSION" build/release/* \
+            --target "$GITHUB_SHA" --title "Jogo do gato 3D $VERSION" --generate-notes
