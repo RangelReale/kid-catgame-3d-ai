@@ -2,8 +2,8 @@
 
 O jogo tem uma versão para o óculos Meta Quest 3. A fase aparece como uma
 maquete, uma caixa de madeira de 1 m de largura que flutua na sala de
-verdade, na frente da criança. A versão já está pronta no computador, mas
-**ainda não foi testada num óculos**.
+verdade, na frente da criança. A versão já abriu num Quest 3 de verdade
+(veja [Teste no óculos](#teste-no-óculos)).
 
 ![A fase 16 como maquete: uma caixa de madeira com o parque de diversões dentro e o céu pintado no fundo](images/diorama.png)
 
@@ -55,14 +55,31 @@ A predefinição "Quest" liga o recurso `quest`. Só com ele o OpenXR liga
 (`xr/openxr/enabled.quest` em `project.godot`). O jogo de tela, o Retroid e
 o iPad continuam sem OpenXR.
 
+## Teste no óculos
+
+O primeiro teste foi em 19/10/2026, num Quest 3 com o sistema Android 14,
+ligado por adb pela rede Wi-Fi.
+
+- O jogo abre direto no modo do óculos, e o OpenXR usa o runtime da Oculus.
+- O passthrough fica ligado: a sala aparece em volta da maquete.
+- O corte nas bordas funciona. O chão e as colinas que passam da caixa
+  não aparecem na sala.
+- O jogo fica em 72 quadros por segundo. O processador gráfico usa uns 42%,
+  então ainda há folga e as sombras podem ficar ligadas.
+- O Godot avisa que a foveação foi desligada porque o jogo usa recursos que
+  não combinam com ela. O jogo funciona normalmente.
+
+Para ver o que o óculos mostra:
+`adb shell screencap -p /sdcard/q.png` e depois `adb pull /sdcard/q.png`.
+Para ver o registro do jogo: `adb logcat -s godot`. A linha `VrApi FPS=`
+do `adb logcat` mostra os quadros por segundo.
+
 ## O que falta testar no óculos
 
 - Conforto: a velocidade com que a fase desliza, a distância e a altura da
   caixa.
-- Se os painéis invisíveis apagam bem o que sai da caixa no passthrough de
-  verdade. No computador, o teste deu certo.
-- Velocidade: o Quest precisa de 72 quadros por segundo. Se ficar lento, o
-  primeiro passo é desligar as sombras.
+- Os controles: andar, pular, nadar e trazer a caixa de volta com o grip.
+- A velocidade nas fases mais pesadas, como a 16.
 - O flash da foto das princesas (fase 14), que no óculos é uma bola branca
   em volta da cabeça.
 - No Retroid, se o jogo de tela abre sem erro. A exportação "Android" não

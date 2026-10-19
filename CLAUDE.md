@@ -15,8 +15,8 @@ montanha-russa, torre e pescaria. Depois da última fase, o jogo volta à
 primeira. As teclas de 1 a 9 e o 0 pulam para as fases 1 a 10; com Ctrl, para
 as fases 11 a 20. Os próximos passos estão no [roteiro](docs/03-roteiro.md).
 Há também uma versão para o Meta Quest 3, em que a fase vira uma maquete na
-sala ([docs/04-realidade-virtual.md](docs/04-realidade-virtual.md)); ela
-ainda não foi testada num óculos. Atualize esta seção a cada marco.
+sala ([docs/04-realidade-virtual.md](docs/04-realidade-virtual.md)); ela já
+abriu num Quest 3 de verdade. Atualize esta seção a cada marco.
 
 ## Quem pede as mudanças
 
