@@ -1,0 +1,262 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/ferris_wheel/ferris_wheel.gd" id="1_wheel"]
+[ext_resource type="Script" path="res://scenes/level/one_way_platform.gd" id="2_one_way"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_leg"]
+albedo_color = Color(0.6, 0.6, 0.68, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_rim"]
+albedo_color = Color(1, 0.45, 0.6, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_spoke"]
+albedo_color = Color(0.9, 0.9, 0.95, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_hub"]
+albedo_color = Color(1, 0.85, 0.3, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_rod"]
+albedo_color = Color(0.5, 0.5, 0.55, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_seat1"]
+albedo_color = Color(1, 0.4, 0.5, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_seat2"]
+albedo_color = Color(1, 0.8, 0.3, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_seat3"]
+albedo_color = Color(0.4, 0.8, 0.4, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_seat4"]
+albedo_color = Color(0.4, 0.6, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_seat5"]
+albedo_color = Color(0.75, 0.5, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_seat6"]
+albedo_color = Color(1, 0.6, 0.3, 1)
+
+[sub_resource type="TorusMesh" id="Mesh_rim"]
+inner_radius = 2.48
+outer_radius = 2.62
+
+[sub_resource type="BoxMesh" id="Mesh_spoke"]
+size = Vector3(5.0, 0.09, 0.09)
+
+[sub_resource type="CylinderMesh" id="Mesh_hub"]
+top_radius = 0.2
+bottom_radius = 0.2
+height = 0.5
+
+[sub_resource type="CylinderMesh" id="Mesh_axle"]
+top_radius = 0.06
+bottom_radius = 0.06
+height = 1.0
+
+[sub_resource type="BoxMesh" id="Mesh_leg"]
+size = Vector3(0.2, 4.09, 0.2)
+
+[sub_resource type="BoxMesh" id="Mesh_rod"]
+size = Vector3(0.05, 0.4375, 0.05)
+
+[sub_resource type="BoxMesh" id="Mesh_seat"]
+size = Vector3(1.0, 0.3125, 0.8)
+
+[sub_resource type="BoxShape3D" id="Shape_seat"]
+size = Vector3(1.0, 0.1875, 0.8)
+
+[node name="FerrisWheel" type="Node3D"]
+script = ExtResource("1_wheel")
+
+[node name="Visual" type="Node3D" parent="."]
+
+[node name="LegLeftBack" type="MeshInstance3D" parent="Visual"]
+position = Vector3(-0.8125, -1.875, -0.9)
+rotation = Vector3(0, 0, -0.4089)
+mesh = SubResource("Mesh_leg")
+surface_material_override/0 = SubResource("Mat_leg")
+
+[node name="LegLeftFront" type="MeshInstance3D" parent="Visual"]
+position = Vector3(-0.8125, -1.875, -0.3)
+rotation = Vector3(0, 0, -0.4089)
+mesh = SubResource("Mesh_leg")
+surface_material_override/0 = SubResource("Mat_leg")
+
+[node name="LegRightBack" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0.8125, -1.875, -0.9)
+rotation = Vector3(0, 0, 0.4089)
+mesh = SubResource("Mesh_leg")
+surface_material_override/0 = SubResource("Mat_leg")
+
+[node name="LegRightFront" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0.8125, -1.875, -0.3)
+rotation = Vector3(0, 0, 0.4089)
+mesh = SubResource("Mesh_leg")
+surface_material_override/0 = SubResource("Mat_leg")
+
+[node name="Axle" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0, 0, -0.6)
+rotation = Vector3(1.5708, 0, 0)
+mesh = SubResource("Mesh_axle")
+surface_material_override/0 = SubResource("Mat_leg")
+
+[node name="Wheel" type="Node3D" parent="Visual"]
+position = Vector3(0, 0, -0.6)
+
+[node name="Rim" type="MeshInstance3D" parent="Visual/Wheel"]
+position = Vector3(0, 0, 0)
+rotation = Vector3(1.5708, 0, 0)
+mesh = SubResource("Mesh_rim")
+surface_material_override/0 = SubResource("Mat_rim")
+
+[node name="Spoke1" type="MeshInstance3D" parent="Visual/Wheel"]
+position = Vector3(0, 0, 0)
+rotation = Vector3(0, 0, 0.0)
+mesh = SubResource("Mesh_spoke")
+surface_material_override/0 = SubResource("Mat_spoke")
+
+[node name="Spoke2" type="MeshInstance3D" parent="Visual/Wheel"]
+position = Vector3(0, 0, 0)
+rotation = Vector3(0, 0, 1.0472)
+mesh = SubResource("Mesh_spoke")
+surface_material_override/0 = SubResource("Mat_spoke")
+
+[node name="Spoke3" type="MeshInstance3D" parent="Visual/Wheel"]
+position = Vector3(0, 0, 0)
+rotation = Vector3(0, 0, 2.0944)
+mesh = SubResource("Mesh_spoke")
+surface_material_override/0 = SubResource("Mat_spoke")
+
+[node name="Hub" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0, 0, -0.6)
+rotation = Vector3(1.5708, 0, 0)
+mesh = SubResource("Mesh_hub")
+surface_material_override/0 = SubResource("Mat_hub")
+
+[node name="Cabins" type="Node3D" parent="."]
+
+[node name="Cabin1" type="AnimatableBody3D" parent="Cabins"]
+position = Vector3(2.5, -0.0, 0)
+script = ExtResource("2_one_way")
+top = -0.4375
+
+[node name="Visual" type="Node3D" parent="Cabins/Cabin1"]
+
+[node name="Rod" type="MeshInstance3D" parent="Cabins/Cabin1/Visual"]
+position = Vector3(0, -0.21875, 0)
+mesh = SubResource("Mesh_rod")
+surface_material_override/0 = SubResource("Mat_rod")
+
+[node name="Seat" type="MeshInstance3D" parent="Cabins/Cabin1/Visual"]
+position = Vector3(0, -0.59375, 0)
+mesh = SubResource("Mesh_seat")
+surface_material_override/0 = SubResource("Mat_seat1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cabins/Cabin1"]
+position = Vector3(0, -0.53125, 0)
+shape = SubResource("Shape_seat")
+
+[node name="Cabin2" type="AnimatableBody3D" parent="Cabins"]
+position = Vector3(1.25, -2.1651, 0)
+script = ExtResource("2_one_way")
+top = -0.4375
+
+[node name="Visual" type="Node3D" parent="Cabins/Cabin2"]
+
+[node name="Rod" type="MeshInstance3D" parent="Cabins/Cabin2/Visual"]
+position = Vector3(0, -0.21875, 0)
+mesh = SubResource("Mesh_rod")
+surface_material_override/0 = SubResource("Mat_rod")
+
+[node name="Seat" type="MeshInstance3D" parent="Cabins/Cabin2/Visual"]
+position = Vector3(0, -0.59375, 0)
+mesh = SubResource("Mesh_seat")
+surface_material_override/0 = SubResource("Mat_seat2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cabins/Cabin2"]
+position = Vector3(0, -0.53125, 0)
+shape = SubResource("Shape_seat")
+
+[node name="Cabin3" type="AnimatableBody3D" parent="Cabins"]
+position = Vector3(-1.25, -2.1651, 0)
+script = ExtResource("2_one_way")
+top = -0.4375
+
+[node name="Visual" type="Node3D" parent="Cabins/Cabin3"]
+
+[node name="Rod" type="MeshInstance3D" parent="Cabins/Cabin3/Visual"]
+position = Vector3(0, -0.21875, 0)
+mesh = SubResource("Mesh_rod")
+surface_material_override/0 = SubResource("Mat_rod")
+
+[node name="Seat" type="MeshInstance3D" parent="Cabins/Cabin3/Visual"]
+position = Vector3(0, -0.59375, 0)
+mesh = SubResource("Mesh_seat")
+surface_material_override/0 = SubResource("Mat_seat3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cabins/Cabin3"]
+position = Vector3(0, -0.53125, 0)
+shape = SubResource("Shape_seat")
+
+[node name="Cabin4" type="AnimatableBody3D" parent="Cabins"]
+position = Vector3(-2.5, -0.0, 0)
+script = ExtResource("2_one_way")
+top = -0.4375
+
+[node name="Visual" type="Node3D" parent="Cabins/Cabin4"]
+
+[node name="Rod" type="MeshInstance3D" parent="Cabins/Cabin4/Visual"]
+position = Vector3(0, -0.21875, 0)
+mesh = SubResource("Mesh_rod")
+surface_material_override/0 = SubResource("Mat_rod")
+
+[node name="Seat" type="MeshInstance3D" parent="Cabins/Cabin4/Visual"]
+position = Vector3(0, -0.59375, 0)
+mesh = SubResource("Mesh_seat")
+surface_material_override/0 = SubResource("Mat_seat4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cabins/Cabin4"]
+position = Vector3(0, -0.53125, 0)
+shape = SubResource("Shape_seat")
+
+[node name="Cabin5" type="AnimatableBody3D" parent="Cabins"]
+position = Vector3(-1.25, 2.1651, 0)
+script = ExtResource("2_one_way")
+top = -0.4375
+
+[node name="Visual" type="Node3D" parent="Cabins/Cabin5"]
+
+[node name="Rod" type="MeshInstance3D" parent="Cabins/Cabin5/Visual"]
+position = Vector3(0, -0.21875, 0)
+mesh = SubResource("Mesh_rod")
+surface_material_override/0 = SubResource("Mat_rod")
+
+[node name="Seat" type="MeshInstance3D" parent="Cabins/Cabin5/Visual"]
+position = Vector3(0, -0.59375, 0)
+mesh = SubResource("Mesh_seat")
+surface_material_override/0 = SubResource("Mat_seat5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cabins/Cabin5"]
+position = Vector3(0, -0.53125, 0)
+shape = SubResource("Shape_seat")
+
+[node name="Cabin6" type="AnimatableBody3D" parent="Cabins"]
+position = Vector3(1.25, 2.1651, 0)
+script = ExtResource("2_one_way")
+top = -0.4375
+
+[node name="Visual" type="Node3D" parent="Cabins/Cabin6"]
+
+[node name="Rod" type="MeshInstance3D" parent="Cabins/Cabin6/Visual"]
+position = Vector3(0, -0.21875, 0)
+mesh = SubResource("Mesh_rod")
+surface_material_override/0 = SubResource("Mat_rod")
+
+[node name="Seat" type="MeshInstance3D" parent="Cabins/Cabin6/Visual"]
+position = Vector3(0, -0.59375, 0)
+mesh = SubResource("Mesh_seat")
+surface_material_override/0 = SubResource("Mat_seat6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cabins/Cabin6"]
+position = Vector3(0, -0.53125, 0)
+shape = SubResource("Shape_seat")
