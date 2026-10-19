@@ -1,0 +1,43 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/level/paint.gd" id="1_paint"]
+[ext_resource type="Script" path="res://scenes/level/wobble.gd" id="2_wobble"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_string"]
+albedo_color = Color(0.4, 0.4, 0.45, 1)
+
+[sub_resource type="BoxMesh" id="Mesh_string"]
+size = Vector3(0.015, 1.2, 0.015)
+
+[sub_resource type="SphereMesh" id="Mesh_balloon"]
+radius = 0.3
+height = 0.7
+
+[sub_resource type="PrismMesh" id="Mesh_knot"]
+size = Vector3(0.08, 0.08, 0.08)
+
+[node name="Balloon" type="Node3D"]
+script = ExtResource("1_paint")
+color = Color(1, 0.4, 0.5, 1)
+parts = Array[NodePath]([NodePath("Visual/Bob/Balloon"), NodePath("Visual/Bob/Knot")])
+
+[node name="Visual" type="Node3D" parent="."]
+
+[node name="Bob" type="Node3D" parent="Visual"]
+script = ExtResource("2_wobble")
+bob_height = 0.08
+sway_degrees = 4.0
+speed = 0.3
+
+[node name="String" type="MeshInstance3D" parent="Visual/Bob"]
+position = Vector3(0, -0.6, 0)
+mesh = SubResource("Mesh_string")
+surface_material_override/0 = SubResource("Mat_string")
+
+[node name="Knot" type="MeshInstance3D" parent="Visual/Bob"]
+position = Vector3(0, 0.02, 0)
+mesh = SubResource("Mesh_knot")
+
+[node name="Balloon" type="MeshInstance3D" parent="Visual/Bob"]
+position = Vector3(0, 0.38, 0)
+mesh = SubResource("Mesh_balloon")
