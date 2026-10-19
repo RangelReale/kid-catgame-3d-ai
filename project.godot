@@ -209,4 +209,5 @@ openxr/environment_blend_mode=2
 openxr/foveation_level=2
 openxr/foveation_dynamic=true
 openxr/startup_alert=false
+openxr/extensions/meta/passthrough=true
 shaders/enabled=true

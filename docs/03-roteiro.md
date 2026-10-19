@@ -18,10 +18,15 @@
    avião, parque, castelo com as princesas, Brasil, monstro gigante e parque
    de diversões.
 
+6. **Versão do Meta Quest 3 (sem testar no óculos).** A fase aparece como uma
+   maquete na sala de verdade. Há uma prévia no computador
+   (`-- --xr-preview`) e a exportação "Quest". Veja
+   [04-realidade-virtual.md](04-realidade-virtual.md).
+
 ## Falta
 
 - Testar no Retroid e ver se precisa desligar as sombras.
 - Exportar para Windows e Mac.
-- Jogar no Meta Quest 3 em realidade virtual. O plano está em
-  [04-realidade-virtual.md](04-realidade-virtual.md).
+- Testar a versão do Quest 3 num óculos de verdade. A lista do que testar
+  está em [04-realidade-virtual.md](04-realidade-virtual.md).
 - As ideias novas da filha.
