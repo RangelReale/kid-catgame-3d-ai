@@ -1,0 +1,126 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/level/level_environment.gd" id="1_environment"]
+[ext_resource type="Script" path="res://scenes/level/block.gd" id="2_block"]
+[ext_resource type="Script" path="res://scenes/camera/follow_camera.gd" id="3_camera"]
+[ext_resource type="Script" path="res://scenes/level/sky.gd" id="4_sky"]
+[ext_resource type="PackedScene" path="res://scenes/sun/sun.tscn" id="5_sun"]
+[ext_resource type="PackedScene" path="res://scenes/cloud/cloud.tscn" id="6_cloud"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="7_player"]
+[ext_resource type="PackedScene" path="res://scenes/goal/goal.tscn" id="9_goal"]
+[ext_resource type="PackedScene" path="res://scenes/tree/tree.tscn" id="10_tree"]
+[ext_resource type="PackedScene" path="res://scenes/castle/castle.tscn" id="11_castle"]
+[ext_resource type="PackedScene" path="res://scenes/balloon/balloon.tscn" id="12_balloon"]
+[ext_resource type="PackedScene" path="res://scenes/giant_monster/giant_monster.tscn" id="13_giant_monster"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_path"]
+albedo_color = Color(1, 0.9, 0.65, 1)
+
+[sub_resource type="BoxMesh" id="Mesh_path"]
+material = SubResource("Mat_path")
+size = Vector3(60, 0.02, 1.4)
+
+[node name="Level15" type="Node3D"]
+
+[node name="Environment" type="Node3D" parent="."]
+script = ExtResource("1_environment")
+
+[node name="Camera" type="Camera3D" parent="." node_paths=PackedStringArray("target")]
+fov = 40.0
+script = ExtResource("3_camera")
+target = NodePath("../Player")
+limit_left = 0.0
+limit_right = 45.0
+limit_bottom = -1.0
+
+[node name="Sky" type="Node3D" parent="."]
+script = ExtResource("4_sky")
+
+[node name="Sun" parent="Sky" instance=ExtResource("5_sun")]
+position = Vector3(-17, 6, -30)
+
+[node name="Cloud1" parent="Sky" instance=ExtResource("6_cloud")]
+position = Vector3(-4, 5.5, -30)
+
+[node name="Cloud2" parent="Sky" instance=ExtResource("6_cloud")]
+position = Vector3(8, 7, -30)
+scale = Vector3(0.8, 0.8, 0.8)
+
+[node name="Trees" type="Node3D" parent="."]
+
+[node name="Tree1" parent="Trees" instance=ExtResource("10_tree")]
+position = Vector3(3, 0, -6)
+scale = Vector3(1.3, 1.3, 1.3)
+color = Color(0.3, 0.68, 0.32, 1)
+
+[node name="Tree2" parent="Trees" instance=ExtResource("10_tree")]
+position = Vector3(13, 0, -7)
+scale = Vector3(1.5, 1.5, 1.5)
+color = Color(0.25, 0.62, 0.3, 1)
+
+[node name="Tree3" parent="Trees" instance=ExtResource("10_tree")]
+position = Vector3(22, 0, -6)
+scale = Vector3(1.2, 1.2, 1.2)
+color = Color(0.3, 0.68, 0.32, 1)
+
+[node name="Tree4" parent="Trees" instance=ExtResource("10_tree")]
+position = Vector3(31, 0, -7)
+scale = Vector3(1.4, 1.4, 1.4)
+color = Color(0.25, 0.62, 0.3, 1)
+
+[node name="Castle" parent="." instance=ExtResource("11_castle")]
+position = Vector3(39.375, 0, 0)
+
+[node name="Balloon1" parent="." instance=ExtResource("12_balloon")]
+position = Vector3(4.6875, 2.75, -1.5)
+color = Color(1, 0.4, 0.5, 1)
+
+[node name="Balloon2" parent="." instance=ExtResource("12_balloon")]
+position = Vector3(9.375, 3.6875, -2)
+color = Color(0.4, 0.7, 1, 1)
+
+[node name="Balloon3" parent="." instance=ExtResource("12_balloon")]
+position = Vector3(10.3125, 2.4375, -1.5)
+color = Color(1, 0.85, 0.3, 1)
+
+[node name="Balloon4" parent="." instance=ExtResource("12_balloon")]
+position = Vector3(15.625, 4, -2)
+color = Color(0.6, 0.9, 0.4, 1)
+
+[node name="Balloon5" parent="." instance=ExtResource("12_balloon")]
+position = Vector3(19.375, 3.0625, -1.5)
+color = Color(0.8, 0.5, 1, 1)
+
+[node name="Floor" type="StaticBody3D" parent="."]
+position = Vector3(22.5, -0.5, -3)
+script = ExtResource("2_block")
+size = Vector3(60, 1, 10)
+color = Color(0.45, 0.8, 0.4, 1)
+
+[node name="Path" type="MeshInstance3D" parent="."]
+position = Vector3(22.5, 0.01, 0)
+mesh = SubResource("Mesh_path")
+
+[node name="WallLeft" type="StaticBody3D" parent="."]
+position = Vector3(-0.25, 7.4375, 0)
+script = ExtResource("2_block")
+size = Vector3(0.5, 37.5, 4)
+show_mesh = false
+
+[node name="WallRight" type="StaticBody3D" parent="."]
+position = Vector3(45.25, 7.4375, 0)
+script = ExtResource("2_block")
+size = Vector3(0.5, 37.5, 4)
+show_mesh = false
+
+[node name="Goal" parent="." instance=ExtResource("9_goal")]
+position = Vector3(40, 0, 0)
+locked = true
+
+[node name="GiantMonster" parent="." node_paths=PackedStringArray("goal") instance=ExtResource("13_giant_monster")]
+position = Vector3(29.6875, 0, 0)
+respawn_position = Vector3(18.75, 0, 0)
+goal = NodePath("../Goal")
+
+[node name="Player" parent="." instance=ExtResource("7_player")]
+position = Vector3(1.875, 0, 0)

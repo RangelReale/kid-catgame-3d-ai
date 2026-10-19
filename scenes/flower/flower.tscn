@@ -1,0 +1,62 @@
+[gd_scene format=3]
+
+[sub_resource type="StandardMaterial3D" id="Mat_stem"]
+albedo_color = Color(0.2, 0.55, 0.2, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_petal"]
+albedo_color = Color(1, 0.5, 0.75, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_center"]
+albedo_color = Color(1, 0.85, 0.3, 1)
+
+[sub_resource type="CylinderMesh" id="Mesh_stem"]
+top_radius = 0.02
+bottom_radius = 0.02
+height = 0.4
+
+[sub_resource type="SphereMesh" id="Mesh_petal"]
+radius = 0.06
+height = 0.12
+
+[sub_resource type="SphereMesh" id="Mesh_center"]
+radius = 0.045
+height = 0.09
+
+[node name="Flower" type="Node3D"]
+
+[node name="Visual" type="Node3D" parent="."]
+
+[node name="Stem" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0, 0.2, 0)
+mesh = SubResource("Mesh_stem")
+surface_material_override/0 = SubResource("Mat_stem")
+
+[node name="Petal1" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0, 0.5, 0.02)
+mesh = SubResource("Mesh_petal")
+surface_material_override/0 = SubResource("Mat_petal")
+
+[node name="Petal2" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0.08, 0.43, 0.02)
+mesh = SubResource("Mesh_petal")
+surface_material_override/0 = SubResource("Mat_petal")
+
+[node name="Petal3" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0.05, 0.35, 0.02)
+mesh = SubResource("Mesh_petal")
+surface_material_override/0 = SubResource("Mat_petal")
+
+[node name="Petal4" type="MeshInstance3D" parent="Visual"]
+position = Vector3(-0.05, 0.35, 0.02)
+mesh = SubResource("Mesh_petal")
+surface_material_override/0 = SubResource("Mat_petal")
+
+[node name="Petal5" type="MeshInstance3D" parent="Visual"]
+position = Vector3(-0.08, 0.43, 0.02)
+mesh = SubResource("Mesh_petal")
+surface_material_override/0 = SubResource("Mat_petal")
+
+[node name="Center" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0, 0.42, 0.06)
+mesh = SubResource("Mesh_center")
+surface_material_override/0 = SubResource("Mat_center")

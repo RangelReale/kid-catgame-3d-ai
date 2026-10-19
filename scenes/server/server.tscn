@@ -1,0 +1,95 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/level/block.gd" id="1_block"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_green"]
+shading_mode = 0
+albedo_color = Color(0.3, 1, 0.4, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_red"]
+shading_mode = 0
+albedo_color = Color(1, 0.4, 0.4, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_blue"]
+shading_mode = 0
+albedo_color = Color(0.4, 0.7, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_yellow"]
+shading_mode = 0
+albedo_color = Color(1, 0.9, 0.3, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_slot"]
+albedo_color = Color(0.18, 0.18, 0.22, 1)
+
+[sub_resource type="BoxMesh" id="Mesh_light"]
+size = Vector3(0.12, 0.08, 0.03)
+
+[sub_resource type="BoxMesh" id="Mesh_slot"]
+size = Vector3(0.8, 0.04, 0.02)
+
+[node name="Server" type="StaticBody3D"]
+script = ExtResource("1_block")
+size = Vector3(1, 2.25, 1.4)
+color = Color(0.25, 0.25, 0.3, 1)
+
+[node name="Visual" type="Node3D" parent="."]
+
+[node name="Slot1" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0, 0.75, 0.71)
+mesh = SubResource("Mesh_slot")
+surface_material_override/0 = SubResource("Mat_slot")
+
+[node name="Slot2" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0, 0.25, 0.71)
+mesh = SubResource("Mesh_slot")
+surface_material_override/0 = SubResource("Mat_slot")
+
+[node name="Slot3" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0, -0.25, 0.71)
+mesh = SubResource("Mesh_slot")
+surface_material_override/0 = SubResource("Mat_slot")
+
+[node name="Slot4" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0, -0.75, 0.71)
+mesh = SubResource("Mesh_slot")
+surface_material_override/0 = SubResource("Mat_slot")
+
+[node name="Light1" type="MeshInstance3D" parent="Visual"]
+position = Vector3(-0.25, 0.9, 0.71)
+mesh = SubResource("Mesh_light")
+surface_material_override/0 = SubResource("Mat_green")
+
+[node name="Light2" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0.05, 0.9, 0.71)
+mesh = SubResource("Mesh_light")
+surface_material_override/0 = SubResource("Mat_red")
+
+[node name="Light3" type="MeshInstance3D" parent="Visual"]
+position = Vector3(-0.25, 0.4, 0.71)
+mesh = SubResource("Mesh_light")
+surface_material_override/0 = SubResource("Mat_blue")
+
+[node name="Light4" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0.05, 0.4, 0.71)
+mesh = SubResource("Mesh_light")
+surface_material_override/0 = SubResource("Mat_yellow")
+
+[node name="Light5" type="MeshInstance3D" parent="Visual"]
+position = Vector3(-0.25, -0.1, 0.71)
+mesh = SubResource("Mesh_light")
+surface_material_override/0 = SubResource("Mat_green")
+
+[node name="Light6" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0.05, -0.1, 0.71)
+mesh = SubResource("Mesh_light")
+surface_material_override/0 = SubResource("Mat_red")
+
+[node name="Light7" type="MeshInstance3D" parent="Visual"]
+position = Vector3(-0.25, -0.6, 0.71)
+mesh = SubResource("Mesh_light")
+surface_material_override/0 = SubResource("Mat_blue")
+
+[node name="Light8" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0.05, -0.6, 0.71)
+mesh = SubResource("Mesh_light")
+surface_material_override/0 = SubResource("Mat_yellow")

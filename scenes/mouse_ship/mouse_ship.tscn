@@ -1,0 +1,162 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/monster/monster.gd" id="1_monster"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_mouse"]
+albedo_color = Color(0.65, 0.65, 0.7, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_ear"]
+albedo_color = Color(1, 0.65, 0.75, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_dark"]
+albedo_color = Color(0.15, 0.1, 0.15, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_nose"]
+albedo_color = Color(1, 0.5, 0.65, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_dome"]
+transparency = 1
+albedo_color = Color(0.7, 0.9, 1, 0.35)
+roughness = 0.2
+
+[sub_resource type="StandardMaterial3D" id="Mat_saucer"]
+albedo_color = Color(0.6, 0.5, 0.85, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_light_yellow"]
+shading_mode = 0
+albedo_color = Color(1, 0.9, 0.3, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_light_green"]
+shading_mode = 0
+albedo_color = Color(0.4, 1, 0.5, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_light_pink"]
+shading_mode = 0
+albedo_color = Color(1, 0.45, 0.6, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_sparkle"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+
+[sub_resource type="SphereMesh" id="Mesh_head"]
+radius = 0.13
+height = 0.26
+
+[sub_resource type="SphereMesh" id="Mesh_ear"]
+radius = 0.07
+height = 0.14
+
+[sub_resource type="SphereMesh" id="Mesh_eye"]
+radius = 0.025
+height = 0.05
+
+[sub_resource type="SphereMesh" id="Mesh_nose"]
+radius = 0.03
+height = 0.06
+
+[sub_resource type="SphereMesh" id="Mesh_dome"]
+radius = 0.24
+height = 0.48
+
+[sub_resource type="SphereMesh" id="Mesh_saucer"]
+radius = 0.38
+height = 0.76
+
+[sub_resource type="SphereMesh" id="Mesh_light"]
+radius = 0.04
+height = 0.08
+
+[sub_resource type="BoxMesh" id="Mesh_sparkle"]
+material = SubResource("Mat_sparkle")
+size = Vector3(0.08, 0.08, 0.08)
+
+[sub_resource type="Gradient" id="Gradient_fade"]
+colors = PackedColorArray(1, 0.9, 0.3, 1, 1, 0.9, 0.3, 0)
+
+[sub_resource type="BoxShape3D" id="Shape_body"]
+size = Vector3(0.6875, 0.4375, 0.5)
+
+[node name="MouseShip" type="Area3D"]
+script = ExtResource("1_monster")
+
+[node name="Visual" type="Node3D" parent="."]
+
+[node name="MouseHead" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0, 0.26, 0)
+mesh = SubResource("Mesh_head")
+surface_material_override/0 = SubResource("Mat_mouse")
+
+[node name="EarLeft" type="MeshInstance3D" parent="Visual"]
+position = Vector3(-0.04, 0.38, -0.09)
+scale = Vector3(1, 1, 0.4)
+mesh = SubResource("Mesh_ear")
+surface_material_override/0 = SubResource("Mat_ear")
+
+[node name="EarRight" type="MeshInstance3D" parent="Visual"]
+position = Vector3(-0.04, 0.38, 0.09)
+scale = Vector3(1, 1, 0.4)
+mesh = SubResource("Mesh_ear")
+surface_material_override/0 = SubResource("Mat_ear")
+
+[node name="EyeLeft" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0.1, 0.3, -0.06)
+mesh = SubResource("Mesh_eye")
+surface_material_override/0 = SubResource("Mat_dark")
+
+[node name="EyeRight" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0.1, 0.3, 0.06)
+mesh = SubResource("Mesh_eye")
+surface_material_override/0 = SubResource("Mat_dark")
+
+[node name="Nose" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0.14, 0.24, 0)
+mesh = SubResource("Mesh_nose")
+surface_material_override/0 = SubResource("Mat_nose")
+
+[node name="Saucer" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0, 0.12, 0)
+scale = Vector3(1, 0.3, 1)
+mesh = SubResource("Mesh_saucer")
+surface_material_override/0 = SubResource("Mat_saucer")
+
+[node name="LightLeft" type="MeshInstance3D" parent="Visual"]
+position = Vector3(-0.24, 0.1, 0.27)
+mesh = SubResource("Mesh_light")
+surface_material_override/0 = SubResource("Mat_light_yellow")
+
+[node name="LightMiddle" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0, 0.1, 0.37)
+mesh = SubResource("Mesh_light")
+surface_material_override/0 = SubResource("Mat_light_green")
+
+[node name="LightRight" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0.24, 0.1, 0.27)
+mesh = SubResource("Mesh_light")
+surface_material_override/0 = SubResource("Mat_light_pink")
+
+[node name="Dome" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0, 0.2, 0)
+mesh = SubResource("Mesh_dome")
+surface_material_override/0 = SubResource("Mat_dome")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+position = Vector3(0, 0.21875, 0)
+shape = SubResource("Shape_body")
+
+[node name="Poof" type="CPUParticles3D" parent="."]
+position = Vector3(0, 0.22, 0)
+emitting = false
+amount = 14
+lifetime = 0.6
+one_shot = true
+explosiveness = 1.0
+mesh = SubResource("Mesh_sparkle")
+direction = Vector3(0, 1, 0)
+spread = 180.0
+gravity = Vector3(0, -6.25, 0)
+initial_velocity_min = 1.875
+initial_velocity_max = 3.125
+scale_amount_min = 1.0
+scale_amount_max = 1.5
+color_ramp = SubResource("Gradient_fade")

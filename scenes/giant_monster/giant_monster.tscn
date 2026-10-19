@@ -1,0 +1,194 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/big_rat/big_rat.gd" id="1_big_rat"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_body"]
+albedo_color = Color(0.6, 0.35, 0.8, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_belly"]
+albedo_color = Color(0.78, 0.6, 0.92, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_feet"]
+albedo_color = Color(0.45, 0.25, 0.6, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_horn"]
+albedo_color = Color(1, 0.7, 0.3, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_white"]
+albedo_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_dark"]
+albedo_color = Color(0.15, 0.1, 0.15, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_brow"]
+albedo_color = Color(0.35, 0.18, 0.45, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_mouth"]
+albedo_color = Color(0.35, 0.15, 0.3, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_bar_back"]
+shading_mode = 0
+albedo_color = Color(0.25, 0.2, 0.25, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_bar_fill"]
+shading_mode = 0
+albedo_color = Color(1, 0.35, 0.45, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_sparkle"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+
+[sub_resource type="SphereMesh" id="Mesh_ball"]
+radius = 0.5
+height = 1.0
+
+[sub_resource type="CylinderMesh" id="Mesh_horn"]
+top_radius = 0.0
+bottom_radius = 0.15
+height = 0.5
+
+[sub_resource type="BoxMesh" id="Mesh_brow"]
+size = Vector3(0.5, 0.08, 0.08)
+
+[sub_resource type="BoxMesh" id="Mesh_mouth"]
+size = Vector3(0.6, 0.08, 0.06)
+
+[sub_resource type="BoxMesh" id="Mesh_tooth"]
+size = Vector3(0.1, 0.12, 0.04)
+
+[sub_resource type="BoxMesh" id="Mesh_bar_back"]
+size = Vector3(1.9375, 0.1875, 0.05)
+
+[sub_resource type="BoxMesh" id="Mesh_bar_fill"]
+size = Vector3(1.8125, 0.125, 0.07)
+
+[sub_resource type="BoxMesh" id="Mesh_sparkle"]
+material = SubResource("Mat_sparkle")
+size = Vector3(0.08, 0.08, 0.08)
+
+[sub_resource type="Gradient" id="Gradient_fade"]
+colors = PackedColorArray(1, 0.9, 0.3, 1, 1, 0.9, 0.3, 0)
+
+[sub_resource type="BoxShape3D" id="Shape_body"]
+size = Vector3(2.1875, 1.875, 1)
+
+[node name="GiantMonster" type="Area3D"]
+script = ExtResource("1_big_rat")
+speed = 1.5625
+walk_distance = 3.75
+max_health = 5
+
+[node name="Visual" type="Node3D" parent="."]
+
+[node name="FootBackLeft" type="MeshInstance3D" parent="Visual"]
+position = Vector3(-0.5, 0.1, -0.3)
+scale = Vector3(0.5, 0.25, 0.35)
+mesh = SubResource("Mesh_ball")
+surface_material_override/0 = SubResource("Mat_feet")
+
+[node name="FootBackRight" type="MeshInstance3D" parent="Visual"]
+position = Vector3(-0.5, 0.1, 0.3)
+scale = Vector3(0.5, 0.25, 0.35)
+mesh = SubResource("Mesh_ball")
+surface_material_override/0 = SubResource("Mat_feet")
+
+[node name="FootFrontLeft" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0.5, 0.1, -0.3)
+scale = Vector3(0.5, 0.25, 0.35)
+mesh = SubResource("Mesh_ball")
+surface_material_override/0 = SubResource("Mat_feet")
+
+[node name="FootFrontRight" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0.5, 0.1, 0.3)
+scale = Vector3(0.5, 0.25, 0.35)
+mesh = SubResource("Mesh_ball")
+surface_material_override/0 = SubResource("Mat_feet")
+
+[node name="HornLeft" type="MeshInstance3D" parent="Visual"]
+position = Vector3(-0.45, 1.85, 0)
+rotation = Vector3(0, 0, 0.3)
+mesh = SubResource("Mesh_horn")
+surface_material_override/0 = SubResource("Mat_horn")
+
+[node name="HornRight" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0.45, 1.85, 0)
+rotation = Vector3(0, 0, -0.3)
+mesh = SubResource("Mesh_horn")
+surface_material_override/0 = SubResource("Mat_horn")
+
+[node name="Body" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0, 0.95, 0)
+scale = Vector3(2, 1.8, 1.4)
+mesh = SubResource("Mesh_ball")
+surface_material_override/0 = SubResource("Mat_body")
+
+[node name="Belly" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0.15, 0.75, 0.3)
+scale = Vector3(1.3, 1.1, 0.8)
+mesh = SubResource("Mesh_ball")
+surface_material_override/0 = SubResource("Mat_belly")
+
+[node name="EyeWhite" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0.35, 1.3, 0.5)
+scale = Vector3(0.55, 0.55, 0.55)
+mesh = SubResource("Mesh_ball")
+surface_material_override/0 = SubResource("Mat_white")
+
+[node name="Pupil" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0.45, 1.32, 0.72)
+scale = Vector3(0.25, 0.25, 0.25)
+mesh = SubResource("Mesh_ball")
+surface_material_override/0 = SubResource("Mat_dark")
+
+[node name="Eyebrow" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0.35, 1.64, 0.58)
+rotation = Vector3(0, 0, -0.2)
+mesh = SubResource("Mesh_brow")
+surface_material_override/0 = SubResource("Mat_brow")
+
+[node name="Mouth" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0.35, 0.86, 0.68)
+mesh = SubResource("Mesh_mouth")
+surface_material_override/0 = SubResource("Mat_mouth")
+
+[node name="Tooth" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0.42, 0.8, 0.71)
+mesh = SubResource("Mesh_tooth")
+surface_material_override/0 = SubResource("Mat_white")
+
+[node name="HealthBar" type="Node3D" parent="."]
+position = Vector3(0, 2.875, 0)
+
+[node name="Back" type="MeshInstance3D" parent="HealthBar"]
+mesh = SubResource("Mesh_bar_back")
+surface_material_override/0 = SubResource("Mat_bar_back")
+
+[node name="Fill" type="Node3D" parent="HealthBar"]
+position = Vector3(-0.90625, 0, 0)
+
+[node name="Bar" type="MeshInstance3D" parent="HealthBar/Fill"]
+position = Vector3(0.90625, 0, 0)
+mesh = SubResource("Mesh_bar_fill")
+surface_material_override/0 = SubResource("Mat_bar_fill")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+position = Vector3(0, 0.9375, 0)
+shape = SubResource("Shape_body")
+
+[node name="Poof" type="CPUParticles3D" parent="."]
+position = Vector3(0, 1.06, 0)
+emitting = false
+amount = 50
+lifetime = 1.0
+one_shot = true
+explosiveness = 1.0
+mesh = SubResource("Mesh_sparkle")
+direction = Vector3(0, 1, 0)
+spread = 180.0
+gravity = Vector3(0, -6.25, 0)
+initial_velocity_min = 3.125
+initial_velocity_max = 5.625
+scale_amount_min = 1.5
+scale_amount_max = 2.5
+color_ramp = SubResource("Gradient_fade")
