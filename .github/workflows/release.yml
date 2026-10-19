@@ -117,12 +117,18 @@ jobs:
           test -f build/windows/catgame3d.exe
           test -f build/android/catgame3d.apk
 
+      # On Linux, Godot can crash while quitting once the headset plugin is
+      # loaded. The work is done by then, so the step checks the results
+      # instead of Godot's exit code.
       - name: Export Meta Quest 3
         run: |
           sh tools/install_xr_plugin.sh
-          "$GODOT" --headless --path . --import
-          "$GODOT" --headless --path . --install-android-build-template --export-release "Quest" build/quest/catgame3d-quest.apk
+          "$GODOT" --headless --path . --import || echo "Godot exited with code $?"
+          grep godotopenxrvendors .godot/extension_list.cfg
+          "$GODOT" --headless --path . --install-android-build-template --export-release "Quest" build/quest/catgame3d-quest.apk \
+            || echo "Godot exited with code $?"
           test -f build/quest/catgame3d-quest.apk
+          unzip -l build/quest/catgame3d-quest.apk | grep libgodotopenxrvendors.so
 
       - name: Build the Windows installer
         run: |
