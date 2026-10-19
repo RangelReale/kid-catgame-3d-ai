@@ -1,0 +1,156 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/angry_man/angry_man.gd" id="1_angry_man"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_pants"]
+albedo_color = Color(0.2, 0.25, 0.45, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_shoes"]
+albedo_color = Color(0.3, 0.2, 0.15, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_shirt"]
+albedo_color = Color(0.95, 0.95, 0.95, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_tie"]
+albedo_color = Color(0.9, 0.25, 0.3, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_hand"]
+albedo_color = Color(0.98, 0.78, 0.65, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_head"]
+albedo_color = Color(0.98, 0.7, 0.6, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_hair"]
+albedo_color = Color(0.35, 0.25, 0.2, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_brow"]
+albedo_color = Color(0.25, 0.15, 0.1, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_dark"]
+albedo_color = Color(0.15, 0.1, 0.15, 1)
+
+[sub_resource type="BoxMesh" id="Mesh_leg"]
+size = Vector3(0.12, 0.5, 0.14)
+
+[sub_resource type="BoxMesh" id="Mesh_shoe"]
+size = Vector3(0.22, 0.08, 0.16)
+
+[sub_resource type="BoxMesh" id="Mesh_shirt"]
+size = Vector3(0.36, 0.42, 0.34)
+
+[sub_resource type="BoxMesh" id="Mesh_tie"]
+size = Vector3(0.02, 0.3, 0.07)
+
+[sub_resource type="BoxMesh" id="Mesh_arm"]
+size = Vector3(0.36, 0.1, 0.1)
+
+[sub_resource type="SphereMesh" id="Mesh_hand"]
+radius = 0.06
+height = 0.12
+
+[sub_resource type="SphereMesh" id="Mesh_head"]
+radius = 0.17
+height = 0.34
+
+[sub_resource type="BoxMesh" id="Mesh_hair"]
+size = Vector3(0.32, 0.08, 0.32)
+
+[sub_resource type="BoxMesh" id="Mesh_brow"]
+size = Vector3(0.02, 0.025, 0.1)
+
+[sub_resource type="SphereMesh" id="Mesh_eye"]
+radius = 0.025
+height = 0.05
+
+[sub_resource type="BoxMesh" id="Mesh_mouth"]
+size = Vector3(0.02, 0.02, 0.1)
+
+[sub_resource type="BoxShape3D" id="Shape_body"]
+size = Vector3(0.4375, 1.25, 0.5)
+
+[node name="AngryMan" type="Area3D"]
+script = ExtResource("1_angry_man")
+
+[node name="Visual" type="Node3D" parent="."]
+
+[node name="LegBack" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0, 0.29, -0.09)
+mesh = SubResource("Mesh_leg")
+surface_material_override/0 = SubResource("Mat_pants")
+
+[node name="LegFront" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0, 0.29, 0.09)
+mesh = SubResource("Mesh_leg")
+surface_material_override/0 = SubResource("Mat_pants")
+
+[node name="ShoeBack" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0.04, 0.04, -0.09)
+mesh = SubResource("Mesh_shoe")
+surface_material_override/0 = SubResource("Mat_shoes")
+
+[node name="ShoeFront" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0.04, 0.04, 0.09)
+mesh = SubResource("Mesh_shoe")
+surface_material_override/0 = SubResource("Mat_shoes")
+
+[node name="Shirt" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0, 0.75, 0)
+mesh = SubResource("Mesh_shirt")
+surface_material_override/0 = SubResource("Mat_shirt")
+
+[node name="Tie" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0.19, 0.8, 0)
+mesh = SubResource("Mesh_tie")
+surface_material_override/0 = SubResource("Mat_tie")
+
+[node name="Arm" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0.18, 0.84, 0.22)
+rotation = Vector3(0, 0, 0.25)
+mesh = SubResource("Mesh_arm")
+surface_material_override/0 = SubResource("Mat_shirt")
+
+[node name="Hand" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0.38, 0.9, 0.22)
+mesh = SubResource("Mesh_hand")
+surface_material_override/0 = SubResource("Mat_hand")
+
+[node name="Head" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0, 1.1, 0)
+mesh = SubResource("Mesh_head")
+surface_material_override/0 = SubResource("Mat_head")
+
+[node name="Hair" type="MeshInstance3D" parent="Visual"]
+position = Vector3(-0.02, 1.25, 0)
+mesh = SubResource("Mesh_hair")
+surface_material_override/0 = SubResource("Mat_hair")
+
+[node name="EyebrowBack" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0.155, 1.17, -0.07)
+rotation = Vector3(0.5, 0, 0)
+mesh = SubResource("Mesh_brow")
+surface_material_override/0 = SubResource("Mat_brow")
+
+[node name="EyebrowFront" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0.155, 1.17, 0.07)
+rotation = Vector3(-0.5, 0, 0)
+mesh = SubResource("Mesh_brow")
+surface_material_override/0 = SubResource("Mat_brow")
+
+[node name="EyeBack" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0.15, 1.12, -0.06)
+mesh = SubResource("Mesh_eye")
+surface_material_override/0 = SubResource("Mat_dark")
+
+[node name="EyeFront" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0.15, 1.12, 0.06)
+mesh = SubResource("Mesh_eye")
+surface_material_override/0 = SubResource("Mat_dark")
+
+[node name="Mouth" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0.165, 1.02, 0)
+mesh = SubResource("Mesh_mouth")
+surface_material_override/0 = SubResource("Mat_dark")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+position = Vector3(0, 0.625, 0)
+shape = SubResource("Shape_body")
