@@ -18,7 +18,9 @@ var _level: Node
 ## `godot --path . -- --level 3` starts at the third level, to test it quickly.
 func _ready() -> void:
 	var args := OS.get_cmdline_user_args()
-	if xr_preview or args.has("--xr-preview"):
+	if _start_headset():
+		_add_xr_rig(false)
+	elif xr_preview or args.has("--xr-preview"):
 		_add_xr_rig(true)
 	if levels.is_empty():
 		return
@@ -59,6 +61,27 @@ func _load_level(index: int) -> void:
 		if _level.is_ancestor_of(catcher):
 			catcher.caught.connect(_on_caught)
 	level_loaded.emit(_level)
+
+
+## In the Quest build (or with `--xr-mode on` on a computer with an OpenXR
+## runtime), OpenXR is running: draw to the headset and show the real room
+## behind the game. Returns false on a normal screen.
+func _start_headset() -> bool:
+	var xr := XRServer.find_interface("OpenXR")
+	if xr == null or not xr.is_initialized():
+		return false
+	var viewport := get_viewport()
+	viewport.use_xr = true
+	viewport.transparent_bg = true
+	if XRInterface.XR_ENV_BLEND_MODE_ALPHA_BLEND in xr.get_supported_environment_blend_modes():
+		xr.environment_blend_mode = XRInterface.XR_ENV_BLEND_MODE_ALPHA_BLEND
+	# The headset sets its own pace; physics follows its refresh rate so the
+	# cat moves smoothly.
+	DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
+	xr.session_begun.connect(func() -> void:
+		if xr.display_refresh_rate > 0.0:
+			Engine.physics_ticks_per_second = roundi(xr.display_refresh_rate))
+	return true
 
 
 func _add_xr_rig(preview: bool) -> void:

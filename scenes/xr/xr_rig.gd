@@ -15,10 +15,14 @@ extends Node3D
 ## When true, a normal camera stands where a head would be, to look at the
 ## diorama on a computer screen without a headset.
 @export var preview: bool = false
-## Preview only: how far the head is from the cat's plane, in metres.
-@export var head_distance: float = 1.0
-## Preview only: how far the head is above the base of the box, in metres.
+## Where the box goes in front of the player: how far the head is from the
+## cat's plane, in metres.
+@export var head_distance: float = 0.9
+## How far the head is above the base of the box, in metres. About right for
+## a child sitting at a table.
 @export var head_height: float = 0.45
+## Seconds to hold a grip button to bring the box back in front of the head.
+@export var recenter_hold: float = 1.0
 
 ## Where the sun and clouds go: just in front of the painted sky, smaller,
 ## so they fit in the box.
@@ -29,20 +33,67 @@ var _target: Node3D
 var _limit_low := Vector2(-10000, -10000)
 var _limit_high := Vector2(10000, 10000)
 
+## True once the box has been put in front of the head in the headset.
+var _placed: bool = false
+var _grip_time: float = 0.0
+
 @onready var _stage: Node3D = $Stage
 @onready var _preview_camera: Camera3D = $PreviewCamera
+@onready var _origin: XROrigin3D = $XROrigin3D
+@onready var _xr_camera: XRCamera3D = $XROrigin3D/XRCamera3D
+@onready var _hands: Array[XRController3D] = [$XROrigin3D/LeftHand, $XROrigin3D/RightHand]
 
 
 func _ready() -> void:
 	_stage.preview = preview
 	_preview_camera.visible = preview
 	if preview:
-		var half: Vector2 = _stage.window_size / 2.0
-		var base: float = -half.y - _stage.base_height
-		_preview_camera.position = Vector3(0, base + head_height * world_scale,
-				head_distance * world_scale)
-		_preview_camera.look_at(global_position + Vector3(0, -1, 0), Vector3.UP)
+		_preview_camera.transform = _head_spot().looking_at(Vector3(0, -1, 0), Vector3.UP)
 		_preview_camera.make_current()
+		_origin.process_mode = Node.PROCESS_MODE_DISABLED
+		return
+	_origin.world_scale = world_scale
+	_origin.current = true
+	_xr_camera.make_current()
+	var xr := XRServer.find_interface("OpenXR")
+	if xr != null:
+		# The player held the Meta button to recenter: move the box too.
+		xr.pose_recentered.connect(func() -> void: _placed = false)
+
+
+## Where the head should be, in the rig: in front of the box and a little
+## above its base, looking straight ahead.
+func _head_spot() -> Transform3D:
+	var half: Vector2 = _stage.window_size / 2.0
+	var base: float = -half.y - _stage.base_height
+	return Transform3D(Basis(), Vector3(0, base + head_height * world_scale,
+			head_distance * world_scale))
+
+
+## Where to put the XR origin so the box is in front of a head that is at
+## `head` in the origin's space. Only the head's turn to the sides counts;
+## its tilt up or down does not.
+func origin_for_head(head: Transform3D) -> Transform3D:
+	var forward := -head.basis.z
+	var turn := atan2(-forward.x, -forward.z)
+	var flat_head := Transform3D(Basis(Vector3.UP, turn), head.origin)
+	return _head_spot() * flat_head.affine_inverse()
+
+
+## In the headset: puts the box in front of the head when tracking starts,
+## and again when a grip button is held.
+func _update_headset(delta: float) -> void:
+	var gripping := false
+	for hand in _hands:
+		if hand.get_is_active() and hand.is_button_pressed("grip_click"):
+			gripping = true
+	_grip_time = _grip_time + delta if gripping else 0.0
+	if _grip_time >= recenter_hold:
+		_grip_time = -INF
+		_placed = false
+	if not _placed and _xr_camera.position != Vector3.ZERO:
+		_origin.transform = origin_for_head(_xr_camera.transform)
+		_placed = true
 
 
 ## Takes over a freshly loaded level: switches off its flat camera, reads
@@ -70,6 +121,8 @@ func attach_level(level: Node) -> void:
 		environment.passthrough_color = _stage.room_color if preview else Color(0, 0, 0, 0)
 	if preview:
 		_preview_camera.make_current()
+	else:
+		_xr_camera.make_current()
 	_snap()
 
 
@@ -85,6 +138,8 @@ func _find_floor(level: Node) -> Block:
 
 
 func _process(delta: float) -> void:
+	if not preview:
+		_update_headset(delta)
 	if not is_instance_valid(_target):
 		return
 	var goal := focus_for(_target.global_position)

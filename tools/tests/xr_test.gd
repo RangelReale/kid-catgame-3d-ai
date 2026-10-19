@@ -20,6 +20,8 @@ func _run() -> void:
 	await _test_window_limits()
 	await _test_level_takeover(9, "Player")
 	await _test_level_takeover(11, "Airplane")
+	await _test_controllers()
+	await _test_box_placement()
 	print("FAILED: %d check(s)" % _failures if _failures > 0 else "ALL PASSED")
 	quit(1 if _failures > 0 else 0)
 
@@ -90,6 +92,46 @@ func _test_level_takeover(number: int, target_name: String) -> void:
 	_check(prefix + "the background is the room, not the sky",
 			environment.passthrough, environment.passthrough)
 	main.queue_free()
+	await process_frame
+
+
+## The thumbstick and buttons press the same actions as the keyboard.
+func _test_controllers() -> void:
+	var input: Node = load("res://scenes/xr/xr_input.gd").new()
+	root.add_child(input)
+	input.apply(Vector2(-0.9, 0), false)
+	_check("thumbstick left walks left",
+			Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"), null)
+	input.apply(Vector2(0.3, 0), false)
+	_check("a small push does nothing",
+			not Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"), null)
+	input.apply(Vector2(0.8, -0.8), true)
+	_check("thumbstick right and down, with a button, walks right, swims down and jumps",
+			Input.is_action_pressed("move_right") and Input.is_action_pressed("move_down")
+			and Input.is_action_pressed("jump"), null)
+	input.apply(Vector2.ZERO, false)
+	_check("letting go releases every action",
+			not Input.is_action_pressed("move_right") and not Input.is_action_pressed("move_down")
+			and not Input.is_action_pressed("jump"), null)
+	input.free()
+	await process_frame
+
+
+## Wherever the head is when the game starts, the box ends up in front of it.
+func _test_box_placement() -> void:
+	var rig := RigScene.instantiate()
+	rig.preview = true
+	root.add_child(rig)
+	var head := Transform3D(Basis(Vector3.UP, deg_to_rad(70)).rotated(Vector3.RIGHT, -0.3),
+			Vector3(5, 18, -3))
+	var head_in_rig: Transform3D = rig.origin_for_head(head) * head
+	var spot: Transform3D = rig._head_spot()
+	_check("the head ends up at the spot in front of the box",
+			head_in_rig.origin.is_equal_approx(spot.origin), head_in_rig.origin)
+	var forward := -head_in_rig.basis.z
+	_check("the head faces the box",
+			absf(forward.x) < 0.001 and forward.z < 0.0, forward)
+	rig.free()
 	await process_frame
 
 
