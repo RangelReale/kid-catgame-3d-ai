@@ -1,0 +1,115 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/level/level_environment.gd" id="1_environment"]
+[ext_resource type="Script" path="res://scenes/camera/follow_camera.gd" id="3_camera"]
+[ext_resource type="Script" path="res://scenes/level/sky.gd" id="4_sky"]
+[ext_resource type="PackedScene" path="res://scenes/sun/sun.tscn" id="5_sun"]
+[ext_resource type="PackedScene" path="res://scenes/cloud/cloud.tscn" id="6_cloud"]
+[ext_resource type="PackedScene" path="res://scenes/airplane/airplane.tscn" id="7_airplane"]
+[ext_resource type="PackedScene" path="res://scenes/friendly_man/friendly_man.tscn" id="8_friendly_man"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_grass"]
+albedo_color = Color(0.35, 0.65, 0.25, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_runway"]
+albedo_color = Color(0.45, 0.45, 0.5, 1)
+
+[sub_resource type="BoxMesh" id="Mesh_grass"]
+size = Vector3(150, 1, 30)
+
+[sub_resource type="BoxMesh" id="Mesh_runway_start"]
+size = Vector3(25, 1, 5)
+
+[sub_resource type="BoxMesh" id="Mesh_runway_end"]
+size = Vector3(31.25, 1, 5)
+
+[node name="Level11" type="Node3D"]
+
+[node name="Environment" type="Node3D" parent="."]
+script = ExtResource("1_environment")
+
+[node name="Camera" type="Camera3D" parent="." node_paths=PackedStringArray("target")]
+fov = 40.0
+script = ExtResource("3_camera")
+target = NodePath("../Airplane")
+limit_left = 0.0
+limit_right = 106.25
+limit_bottom = -1.0
+
+[node name="Sky" type="Node3D" parent="."]
+script = ExtResource("4_sky")
+
+[node name="Sun" parent="Sky" instance=ExtResource("5_sun")]
+position = Vector3(17, 6, -30)
+
+[node name="Grass" type="MeshInstance3D" parent="."]
+position = Vector3(55, -0.5, -13)
+mesh = SubResource("Mesh_grass")
+surface_material_override/0 = SubResource("Mat_grass")
+
+[node name="RunwayStart" type="MeshInstance3D" parent="."]
+position = Vector3(9.375, -0.49, 0)
+mesh = SubResource("Mesh_runway_start")
+surface_material_override/0 = SubResource("Mat_runway")
+
+[node name="RunwayEnd" type="MeshInstance3D" parent="."]
+position = Vector3(93.75, -0.49, 0)
+mesh = SubResource("Mesh_runway_end")
+surface_material_override/0 = SubResource("Mat_runway")
+
+[node name="Clouds" type="Node3D" parent="."]
+
+[node name="Cloud1" parent="Clouds" instance=ExtResource("6_cloud")]
+position = Vector3(21.875, 5.5625, -3.5)
+scale = Vector3(1, 1, 1)
+speed = 0.0
+wrap_half_width = 1000.0
+
+[node name="Cloud2" parent="Clouds" instance=ExtResource("6_cloud")]
+position = Vector3(31.25, 2.75, -6)
+scale = Vector3(1.3, 1.3, 1.3)
+speed = 0.0
+wrap_half_width = 1000.0
+
+[node name="Cloud3" parent="Clouds" instance=ExtResource("6_cloud")]
+position = Vector3(40.625, 5.875, -3.5)
+scale = Vector3(0.9, 0.9, 0.9)
+speed = 0.0
+wrap_half_width = 1000.0
+
+[node name="Cloud4" parent="Clouds" instance=ExtResource("6_cloud")]
+position = Vector3(48.4375, 2.125, -6)
+scale = Vector3(1.1, 1.1, 1.1)
+speed = 0.0
+wrap_half_width = 1000.0
+
+[node name="Cloud5" parent="Clouds" instance=ExtResource("6_cloud")]
+position = Vector3(56.25, 5.25, -3.5)
+scale = Vector3(1.2, 1.2, 1.2)
+speed = 0.0
+wrap_half_width = 1000.0
+
+[node name="Cloud6" parent="Clouds" instance=ExtResource("6_cloud")]
+position = Vector3(64.0625, 3.0625, -6)
+scale = Vector3(0.8, 0.8, 0.8)
+speed = 0.0
+wrap_half_width = 1000.0
+
+[node name="Cloud7" parent="Clouds" instance=ExtResource("6_cloud")]
+position = Vector3(75, 5.5625, -3.5)
+scale = Vector3(1, 1, 1)
+speed = 0.0
+wrap_half_width = 1000.0
+
+[node name="Cloud8" parent="Clouds" instance=ExtResource("6_cloud")]
+position = Vector3(90.625, 4.625, -6)
+scale = Vector3(1.1, 1.1, 1.1)
+speed = 0.0
+wrap_half_width = 1000.0
+
+[node name="FriendlyMan" parent="." instance=ExtResource("8_friendly_man")]
+position = Vector3(100, 0, 0)
+
+[node name="Airplane" parent="." node_paths=PackedStringArray("show_on_landing") instance=ExtResource("7_airplane")]
+position = Vector3(3.75, 0, 0)
+show_on_landing = NodePath("../FriendlyMan")
