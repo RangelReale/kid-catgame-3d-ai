@@ -1,0 +1,84 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/roller_coaster/roller_coaster.gd" id="1_coaster"]
+[ext_resource type="Script" path="res://scenes/level/one_way_platform.gd" id="2_one_way"]
+
+[sub_resource type="Curve3D" id="Curve3D_track"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0.0, 0.0, 0, 0, 0, 0, 0, 0, 0, 0.3125, 0.00625, 0, 0, 0, 0, 0, 0, 0, 0.625, 0.025, 0, 0, 0, 0, 0, 0, 0, 0.9375, 0.05937, 0, 0, 0, 0, 0, 0, 0, 1.25, 0.10938, 0, 0, 0, 0, 0, 0, 0, 1.5625, 0.17813, 0, 0, 0, 0, 0, 0, 0, 1.875, 0.26562, 0, 0, 0, 0, 0, 0, 0, 2.1875, 0.36875, 0, 0, 0, 0, 0, 0, 0, 2.5, 0.4875, 0, 0, 0, 0, 0, 0, 0, 2.8125, 0.61562, 0, 0, 0, 0, 0, 0, 0, 3.125, 0.75, 0, 0, 0, 0, 0, 0, 0, 3.4375, 0.88438, 0, 0, 0, 0, 0, 0, 0, 3.75, 1.01875, 0, 0, 0, 0, 0, 0, 0, 4.0625, 1.14062, 0, 0, 0, 0, 0, 0, 0, 4.375, 1.24687, 0, 0, 0, 0, 0, 0, 0, 4.6875, 1.33438, 0, 0, 0, 0, 0, 0, 0, 5.0, 1.4, 0, 0, 0, 0, 0, 0, 0, 5.3125, 1.44063, 0, 0, 0, 0, 0, 0, 0, 5.625, 1.45625, 0, 0, 0, 0, 0, 0, 0, 5.9375, 1.44375, 0, 0, 0, 0, 0, 0, 0, 6.25, 1.40625, 0, 0, 0, 0, 0, 0, 0, 6.5625, 1.35, 0, 0, 0, 0, 0, 0, 0, 6.875, 1.275, 0, 0, 0, 0, 0, 0, 0, 7.1875, 1.1875, 0, 0, 0, 0, 0, 0, 0, 7.5, 1.09688, 0, 0, 0, 0, 0, 0, 0, 7.8125, 1.00625, 0, 0, 0, 0, 0, 0, 0, 8.125, 0.92188, 0, 0, 0, 0, 0, 0, 0, 8.4375, 0.85, 0, 0, 0, 0, 0, 0, 0, 8.75, 0.79688, 0, 0, 0, 0, 0, 0, 0, 9.0625, 0.7625, 0, 0, 0, 0, 0, 0, 0, 9.375, 0.75, 0, 0, 0, 0, 0, 0, 0, 9.6875, 0.7625, 0, 0, 0, 0, 0, 0, 0, 10.0, 0.79688, 0, 0, 0, 0, 0, 0, 0, 10.3125, 0.85, 0, 0, 0, 0, 0, 0, 0, 10.625, 0.92188, 0, 0, 0, 0, 0, 0, 0, 10.9375, 1.00625, 0, 0, 0, 0, 0, 0, 0, 11.25, 1.09688, 0, 0, 0, 0, 0, 0, 0, 11.5625, 1.1875, 0, 0, 0, 0, 0, 0, 0, 11.875, 1.275, 0, 0, 0, 0, 0, 0, 0, 12.1875, 1.35, 0, 0, 0, 0, 0, 0, 0, 12.5, 1.40625, 0, 0, 0, 0, 0, 0, 0, 12.8125, 1.44375, 0, 0, 0, 0, 0, 0, 0, 13.125, 1.45625, 0, 0, 0, 0, 0, 0, 0, 13.4375, 1.44063, 0, 0, 0, 0, 0, 0, 0, 13.75, 1.4, 0, 0, 0, 0, 0, 0, 0, 14.0625, 1.33438, 0, 0, 0, 0, 0, 0, 0, 14.375, 1.24687, 0, 0, 0, 0, 0, 0, 0, 14.6875, 1.14062, 0, 0, 0, 0, 0, 0, 0, 15.0, 1.01875, 0, 0, 0, 0, 0, 0, 0, 15.3125, 0.88438, 0, 0, 0, 0, 0, 0, 0, 15.625, 0.75, 0, 0, 0, 0, 0, 0, 0, 15.9375, 0.61562, 0, 0, 0, 0, 0, 0, 0, 16.25, 0.4875, 0, 0, 0, 0, 0, 0, 0, 16.5625, 0.36875, 0, 0, 0, 0, 0, 0, 0, 16.875, 0.26562, 0, 0, 0, 0, 0, 0, 0, 17.1875, 0.17813, 0, 0, 0, 0, 0, 0, 0, 17.5, 0.10938, 0, 0, 0, 0, 0, 0, 0, 17.8125, 0.05937, 0, 0, 0, 0, 0, 0, 0, 18.125, 0.025, 0, 0, 0, 0, 0, 0, 0, 18.4375, 0.00625, 0, 0, 0, 0, 0, 0, 0, 18.75, 0.0, 0),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 61
+
+[sub_resource type="StandardMaterial3D" id="Mat_body"]
+albedo_color = Color(1, 0.8, 0.25, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_stripe"]
+albedo_color = Color(1, 0.45, 0.3, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_wheel"]
+albedo_color = Color(0.25, 0.25, 0.3, 1)
+
+[sub_resource type="BoxMesh" id="Mesh_body"]
+size = Vector3(0.94, 0.3, 0.7)
+
+[sub_resource type="BoxMesh" id="Mesh_stripe"]
+size = Vector3(0.96, 0.07, 0.72)
+
+[sub_resource type="CylinderMesh" id="Mesh_wheel"]
+top_radius = 0.09
+bottom_radius = 0.09
+height = 0.06
+
+[sub_resource type="BoxShape3D" id="Shape_cart"]
+size = Vector3(0.9375, 0.1875, 0.7)
+
+[node name="RollerCoaster" type="Path3D"]
+curve = SubResource("Curve3D_track")
+script = ExtResource("1_coaster")
+
+[node name="Visual" type="Node3D" parent="."]
+
+[node name="Cart" type="AnimatableBody3D" parent="."]
+script = ExtResource("2_one_way")
+top = 0.5
+
+[node name="Visual" type="Node3D" parent="Cart"]
+
+[node name="Body" type="MeshInstance3D" parent="Cart/Visual"]
+position = Vector3(0, 0.35, 0)
+mesh = SubResource("Mesh_body")
+surface_material_override/0 = SubResource("Mat_body")
+
+[node name="Stripe" type="MeshInstance3D" parent="Cart/Visual"]
+position = Vector3(0, 0.32, 0)
+mesh = SubResource("Mesh_stripe")
+surface_material_override/0 = SubResource("Mat_stripe")
+
+[node name="Wheel1" type="MeshInstance3D" parent="Cart/Visual"]
+position = Vector3(-0.3125, 0.09, -0.3)
+rotation = Vector3(1.5708, 0, 0)
+mesh = SubResource("Mesh_wheel")
+surface_material_override/0 = SubResource("Mat_wheel")
+
+[node name="Wheel2" type="MeshInstance3D" parent="Cart/Visual"]
+position = Vector3(-0.3125, 0.09, 0.3)
+rotation = Vector3(1.5708, 0, 0)
+mesh = SubResource("Mesh_wheel")
+surface_material_override/0 = SubResource("Mat_wheel")
+
+[node name="Wheel3" type="MeshInstance3D" parent="Cart/Visual"]
+position = Vector3(0.3125, 0.09, -0.3)
+rotation = Vector3(1.5708, 0, 0)
+mesh = SubResource("Mesh_wheel")
+surface_material_override/0 = SubResource("Mat_wheel")
+
+[node name="Wheel4" type="MeshInstance3D" parent="Cart/Visual"]
+position = Vector3(0.3125, 0.09, 0.3)
+rotation = Vector3(1.5708, 0, 0)
+mesh = SubResource("Mesh_wheel")
+surface_material_override/0 = SubResource("Mat_wheel")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cart"]
+position = Vector3(0, 0.40625, 0)
+shape = SubResource("Shape_cart")

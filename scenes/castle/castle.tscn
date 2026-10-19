@@ -18,52 +18,84 @@ albedo_color = Color(1, 0.85, 0.3, 1)
 [sub_resource type="StandardMaterial3D" id="Mat_window"]
 albedo_color = Color(0.55, 0.8, 0.95, 1)
 
+[sub_resource type="StandardMaterial3D" id="Mat_pole"]
+albedo_color = Color(0.55, 0.35, 0.2, 1)
+
 [sub_resource type="BoxMesh" id="Mesh_wall"]
 size = Vector3(5.625, 2.8125, 1.5)
 
 [sub_resource type="BoxMesh" id="Mesh_gate"]
-size = Vector3(1, 1.3, 0.06)
+size = Vector3(1.0, 0.94, 0.1)
 
-[sub_resource type="CylinderMesh" id="Mesh_tower_small"]
+[sub_resource type="CylinderMesh" id="Mesh_gate_top"]
 top_radius = 0.5
 bottom_radius = 0.5
-height = 4.375
-
-[sub_resource type="CylinderMesh" id="Mesh_tower_mid"]
-top_radius = 0.44
-bottom_radius = 0.44
-height = 5.0
-
-[sub_resource type="CylinderMesh" id="Mesh_tower_big"]
-top_radius = 0.56
-bottom_radius = 0.56
-height = 5.9375
-
-[sub_resource type="CylinderMesh" id="Mesh_roof_small"]
-top_radius = 0.0
-bottom_radius = 0.64
-height = 1.06
-
-[sub_resource type="CylinderMesh" id="Mesh_roof_mid"]
-top_radius = 0.0
-bottom_radius = 0.58
-height = 1.06
-
-[sub_resource type="CylinderMesh" id="Mesh_roof_big"]
-top_radius = 0.0
-bottom_radius = 0.7
-height = 1.06
+height = 0.1
 
 [sub_resource type="PrismMesh" id="Mesh_flag"]
-size = Vector3(0.3, 0.32, 0.03)
+size = Vector3(0.3, 0.35, 0.03)
+
+[sub_resource type="CylinderMesh" id="Mesh_flag_pole"]
+top_radius = 0.02
+bottom_radius = 0.02
+height = 0.45
 
 [sub_resource type="BoxMesh" id="Mesh_window"]
 size = Vector3(0.25, 0.4, 0.05)
 
+[sub_resource type="CylinderMesh" id="Mesh_tower1"]
+top_radius = 0.5
+bottom_radius = 0.5
+height = 4.375
+
+[sub_resource type="CylinderMesh" id="Mesh_roof1"]
+top_radius = 0.0
+bottom_radius = 0.625
+height = 1.0625
+
+[sub_resource type="CylinderMesh" id="Mesh_tower2"]
+top_radius = 0.5
+bottom_radius = 0.5
+height = 4.375
+
+[sub_resource type="CylinderMesh" id="Mesh_roof2"]
+top_radius = 0.0
+bottom_radius = 0.625
+height = 1.0625
+
+[sub_resource type="CylinderMesh" id="Mesh_tower3"]
+top_radius = 0.4375
+bottom_radius = 0.4375
+height = 5.0
+
+[sub_resource type="CylinderMesh" id="Mesh_roof3"]
+top_radius = 0.0
+bottom_radius = 0.5625
+height = 1.0625
+
+[sub_resource type="CylinderMesh" id="Mesh_tower4"]
+top_radius = 0.4375
+bottom_radius = 0.4375
+height = 5.0
+
+[sub_resource type="CylinderMesh" id="Mesh_roof4"]
+top_radius = 0.0
+bottom_radius = 0.5625
+height = 1.0625
+
+[sub_resource type="CylinderMesh" id="Mesh_tower5"]
+top_radius = 0.5625
+bottom_radius = 0.5625
+height = 5.9375
+
+[sub_resource type="CylinderMesh" id="Mesh_roof5"]
+top_radius = 0.0
+bottom_radius = 0.6875
+height = 1.0625
+
 [node name="Castle" type="Node3D"]
 
 [node name="Visual" type="Node3D" parent="."]
-position = Vector3(0, 0, -2.5)
 
 [node name="Wall" type="MeshInstance3D" parent="Visual"]
 position = Vector3(0, 1.40625, 0)
@@ -71,111 +103,142 @@ mesh = SubResource("Mesh_wall")
 surface_material_override/0 = SubResource("Mat_wall")
 
 [node name="Gate" type="MeshInstance3D" parent="Visual"]
-position = Vector3(0, 0.65, 0.76)
+position = Vector3(0, 0.47, 0.76)
 mesh = SubResource("Mesh_gate")
 surface_material_override/0 = SubResource("Mat_gate")
 
+[node name="GateTop" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0, 0.94, 0.76)
+rotation = Vector3(1.5708, 0, 0)
+mesh = SubResource("Mesh_gate_top")
+surface_material_override/0 = SubResource("Mat_gate")
+
 [node name="Tower1" type="MeshInstance3D" parent="Visual"]
-position = Vector3(-2.8125, 2.1875, 0.3)
-mesh = SubResource("Mesh_tower_small")
+position = Vector3(-2.8125, 2.1875, 0.35)
+mesh = SubResource("Mesh_tower1")
 surface_material_override/0 = SubResource("Mat_tower")
 
 [node name="Roof1" type="MeshInstance3D" parent="Visual"]
-position = Vector3(-2.8125, 4.905, 0.3)
-mesh = SubResource("Mesh_roof_small")
+position = Vector3(-2.8125, 4.9062, 0.35)
+mesh = SubResource("Mesh_roof1")
 surface_material_override/0 = SubResource("Mat_roof")
 
+[node name="FlagPole1" type="MeshInstance3D" parent="Visual"]
+position = Vector3(-2.8125, 5.625, 0.35)
+mesh = SubResource("Mesh_flag_pole")
+surface_material_override/0 = SubResource("Mat_pole")
+
 [node name="Flag1" type="MeshInstance3D" parent="Visual"]
-position = Vector3(-2.65, 5.55, 0.3)
+position = Vector3(-2.6425, 5.725, 0.35)
 rotation = Vector3(0, 0, -1.5708)
 mesh = SubResource("Mesh_flag")
 surface_material_override/0 = SubResource("Mat_flag")
 
 [node name="TowerWindow1" type="MeshInstance3D" parent="Visual"]
-position = Vector3(-2.8125, 3.6, 0.79)
+position = Vector3(-2.8125, 3.475, 0.85)
 mesh = SubResource("Mesh_window")
 surface_material_override/0 = SubResource("Mat_window")
 
 [node name="Tower2" type="MeshInstance3D" parent="Visual"]
-position = Vector3(2.8125, 2.1875, 0.3)
-mesh = SubResource("Mesh_tower_small")
+position = Vector3(2.8125, 2.1875, 0.35)
+mesh = SubResource("Mesh_tower2")
 surface_material_override/0 = SubResource("Mat_tower")
 
 [node name="Roof2" type="MeshInstance3D" parent="Visual"]
-position = Vector3(2.8125, 4.905, 0.3)
-mesh = SubResource("Mesh_roof_small")
+position = Vector3(2.8125, 4.9062, 0.35)
+mesh = SubResource("Mesh_roof2")
 surface_material_override/0 = SubResource("Mat_roof")
 
+[node name="FlagPole2" type="MeshInstance3D" parent="Visual"]
+position = Vector3(2.8125, 5.625, 0.35)
+mesh = SubResource("Mesh_flag_pole")
+surface_material_override/0 = SubResource("Mat_pole")
+
 [node name="Flag2" type="MeshInstance3D" parent="Visual"]
-position = Vector3(2.975, 5.55, 0.3)
+position = Vector3(2.9825, 5.725, 0.35)
 rotation = Vector3(0, 0, -1.5708)
 mesh = SubResource("Mesh_flag")
 surface_material_override/0 = SubResource("Mat_flag")
 
 [node name="TowerWindow2" type="MeshInstance3D" parent="Visual"]
-position = Vector3(2.8125, 3.6, 0.79)
+position = Vector3(2.8125, 3.475, 0.85)
 mesh = SubResource("Mesh_window")
 surface_material_override/0 = SubResource("Mat_window")
 
 [node name="Tower3" type="MeshInstance3D" parent="Visual"]
 position = Vector3(-1.25, 2.5, -0.2)
-mesh = SubResource("Mesh_tower_mid")
+mesh = SubResource("Mesh_tower3")
 surface_material_override/0 = SubResource("Mat_tower")
 
 [node name="Roof3" type="MeshInstance3D" parent="Visual"]
-position = Vector3(-1.25, 5.53, -0.2)
-mesh = SubResource("Mesh_roof_mid")
+position = Vector3(-1.25, 5.5312, -0.2)
+mesh = SubResource("Mesh_roof3")
 surface_material_override/0 = SubResource("Mat_roof")
 
+[node name="FlagPole3" type="MeshInstance3D" parent="Visual"]
+position = Vector3(-1.25, 6.25, -0.2)
+mesh = SubResource("Mesh_flag_pole")
+surface_material_override/0 = SubResource("Mat_pole")
+
 [node name="Flag3" type="MeshInstance3D" parent="Visual"]
-position = Vector3(-1.09, 6.18, -0.2)
+position = Vector3(-1.08, 6.35, -0.2)
 rotation = Vector3(0, 0, -1.5708)
 mesh = SubResource("Mesh_flag")
 surface_material_override/0 = SubResource("Mat_flag")
 
 [node name="TowerWindow3" type="MeshInstance3D" parent="Visual"]
-position = Vector3(-1.25, 4.2, 0.23)
+position = Vector3(-1.25, 4.1, 0.2375)
 mesh = SubResource("Mesh_window")
 surface_material_override/0 = SubResource("Mat_window")
 
 [node name="Tower4" type="MeshInstance3D" parent="Visual"]
 position = Vector3(1.25, 2.5, -0.2)
-mesh = SubResource("Mesh_tower_mid")
+mesh = SubResource("Mesh_tower4")
 surface_material_override/0 = SubResource("Mat_tower")
 
 [node name="Roof4" type="MeshInstance3D" parent="Visual"]
-position = Vector3(1.25, 5.53, -0.2)
-mesh = SubResource("Mesh_roof_mid")
+position = Vector3(1.25, 5.5312, -0.2)
+mesh = SubResource("Mesh_roof4")
 surface_material_override/0 = SubResource("Mat_roof")
 
+[node name="FlagPole4" type="MeshInstance3D" parent="Visual"]
+position = Vector3(1.25, 6.25, -0.2)
+mesh = SubResource("Mesh_flag_pole")
+surface_material_override/0 = SubResource("Mat_pole")
+
 [node name="Flag4" type="MeshInstance3D" parent="Visual"]
-position = Vector3(1.41, 6.18, -0.2)
+position = Vector3(1.42, 6.35, -0.2)
 rotation = Vector3(0, 0, -1.5708)
 mesh = SubResource("Mesh_flag")
 surface_material_override/0 = SubResource("Mat_flag")
 
 [node name="TowerWindow4" type="MeshInstance3D" parent="Visual"]
-position = Vector3(1.25, 4.2, 0.23)
+position = Vector3(1.25, 4.1, 0.2375)
 mesh = SubResource("Mesh_window")
 surface_material_override/0 = SubResource("Mat_window")
 
 [node name="Tower5" type="MeshInstance3D" parent="Visual"]
-position = Vector3(0, 2.97, -0.3)
-mesh = SubResource("Mesh_tower_big")
+position = Vector3(0.0, 2.9688, -0.2)
+mesh = SubResource("Mesh_tower5")
 surface_material_override/0 = SubResource("Mat_tower")
 
 [node name="Roof5" type="MeshInstance3D" parent="Visual"]
-position = Vector3(0, 6.47, -0.3)
-mesh = SubResource("Mesh_roof_big")
+position = Vector3(0.0, 6.4688, -0.2)
+mesh = SubResource("Mesh_roof5")
 surface_material_override/0 = SubResource("Mat_roof")
 
+[node name="FlagPole5" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0.0, 7.1875, -0.2)
+mesh = SubResource("Mesh_flag_pole")
+surface_material_override/0 = SubResource("Mat_pole")
+
 [node name="Flag5" type="MeshInstance3D" parent="Visual"]
-position = Vector3(0.16, 7.12, -0.3)
+position = Vector3(0.17, 7.2875, -0.2)
 rotation = Vector3(0, 0, -1.5708)
 mesh = SubResource("Mesh_flag")
 surface_material_override/0 = SubResource("Mat_flag")
 
 [node name="TowerWindow5" type="MeshInstance3D" parent="Visual"]
-position = Vector3(0, 5.15, 0.27)
+position = Vector3(0.0, 5.0375, 0.3625)
 mesh = SubResource("Mesh_window")
 surface_material_override/0 = SubResource("Mat_window")

@@ -2,13 +2,25 @@
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_main"]
 [ext_resource type="PackedScene" path="res://scenes/hud/hud.tscn" id="2_hud"]
-[ext_resource type="PackedScene" path="res://scenes/levels/level_01.tscn" id="3_level"]
-[ext_resource type="PackedScene" path="res://scenes/levels/level_02.tscn" id="4_level"]
-[ext_resource type="PackedScene" path="res://scenes/levels/level_03.tscn" id="5_level"]
-[ext_resource type="PackedScene" path="res://scenes/levels/level_04.tscn" id="6_level"]
+[ext_resource type="PackedScene" path="res://scenes/levels/level_01.tscn" id="level_01"]
+[ext_resource type="PackedScene" path="res://scenes/levels/level_02.tscn" id="level_02"]
+[ext_resource type="PackedScene" path="res://scenes/levels/level_03.tscn" id="level_03"]
+[ext_resource type="PackedScene" path="res://scenes/levels/level_04.tscn" id="level_04"]
+[ext_resource type="PackedScene" path="res://scenes/levels/level_05.tscn" id="level_05"]
+[ext_resource type="PackedScene" path="res://scenes/levels/level_06.tscn" id="level_06"]
+[ext_resource type="PackedScene" path="res://scenes/levels/level_07.tscn" id="level_07"]
+[ext_resource type="PackedScene" path="res://scenes/levels/level_08.tscn" id="level_08"]
+[ext_resource type="PackedScene" path="res://scenes/levels/level_09.tscn" id="level_09"]
+[ext_resource type="PackedScene" path="res://scenes/levels/level_10.tscn" id="level_10"]
+[ext_resource type="PackedScene" path="res://scenes/levels/level_11.tscn" id="level_11"]
+[ext_resource type="PackedScene" path="res://scenes/levels/level_12.tscn" id="level_12"]
+[ext_resource type="PackedScene" path="res://scenes/levels/level_13.tscn" id="level_13"]
+[ext_resource type="PackedScene" path="res://scenes/levels/level_14.tscn" id="level_14"]
+[ext_resource type="PackedScene" path="res://scenes/levels/level_15.tscn" id="level_15"]
+[ext_resource type="PackedScene" path="res://scenes/levels/level_16.tscn" id="level_16"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_main")
-levels = Array[PackedScene]([ExtResource("3_level"), ExtResource("4_level"), ExtResource("5_level"), ExtResource("6_level")])
+levels = Array[PackedScene]([ExtResource("level_01"), ExtResource("level_02"), ExtResource("level_03"), ExtResource("level_04"), ExtResource("level_05"), ExtResource("level_06"), ExtResource("level_07"), ExtResource("level_08"), ExtResource("level_09"), ExtResource("level_10"), ExtResource("level_11"), ExtResource("level_12"), ExtResource("level_13"), ExtResource("level_14"), ExtResource("level_15"), ExtResource("level_16")])
 
 [node name="HUD" parent="." instance=ExtResource("2_hud")]

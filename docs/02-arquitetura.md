@@ -15,7 +15,8 @@ scenes/
   main.tscn            a cena que o jogo abre; tem a lista de fases e os botões
   hud/                 botões de toque (2D, copiados do jogo 2D)
   camera/              a câmera que segue o gato
-  level/               peças de fase: bloco, luz e céu, céu distante, balanço
+  level/               peças de fase: bloco, plataforma móvel de mão única,
+                       luz e céu, céu distante, balanço, pintura
   levels/              uma cena por fase
   player/              o gato
   monster/             o monstrinho
@@ -94,7 +95,9 @@ isso o chão das fases é mais largo que a fase.
 
 - `godot_console --headless --path . -s tools/tests/movement_test.gd` testa o
   pulo, as asas, o monstrinho, a bandeira, a plataforma de mão única e a
-  sereia.
+  sereia. `group_a_test.gd`, `group_b_test.gd` e `group_c_test.gd` testam as
+  peças das fases 5 a 16: homem bravo, chefes, passarinhos, malas, avião,
+  cama elástica, brinquedos que carregam o gato, princesas e peixes.
 - `tools/tests/demo_drive.gd` joga sozinho por alguns segundos. Com o
   gravador de vídeo do Godot (`--write-movie`), ele grava quadros para ver o
   jogo sem jogar. O comando está no começo do arquivo.

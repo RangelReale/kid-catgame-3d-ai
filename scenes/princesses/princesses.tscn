@@ -1,0 +1,305 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/princesses/princesses.gd" id="1_princesses"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_skin"]
+albedo_color = Color(0.98, 0.8, 0.7, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_dark"]
+albedo_color = Color(0.15, 0.1, 0.15, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_smile"]
+albedo_color = Color(0.85, 0.35, 0.45, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_crown"]
+albedo_color = Color(1, 0.85, 0.25, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_hair_l"]
+albedo_color = Color(1, 0.85, 0.35, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_dress_l"]
+albedo_color = Color(1, 0.6, 0.8, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_stripe_l"]
+albedo_color = Color(0.9, 0.4, 0.65, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_hair_r"]
+albedo_color = Color(0.45, 0.3, 0.2, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_dress_r"]
+albedo_color = Color(0.6, 0.75, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_stripe_r"]
+albedo_color = Color(0.4, 0.55, 0.9, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_red"]
+albedo_color = Color(1, 0.25, 0.25, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_orange"]
+albedo_color = Color(1, 0.6, 0.2, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_yellow"]
+albedo_color = Color(1, 0.9, 0.2, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_green"]
+albedo_color = Color(0.3, 0.85, 0.3, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_blue"]
+albedo_color = Color(0.3, 0.55, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_pink"]
+albedo_color = Color(1, 0.55, 0.75, 1)
+
+[sub_resource type="CylinderMesh" id="Mesh_dress"]
+top_radius = 0.1
+bottom_radius = 0.3
+height = 0.65
+
+[sub_resource type="CylinderMesh" id="Mesh_hem"]
+top_radius = 0.29
+bottom_radius = 0.31
+height = 0.06
+
+[sub_resource type="CylinderMesh" id="Mesh_bodice"]
+top_radius = 0.1
+bottom_radius = 0.11
+height = 0.25
+
+[sub_resource type="SphereMesh" id="Mesh_head"]
+radius = 0.15
+height = 0.3
+
+[sub_resource type="SphereMesh" id="Mesh_hair"]
+radius = 0.17
+height = 0.34
+
+[sub_resource type="BoxMesh" id="Mesh_hair_long"]
+size = Vector3(0.3, 0.45, 0.08)
+
+[sub_resource type="CylinderMesh" id="Mesh_crown"]
+top_radius = 0.08
+bottom_radius = 0.07
+height = 0.08
+
+[sub_resource type="SphereMesh" id="Mesh_eye"]
+radius = 0.02
+height = 0.04
+
+[sub_resource type="BoxMesh" id="Mesh_smile"]
+size = Vector3(0.06, 0.012, 0.01)
+
+[sub_resource type="BoxMesh" id="Mesh_stripe"]
+size = Vector3(0.07, 0.18, 0.24)
+
+[sub_resource type="SphereMesh" id="Mesh_cat_head"]
+radius = 0.11
+height = 0.22
+
+[sub_resource type="PrismMesh" id="Mesh_ear"]
+size = Vector3(0.07, 0.08, 0.03)
+
+[sub_resource type="BoxMesh" id="Mesh_tail"]
+size = Vector3(0.05, 0.16, 0.05)
+
+[sub_resource type="BoxMesh" id="Mesh_arm"]
+size = Vector3(0.36, 0.07, 0.07)
+
+[sub_resource type="SphereMesh" id="Mesh_hand"]
+radius = 0.045
+height = 0.09
+
+[sub_resource type="BoxShape3D" id="Shape_princesses"]
+size = Vector3(1.5625, 1.375, 0.8)
+
+[node name="Princesses" type="Area3D"]
+script = ExtResource("1_princesses")
+
+[node name="Visual" type="Node3D" parent="."]
+
+[node name="Left" type="Node3D" parent="Visual"]
+position = Vector3(0.0, 0, 0)
+
+[node name="HairLong" type="MeshInstance3D" parent="Visual/Left"]
+position = Vector3(0, 0.88, -0.1)
+mesh = SubResource("Mesh_hair_long")
+surface_material_override/0 = SubResource("Mat_hair_l")
+
+[node name="Dress" type="MeshInstance3D" parent="Visual/Left"]
+position = Vector3(0, 0.325, 0)
+mesh = SubResource("Mesh_dress")
+surface_material_override/0 = SubResource("Mat_dress_l")
+
+[node name="Hem" type="MeshInstance3D" parent="Visual/Left"]
+position = Vector3(0, 0.1, 0)
+mesh = SubResource("Mesh_hem")
+surface_material_override/0 = SubResource("Mat_stripe_l")
+
+[node name="Bodice" type="MeshInstance3D" parent="Visual/Left"]
+position = Vector3(0, 0.76, 0)
+mesh = SubResource("Mesh_bodice")
+surface_material_override/0 = SubResource("Mat_stripe_l")
+
+[node name="Head" type="MeshInstance3D" parent="Visual/Left"]
+position = Vector3(0, 1.02, 0)
+mesh = SubResource("Mesh_head")
+surface_material_override/0 = SubResource("Mat_skin")
+
+[node name="Hair" type="MeshInstance3D" parent="Visual/Left"]
+position = Vector3(0, 1.06, -0.04)
+scale = Vector3(1, 0.95, 1)
+mesh = SubResource("Mesh_hair")
+surface_material_override/0 = SubResource("Mat_hair_l")
+
+[node name="Bangs" type="MeshInstance3D" parent="Visual/Left"]
+position = Vector3(0, 1.1, 0.02)
+scale = Vector3(1.02, 0.5, 1)
+mesh = SubResource("Mesh_head")
+surface_material_override/0 = SubResource("Mat_hair_l")
+
+[node name="Crown" type="MeshInstance3D" parent="Visual/Left"]
+position = Vector3(0, 1.21, 0)
+mesh = SubResource("Mesh_crown")
+surface_material_override/0 = SubResource("Mat_crown")
+
+[node name="EyeLeft" type="MeshInstance3D" parent="Visual/Left"]
+position = Vector3(-0.05, 1.03, 0.135)
+mesh = SubResource("Mesh_eye")
+surface_material_override/0 = SubResource("Mat_dark")
+
+[node name="EyeRight" type="MeshInstance3D" parent="Visual/Left"]
+position = Vector3(0.05, 1.03, 0.135)
+mesh = SubResource("Mesh_eye")
+surface_material_override/0 = SubResource("Mat_dark")
+
+[node name="Smile" type="MeshInstance3D" parent="Visual/Left"]
+position = Vector3(0, 0.96, 0.145)
+mesh = SubResource("Mesh_smile")
+surface_material_override/0 = SubResource("Mat_smile")
+
+[node name="Right" type="Node3D" parent="Visual"]
+position = Vector3(0.8, 0, 0)
+
+[node name="HairLong" type="MeshInstance3D" parent="Visual/Right"]
+position = Vector3(0, 0.88, -0.1)
+mesh = SubResource("Mesh_hair_long")
+surface_material_override/0 = SubResource("Mat_hair_r")
+
+[node name="Dress" type="MeshInstance3D" parent="Visual/Right"]
+position = Vector3(0, 0.325, 0)
+mesh = SubResource("Mesh_dress")
+surface_material_override/0 = SubResource("Mat_dress_r")
+
+[node name="Hem" type="MeshInstance3D" parent="Visual/Right"]
+position = Vector3(0, 0.1, 0)
+mesh = SubResource("Mesh_hem")
+surface_material_override/0 = SubResource("Mat_stripe_r")
+
+[node name="Bodice" type="MeshInstance3D" parent="Visual/Right"]
+position = Vector3(0, 0.76, 0)
+mesh = SubResource("Mesh_bodice")
+surface_material_override/0 = SubResource("Mat_stripe_r")
+
+[node name="Head" type="MeshInstance3D" parent="Visual/Right"]
+position = Vector3(0, 1.02, 0)
+mesh = SubResource("Mesh_head")
+surface_material_override/0 = SubResource("Mat_skin")
+
+[node name="Hair" type="MeshInstance3D" parent="Visual/Right"]
+position = Vector3(0, 1.06, -0.04)
+scale = Vector3(1, 0.95, 1)
+mesh = SubResource("Mesh_hair")
+surface_material_override/0 = SubResource("Mat_hair_r")
+
+[node name="Bangs" type="MeshInstance3D" parent="Visual/Right"]
+position = Vector3(0, 1.1, 0.02)
+scale = Vector3(1.02, 0.5, 1)
+mesh = SubResource("Mesh_head")
+surface_material_override/0 = SubResource("Mat_hair_r")
+
+[node name="Crown" type="MeshInstance3D" parent="Visual/Right"]
+position = Vector3(0, 1.21, 0)
+mesh = SubResource("Mesh_crown")
+surface_material_override/0 = SubResource("Mat_crown")
+
+[node name="EyeLeft" type="MeshInstance3D" parent="Visual/Right"]
+position = Vector3(-0.05, 1.03, 0.135)
+mesh = SubResource("Mesh_eye")
+surface_material_override/0 = SubResource("Mat_dark")
+
+[node name="EyeRight" type="MeshInstance3D" parent="Visual/Right"]
+position = Vector3(0.05, 1.03, 0.135)
+mesh = SubResource("Mesh_eye")
+surface_material_override/0 = SubResource("Mat_dark")
+
+[node name="Smile" type="MeshInstance3D" parent="Visual/Right"]
+position = Vector3(0, 0.96, 0.145)
+mesh = SubResource("Mesh_smile")
+surface_material_override/0 = SubResource("Mat_smile")
+
+[node name="HeldCat" type="Node3D" parent="Visual"]
+position = Vector3(0.32, 0.72, 0.28)
+
+[node name="Tail" type="MeshInstance3D" parent="Visual/HeldCat"]
+position = Vector3(-0.24, 0.12, 0)
+rotation = Vector3(0, 0, 0.6)
+mesh = SubResource("Mesh_tail")
+surface_material_override/0 = SubResource("Mat_red")
+
+[node name="Stripe1" type="MeshInstance3D" parent="Visual/HeldCat"]
+position = Vector3(-0.14, 0, 0)
+mesh = SubResource("Mesh_stripe")
+surface_material_override/0 = SubResource("Mat_red")
+
+[node name="Stripe2" type="MeshInstance3D" parent="Visual/HeldCat"]
+position = Vector3(-0.07, 0, 0)
+mesh = SubResource("Mesh_stripe")
+surface_material_override/0 = SubResource("Mat_orange")
+
+[node name="Stripe3" type="MeshInstance3D" parent="Visual/HeldCat"]
+position = Vector3(0.0, 0, 0)
+mesh = SubResource("Mesh_stripe")
+surface_material_override/0 = SubResource("Mat_yellow")
+
+[node name="Stripe4" type="MeshInstance3D" parent="Visual/HeldCat"]
+position = Vector3(0.07, 0, 0)
+mesh = SubResource("Mesh_stripe")
+surface_material_override/0 = SubResource("Mat_green")
+
+[node name="Stripe5" type="MeshInstance3D" parent="Visual/HeldCat"]
+position = Vector3(0.14, 0, 0)
+mesh = SubResource("Mesh_stripe")
+surface_material_override/0 = SubResource("Mat_blue")
+
+[node name="Head" type="MeshInstance3D" parent="Visual/HeldCat"]
+position = Vector3(0.24, 0.08, 0)
+mesh = SubResource("Mesh_cat_head")
+surface_material_override/0 = SubResource("Mat_pink")
+
+[node name="EarLeft" type="MeshInstance3D" parent="Visual/HeldCat"]
+position = Vector3(0.22, 0.2, -0.06)
+mesh = SubResource("Mesh_ear")
+surface_material_override/0 = SubResource("Mat_pink")
+
+[node name="EarRight" type="MeshInstance3D" parent="Visual/HeldCat"]
+position = Vector3(0.22, 0.2, 0.06)
+mesh = SubResource("Mesh_ear")
+surface_material_override/0 = SubResource("Mat_pink")
+
+[node name="Eye" type="MeshInstance3D" parent="Visual/HeldCat"]
+position = Vector3(0.33, 0.1, 0.05)
+mesh = SubResource("Mesh_eye")
+surface_material_override/0 = SubResource("Mat_dark")
+
+[node name="Arm" type="MeshInstance3D" parent="Visual/HeldCat"]
+position = Vector3(0.2, -0.08, 0.14)
+mesh = SubResource("Mesh_arm")
+surface_material_override/0 = SubResource("Mat_stripe_r")
+
+[node name="Hand" type="MeshInstance3D" parent="Visual/HeldCat"]
+position = Vector3(0.02, -0.08, 0.14)
+mesh = SubResource("Mesh_hand")
+surface_material_override/0 = SubResource("Mat_skin")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+position = Vector3(0.40625, 0.6875, 0)
+shape = SubResource("Shape_princesses")

@@ -1,0 +1,452 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/carousel/carousel.gd" id="1_carousel"]
+[ext_resource type="Script" path="res://scenes/level/one_way_platform.gd" id="2_one_way"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_base"]
+albedo_color = Color(0.85, 0.35, 0.5, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_gold"]
+albedo_color = Color(1, 0.85, 0.3, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_roof"]
+albedo_color = Color(1, 0.45, 0.55, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_white"]
+albedo_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_saddle"]
+albedo_color = Color(0.85, 0.25, 0.4, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_dark"]
+albedo_color = Color(0.15, 0.1, 0.15, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_horse1"]
+albedo_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_mane1"]
+albedo_color = Color(1, 0.6, 0.75, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_horse2"]
+albedo_color = Color(1, 0.85, 0.5, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_mane2"]
+albedo_color = Color(0.5, 0.7, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_horse3"]
+albedo_color = Color(0.85, 0.75, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_mane3"]
+albedo_color = Color(1, 0.8, 0.3, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_horse4"]
+albedo_color = Color(0.7, 0.9, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_mane4"]
+albedo_color = Color(0.6, 0.9, 0.5, 1)
+
+[sub_resource type="CylinderMesh" id="Mesh_base"]
+top_radius = 2.25
+bottom_radius = 2.375
+height = 0.1875
+
+[sub_resource type="CylinderMesh" id="Mesh_pole"]
+top_radius = 0.1875
+bottom_radius = 0.1875
+height = 2.3
+
+[sub_resource type="CylinderMesh" id="Mesh_roof"]
+top_radius = 0.0
+bottom_radius = 2.4
+height = 0.9375
+
+[sub_resource type="CylinderMesh" id="Mesh_roof_edge"]
+top_radius = 2.3125
+bottom_radius = 2.3125
+height = 0.1875
+
+[sub_resource type="SphereMesh" id="Mesh_top"]
+radius = 0.15
+height = 0.3
+
+[sub_resource type="CylinderMesh" id="Mesh_horse_pole"]
+top_radius = 0.03
+bottom_radius = 0.03
+height = 2.3
+
+[sub_resource type="BoxMesh" id="Mesh_body"]
+size = Vector3(0.69, 0.28, 0.25)
+
+[sub_resource type="BoxMesh" id="Mesh_neck"]
+size = Vector3(0.16, 0.34, 0.16)
+
+[sub_resource type="BoxMesh" id="Mesh_head"]
+size = Vector3(0.26, 0.14, 0.15)
+
+[sub_resource type="BoxMesh" id="Mesh_leg"]
+size = Vector3(0.08, 0.3, 0.08)
+
+[sub_resource type="BoxMesh" id="Mesh_mane"]
+size = Vector3(0.07, 0.3, 0.06)
+
+[sub_resource type="BoxMesh" id="Mesh_tail"]
+size = Vector3(0.07, 0.26, 0.06)
+
+[sub_resource type="BoxMesh" id="Mesh_saddle"]
+size = Vector3(0.26, 0.06, 0.27)
+
+[sub_resource type="SphereMesh" id="Mesh_eye"]
+radius = 0.02
+height = 0.04
+
+[sub_resource type="BoxShape3D" id="Shape_horse"]
+size = Vector3(0.6875, 0.1875, 0.6)
+
+[node name="Carousel" type="Node3D"]
+script = ExtResource("1_carousel")
+
+[node name="Visual" type="Node3D" parent="."]
+scale = Vector3(1, 1, 0.55)
+
+[node name="Base" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0, 0.09375, 0)
+mesh = SubResource("Mesh_base")
+surface_material_override/0 = SubResource("Mat_base")
+
+[node name="CenterPole" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0, 1.33, 0)
+mesh = SubResource("Mesh_pole")
+surface_material_override/0 = SubResource("Mat_gold")
+
+[node name="RoofEdge" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0, 2.47, 0)
+mesh = SubResource("Mesh_roof_edge")
+surface_material_override/0 = SubResource("Mat_gold")
+
+[node name="Roof" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0, 3.03, 0)
+mesh = SubResource("Mesh_roof")
+surface_material_override/0 = SubResource("Mat_roof")
+
+[node name="Top" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0, 3.55, 0)
+mesh = SubResource("Mesh_top")
+surface_material_override/0 = SubResource("Mat_gold")
+
+[node name="Horses" type="Node3D" parent="."]
+
+[node name="Horse1" type="AnimatableBody3D" parent="Horses"]
+position = Vector3(1.7188, 0, 0)
+script = ExtResource("2_one_way")
+top = 1.125
+
+[node name="Visual" type="Node3D" parent="Horses/Horse1"]
+
+[node name="Pole" type="MeshInstance3D" parent="Horses/Horse1/Visual"]
+position = Vector3(0, 1.33, 0)
+mesh = SubResource("Mesh_horse_pole")
+surface_material_override/0 = SubResource("Mat_gold")
+
+[node name="Leg1" type="MeshInstance3D" parent="Horses/Horse1/Visual"]
+position = Vector3(-0.27, 0.67, -0.08)
+mesh = SubResource("Mesh_leg")
+surface_material_override/0 = SubResource("Mat_horse1")
+
+[node name="Leg2" type="MeshInstance3D" parent="Horses/Horse1/Visual"]
+position = Vector3(-0.27, 0.67, 0.08)
+mesh = SubResource("Mesh_leg")
+surface_material_override/0 = SubResource("Mat_horse1")
+
+[node name="Leg3" type="MeshInstance3D" parent="Horses/Horse1/Visual"]
+position = Vector3(0.25, 0.67, -0.08)
+mesh = SubResource("Mesh_leg")
+surface_material_override/0 = SubResource("Mat_horse1")
+
+[node name="Leg4" type="MeshInstance3D" parent="Horses/Horse1/Visual"]
+position = Vector3(0.25, 0.67, 0.08)
+mesh = SubResource("Mesh_leg")
+surface_material_override/0 = SubResource("Mat_horse1")
+
+[node name="Body" type="MeshInstance3D" parent="Horses/Horse1/Visual"]
+position = Vector3(0, 0.92, 0)
+mesh = SubResource("Mesh_body")
+surface_material_override/0 = SubResource("Mat_horse1")
+
+[node name="Neck" type="MeshInstance3D" parent="Horses/Horse1/Visual"]
+position = Vector3(0.36, 1.13, 0)
+rotation = Vector3(0, 0, -0.5)
+mesh = SubResource("Mesh_neck")
+surface_material_override/0 = SubResource("Mat_horse1")
+
+[node name="Head" type="MeshInstance3D" parent="Horses/Horse1/Visual"]
+position = Vector3(0.48, 1.24, 0)
+mesh = SubResource("Mesh_head")
+surface_material_override/0 = SubResource("Mat_horse1")
+
+[node name="Mane" type="MeshInstance3D" parent="Horses/Horse1/Visual"]
+position = Vector3(0.29, 1.17, 0)
+rotation = Vector3(0, 0, -0.5)
+mesh = SubResource("Mesh_mane")
+surface_material_override/0 = SubResource("Mat_mane1")
+
+[node name="Tail" type="MeshInstance3D" parent="Horses/Horse1/Visual"]
+position = Vector3(-0.39, 0.86, 0)
+rotation = Vector3(0, 0, -0.5)
+mesh = SubResource("Mesh_tail")
+surface_material_override/0 = SubResource("Mat_mane1")
+
+[node name="Saddle" type="MeshInstance3D" parent="Horses/Horse1/Visual"]
+position = Vector3(-0.03, 1.08, 0)
+mesh = SubResource("Mesh_saddle")
+surface_material_override/0 = SubResource("Mat_saddle")
+
+[node name="EyeLeft" type="MeshInstance3D" parent="Horses/Horse1/Visual"]
+position = Vector3(0.54, 1.27, -0.075)
+mesh = SubResource("Mesh_eye")
+surface_material_override/0 = SubResource("Mat_dark")
+
+[node name="EyeRight" type="MeshInstance3D" parent="Horses/Horse1/Visual"]
+position = Vector3(0.54, 1.27, 0.075)
+mesh = SubResource("Mesh_eye")
+surface_material_override/0 = SubResource("Mat_dark")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Horses/Horse1"]
+position = Vector3(-0.03125, 1.03125, 0)
+shape = SubResource("Shape_horse")
+
+[node name="Horse2" type="AnimatableBody3D" parent="Horses"]
+position = Vector3(0.0, 0, 0)
+script = ExtResource("2_one_way")
+top = 1.125
+
+[node name="Visual" type="Node3D" parent="Horses/Horse2"]
+
+[node name="Pole" type="MeshInstance3D" parent="Horses/Horse2/Visual"]
+position = Vector3(0, 1.33, 0)
+mesh = SubResource("Mesh_horse_pole")
+surface_material_override/0 = SubResource("Mat_gold")
+
+[node name="Leg1" type="MeshInstance3D" parent="Horses/Horse2/Visual"]
+position = Vector3(-0.27, 0.67, -0.08)
+mesh = SubResource("Mesh_leg")
+surface_material_override/0 = SubResource("Mat_horse2")
+
+[node name="Leg2" type="MeshInstance3D" parent="Horses/Horse2/Visual"]
+position = Vector3(-0.27, 0.67, 0.08)
+mesh = SubResource("Mesh_leg")
+surface_material_override/0 = SubResource("Mat_horse2")
+
+[node name="Leg3" type="MeshInstance3D" parent="Horses/Horse2/Visual"]
+position = Vector3(0.25, 0.67, -0.08)
+mesh = SubResource("Mesh_leg")
+surface_material_override/0 = SubResource("Mat_horse2")
+
+[node name="Leg4" type="MeshInstance3D" parent="Horses/Horse2/Visual"]
+position = Vector3(0.25, 0.67, 0.08)
+mesh = SubResource("Mesh_leg")
+surface_material_override/0 = SubResource("Mat_horse2")
+
+[node name="Body" type="MeshInstance3D" parent="Horses/Horse2/Visual"]
+position = Vector3(0, 0.92, 0)
+mesh = SubResource("Mesh_body")
+surface_material_override/0 = SubResource("Mat_horse2")
+
+[node name="Neck" type="MeshInstance3D" parent="Horses/Horse2/Visual"]
+position = Vector3(0.36, 1.13, 0)
+rotation = Vector3(0, 0, -0.5)
+mesh = SubResource("Mesh_neck")
+surface_material_override/0 = SubResource("Mat_horse2")
+
+[node name="Head" type="MeshInstance3D" parent="Horses/Horse2/Visual"]
+position = Vector3(0.48, 1.24, 0)
+mesh = SubResource("Mesh_head")
+surface_material_override/0 = SubResource("Mat_horse2")
+
+[node name="Mane" type="MeshInstance3D" parent="Horses/Horse2/Visual"]
+position = Vector3(0.29, 1.17, 0)
+rotation = Vector3(0, 0, -0.5)
+mesh = SubResource("Mesh_mane")
+surface_material_override/0 = SubResource("Mat_mane2")
+
+[node name="Tail" type="MeshInstance3D" parent="Horses/Horse2/Visual"]
+position = Vector3(-0.39, 0.86, 0)
+rotation = Vector3(0, 0, -0.5)
+mesh = SubResource("Mesh_tail")
+surface_material_override/0 = SubResource("Mat_mane2")
+
+[node name="Saddle" type="MeshInstance3D" parent="Horses/Horse2/Visual"]
+position = Vector3(-0.03, 1.08, 0)
+mesh = SubResource("Mesh_saddle")
+surface_material_override/0 = SubResource("Mat_saddle")
+
+[node name="EyeLeft" type="MeshInstance3D" parent="Horses/Horse2/Visual"]
+position = Vector3(0.54, 1.27, -0.075)
+mesh = SubResource("Mesh_eye")
+surface_material_override/0 = SubResource("Mat_dark")
+
+[node name="EyeRight" type="MeshInstance3D" parent="Horses/Horse2/Visual"]
+position = Vector3(0.54, 1.27, 0.075)
+mesh = SubResource("Mesh_eye")
+surface_material_override/0 = SubResource("Mat_dark")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Horses/Horse2"]
+position = Vector3(-0.03125, 1.03125, 0)
+shape = SubResource("Shape_horse")
+
+[node name="Horse3" type="AnimatableBody3D" parent="Horses"]
+position = Vector3(-1.7188, 0, 0)
+script = ExtResource("2_one_way")
+top = 1.125
+
+[node name="Visual" type="Node3D" parent="Horses/Horse3"]
+
+[node name="Pole" type="MeshInstance3D" parent="Horses/Horse3/Visual"]
+position = Vector3(0, 1.33, 0)
+mesh = SubResource("Mesh_horse_pole")
+surface_material_override/0 = SubResource("Mat_gold")
+
+[node name="Leg1" type="MeshInstance3D" parent="Horses/Horse3/Visual"]
+position = Vector3(-0.27, 0.67, -0.08)
+mesh = SubResource("Mesh_leg")
+surface_material_override/0 = SubResource("Mat_horse3")
+
+[node name="Leg2" type="MeshInstance3D" parent="Horses/Horse3/Visual"]
+position = Vector3(-0.27, 0.67, 0.08)
+mesh = SubResource("Mesh_leg")
+surface_material_override/0 = SubResource("Mat_horse3")
+
+[node name="Leg3" type="MeshInstance3D" parent="Horses/Horse3/Visual"]
+position = Vector3(0.25, 0.67, -0.08)
+mesh = SubResource("Mesh_leg")
+surface_material_override/0 = SubResource("Mat_horse3")
+
+[node name="Leg4" type="MeshInstance3D" parent="Horses/Horse3/Visual"]
+position = Vector3(0.25, 0.67, 0.08)
+mesh = SubResource("Mesh_leg")
+surface_material_override/0 = SubResource("Mat_horse3")
+
+[node name="Body" type="MeshInstance3D" parent="Horses/Horse3/Visual"]
+position = Vector3(0, 0.92, 0)
+mesh = SubResource("Mesh_body")
+surface_material_override/0 = SubResource("Mat_horse3")
+
+[node name="Neck" type="MeshInstance3D" parent="Horses/Horse3/Visual"]
+position = Vector3(0.36, 1.13, 0)
+rotation = Vector3(0, 0, -0.5)
+mesh = SubResource("Mesh_neck")
+surface_material_override/0 = SubResource("Mat_horse3")
+
+[node name="Head" type="MeshInstance3D" parent="Horses/Horse3/Visual"]
+position = Vector3(0.48, 1.24, 0)
+mesh = SubResource("Mesh_head")
+surface_material_override/0 = SubResource("Mat_horse3")
+
+[node name="Mane" type="MeshInstance3D" parent="Horses/Horse3/Visual"]
+position = Vector3(0.29, 1.17, 0)
+rotation = Vector3(0, 0, -0.5)
+mesh = SubResource("Mesh_mane")
+surface_material_override/0 = SubResource("Mat_mane3")
+
+[node name="Tail" type="MeshInstance3D" parent="Horses/Horse3/Visual"]
+position = Vector3(-0.39, 0.86, 0)
+rotation = Vector3(0, 0, -0.5)
+mesh = SubResource("Mesh_tail")
+surface_material_override/0 = SubResource("Mat_mane3")
+
+[node name="Saddle" type="MeshInstance3D" parent="Horses/Horse3/Visual"]
+position = Vector3(-0.03, 1.08, 0)
+mesh = SubResource("Mesh_saddle")
+surface_material_override/0 = SubResource("Mat_saddle")
+
+[node name="EyeLeft" type="MeshInstance3D" parent="Horses/Horse3/Visual"]
+position = Vector3(0.54, 1.27, -0.075)
+mesh = SubResource("Mesh_eye")
+surface_material_override/0 = SubResource("Mat_dark")
+
+[node name="EyeRight" type="MeshInstance3D" parent="Horses/Horse3/Visual"]
+position = Vector3(0.54, 1.27, 0.075)
+mesh = SubResource("Mesh_eye")
+surface_material_override/0 = SubResource("Mat_dark")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Horses/Horse3"]
+position = Vector3(-0.03125, 1.03125, 0)
+shape = SubResource("Shape_horse")
+
+[node name="Horse4" type="AnimatableBody3D" parent="Horses"]
+position = Vector3(-0.0, 0, 0)
+script = ExtResource("2_one_way")
+top = 1.125
+
+[node name="Visual" type="Node3D" parent="Horses/Horse4"]
+
+[node name="Pole" type="MeshInstance3D" parent="Horses/Horse4/Visual"]
+position = Vector3(0, 1.33, 0)
+mesh = SubResource("Mesh_horse_pole")
+surface_material_override/0 = SubResource("Mat_gold")
+
+[node name="Leg1" type="MeshInstance3D" parent="Horses/Horse4/Visual"]
+position = Vector3(-0.27, 0.67, -0.08)
+mesh = SubResource("Mesh_leg")
+surface_material_override/0 = SubResource("Mat_horse4")
+
+[node name="Leg2" type="MeshInstance3D" parent="Horses/Horse4/Visual"]
+position = Vector3(-0.27, 0.67, 0.08)
+mesh = SubResource("Mesh_leg")
+surface_material_override/0 = SubResource("Mat_horse4")
+
+[node name="Leg3" type="MeshInstance3D" parent="Horses/Horse4/Visual"]
+position = Vector3(0.25, 0.67, -0.08)
+mesh = SubResource("Mesh_leg")
+surface_material_override/0 = SubResource("Mat_horse4")
+
+[node name="Leg4" type="MeshInstance3D" parent="Horses/Horse4/Visual"]
+position = Vector3(0.25, 0.67, 0.08)
+mesh = SubResource("Mesh_leg")
+surface_material_override/0 = SubResource("Mat_horse4")
+
+[node name="Body" type="MeshInstance3D" parent="Horses/Horse4/Visual"]
+position = Vector3(0, 0.92, 0)
+mesh = SubResource("Mesh_body")
+surface_material_override/0 = SubResource("Mat_horse4")
+
+[node name="Neck" type="MeshInstance3D" parent="Horses/Horse4/Visual"]
+position = Vector3(0.36, 1.13, 0)
+rotation = Vector3(0, 0, -0.5)
+mesh = SubResource("Mesh_neck")
+surface_material_override/0 = SubResource("Mat_horse4")
+
+[node name="Head" type="MeshInstance3D" parent="Horses/Horse4/Visual"]
+position = Vector3(0.48, 1.24, 0)
+mesh = SubResource("Mesh_head")
+surface_material_override/0 = SubResource("Mat_horse4")
+
+[node name="Mane" type="MeshInstance3D" parent="Horses/Horse4/Visual"]
+position = Vector3(0.29, 1.17, 0)
+rotation = Vector3(0, 0, -0.5)
+mesh = SubResource("Mesh_mane")
+surface_material_override/0 = SubResource("Mat_mane4")
+
+[node name="Tail" type="MeshInstance3D" parent="Horses/Horse4/Visual"]
+position = Vector3(-0.39, 0.86, 0)
+rotation = Vector3(0, 0, -0.5)
+mesh = SubResource("Mesh_tail")
+surface_material_override/0 = SubResource("Mat_mane4")
+
+[node name="Saddle" type="MeshInstance3D" parent="Horses/Horse4/Visual"]
+position = Vector3(-0.03, 1.08, 0)
+mesh = SubResource("Mesh_saddle")
+surface_material_override/0 = SubResource("Mat_saddle")
+
+[node name="EyeLeft" type="MeshInstance3D" parent="Horses/Horse4/Visual"]
+position = Vector3(0.54, 1.27, -0.075)
+mesh = SubResource("Mesh_eye")
+surface_material_override/0 = SubResource("Mat_dark")
+
+[node name="EyeRight" type="MeshInstance3D" parent="Horses/Horse4/Visual"]
+position = Vector3(0.54, 1.27, 0.075)
+mesh = SubResource("Mesh_eye")
+surface_material_override/0 = SubResource("Mat_dark")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Horses/Horse4"]
+position = Vector3(-0.03125, 1.03125, 0)
+shape = SubResource("Shape_horse")

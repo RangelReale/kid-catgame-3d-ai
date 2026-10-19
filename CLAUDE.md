@@ -4,13 +4,17 @@ Um jogo de plataforma lateral em 3D (2.5D) com um gato, feito por um pai e
 sua filha de 6 anos. É a nova versão do jogo 2D `rr-catgame-poc1`, que fica
 na pasta ao lado. Os detalhes estão em [docs/](docs/README.md).
 
-**Estado atual:** as fases 1 a 4 do jogo 2D estão prontas em 3D: gramado,
-deserto, praia e fundo do mar. O gato arco-íris anda, pula com cambalhota,
-bate as asas três vezes no ar e nada como sereia na fase 4. Os monstrinhos
-somem num puf de estrelinhas quando o gato pula neles. A bandeira leva à
-próxima fase, e depois da quarta o jogo volta à primeira. As teclas de 1 a 4
-pulam direto para cada fase. Faltam as fases 5 a 16 (veja o
-[roteiro](docs/03-roteiro.md)). Atualize esta seção a cada marco.
+**Estado atual:** as 16 fases do jogo 2D estão prontas em 3D. O gato
+arco-íris anda, pula com cambalhota, bate as asas três vezes no ar, nada como
+sereia (fase 4) e voa livre (fase 8). Os monstrinhos somem num puf de
+estrelinhas. O homem bravo, os passarinhos e as malas fazem a fase recomeçar.
+O ratão e o monstro gigante têm barra de vida e liberam a bandeira. A fase 11
+é o voo do avião sem controles. As princesas pegam o gato no colo, e a fase 16
+é o parque de diversões com roda-gigante, carrossel, camas elásticas,
+montanha-russa, torre e pescaria. Depois da última fase, o jogo volta à
+primeira. As teclas de 1 a 9 e o 0 pulam para as fases 1 a 10; com Ctrl, para
+as fases 11 a 20. Os próximos passos estão no [roteiro](docs/03-roteiro.md).
+Atualize esta seção a cada marco.
 
 ## Quem pede as mudanças
 
@@ -51,6 +55,7 @@ lugar de `godot` sempre que a saída importa.
 | Rodar com os botões de toque | `godot --path . -- --touch` |
 | Importar recursos | `godot --headless --path . --import` |
 | Testar o movimento | `godot --headless --path . -s tools/tests/movement_test.gd` |
+| Testar as peças das fases | o mesmo comando com `group_a_test.gd`, `group_b_test.gd` e `group_c_test.gd` |
 | Ver se abre sem erros | `godot --path . --quit-after 120 -- --level N` |
 | Exportar para Android | `godot --headless --path . --export-debug "Android" build/android/catgame3d.apk` |
 
@@ -73,5 +78,5 @@ está no começo de `tools/tests/demo_drive.gd`.
   nunca por teclas.
 - Mantenha a parte visual de cada cena em um nó `Visual` separado.
 - Valores de ajuste ficam em variáveis `@export`.
-- Depois de mudar o jogo, rode o teste do movimento e confirme que o jogo abre
+- Depois de mudar o jogo, rode os testes de `tools/tests/` e confirme que o jogo abre
   sem erros antes de dizer que terminou.
