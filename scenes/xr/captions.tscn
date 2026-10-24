@@ -50,6 +50,19 @@ text = "Aperte um botão para começar"
 font_size = 48
 outline_size = 14
 
+[node name="LevelMode" type="Label3D" parent="Visual"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.3, 0.85)
+visible = false
+pixel_size = 0.02
+no_depth_test = true
+render_priority = 20
+outline_render_priority = 19
+modulate = Color(1, 0.95, 0.5, 1)
+outline_modulate = Color(0.35, 0.2, 0.1, 1)
+text = "<   Fase 1   >"
+font_size = 56
+outline_size = 16
+
 [node name="Ending" type="Node3D" parent="Visual"]
 
 [node name="Won" type="Label3D" parent="Visual/Ending"]

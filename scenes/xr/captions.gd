@@ -23,6 +23,7 @@ var _ending_tween: Tween
 @onready var _won: Label3D = $Visual/Ending/Won
 @onready var _credits: Node3D = $Visual/Ending/Credits
 @onready var _press_back: Label3D = $Visual/Ending/Press
+@onready var _level_mode: Label3D = $Visual/LevelMode
 
 
 func _ready() -> void:
@@ -54,6 +55,13 @@ func play_ending(wait: float, scroll_duration: float) -> void:
 func show_press_back() -> void:
 	_press_back.show()
 	_blink(_press_back)
+
+
+## Shows the level number, with arrows to each side, while the thumbstick
+## changes levels.
+func show_level_mode(on: bool, number: int) -> void:
+	_level_mode.visible = on
+	_level_mode.text = "<   Fase %d   >" % number
 
 
 func hide_all() -> void:

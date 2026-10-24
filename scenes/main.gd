@@ -128,6 +128,7 @@ func _show_ending() -> void:
 	_level.process_mode = Node.PROCESS_MODE_DISABLED
 	_hud.hide()
 	_ending.play()
+	_update_level_mode()
 	if _rig != null:
 		_rig.sepia = true
 		_rig.captions.play_ending(_ending.fade_duration, _ending.scroll_duration)
@@ -165,6 +166,7 @@ func _load_level(index: int) -> void:
 		if _level.is_ancestor_of(catcher):
 			catcher.caught.connect(_on_caught)
 	level_loaded.emit(_level)
+	_update_level_mode()
 
 
 ## In the Quest build (or with `--xr-mode on` on a computer with an OpenXR
@@ -199,6 +201,15 @@ func _add_xr_rig(preview: bool) -> void:
 	_ending.overlay_visible = false
 	_ending.credits_done.connect(_rig.captions.show_press_back)
 	_rig.controls.button_pressed.connect(_on_headset_button)
+	_rig.controls.level_mode_changed.connect(_update_level_mode.unbind(1))
+
+
+## In the headset, shows the level number while the thumbstick changes
+## levels. The level keys only work in the game, so it shows only there.
+func _update_level_mode() -> void:
+	if _rig != null:
+		_rig.captions.show_level_mode(_rig.controls.level_mode and _state == State.PLAYING,
+				_level_index + 1)
 
 
 func _on_headset_button() -> void:

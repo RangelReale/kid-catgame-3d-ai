@@ -22,6 +22,8 @@ const STICK_CLICK := "primary_click"
 ## Emitted when a jump button, A, X or a trigger goes down. The title and
 ## the ending listen to it, since pressed actions send no input events.
 signal button_pressed
+## Emitted when a click of the right thumbstick turns the level mode on or off.
+signal level_mode_changed(on: bool)
 
 @export var controllers: Array[XRController3D] = []
 
@@ -62,6 +64,7 @@ func _process(_delta: float) -> void:
 			stick_click = true
 	if stick_click and not _stick_click:
 		level_mode = not level_mode
+		level_mode_changed.emit(level_mode)
 	_stick_click = stick_click
 	if level_mode:
 		change_level(stick)

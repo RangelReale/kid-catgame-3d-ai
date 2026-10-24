@@ -166,9 +166,17 @@ func _test_level_mode() -> void:
 	root.add_child(main)
 	await process_frame
 	var input: Node = main.get_node("XRRig/Input")
+	var label: Label3D = main.get_node("XRRig/Captions/Visual/LevelMode")
+	# No controller is there to read: the test pushes the thumbstick itself.
+	input.process_mode = Node.PROCESS_MODE_DISABLED
+	input.level_mode = true
+	input.level_mode_changed.emit(true)
+	_check("the box shows the level mode", label.visible and label.text.contains("Fase 1"),
+			label.text)
 	input.change_level(Vector2(0.9, 0))
 	await _frames(3)
 	_check("right goes to the next level", main._level_index == 1, main._level_index)
+	_check("the level mode shows the new level", label.text.contains("Fase 2"), label.text)
 	input.change_level(Vector2(0.9, 0))
 	await _frames(3)
 	_check("holding the push does not skip more levels", main._level_index == 1,
@@ -177,6 +185,9 @@ func _test_level_mode() -> void:
 	input.change_level(Vector2(-0.9, 0))
 	await _frames(3)
 	_check("left goes back a level", main._level_index == 0, main._level_index)
+	input.level_mode = false
+	input.level_mode_changed.emit(false)
+	_check("the level mode hides when it turns off", not label.visible, null)
 	input.change_level(Vector2.ZERO)
 	main.queue_free()
 	await process_frame
