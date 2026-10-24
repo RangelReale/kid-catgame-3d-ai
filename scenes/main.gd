@@ -86,6 +86,7 @@ func _show_title() -> void:
 	_hud.hide()
 	_title_screen.show()
 	if _rig != null:
+		_rig.sepia = true
 		_rig.captions.show_title()
 	# The cat's "boing" would play by itself, so the game sounds stay off.
 	# The title music plays on another bus.
@@ -108,6 +109,7 @@ func _start_game() -> void:
 	AudioServer.set_bus_mute(AudioServer.get_bus_index("Sounds"), false)
 	_title_screen.hide()
 	if _rig != null:
+		_rig.sepia = false
 		_rig.captions.hide_all()
 	_hud.show()
 	_state = State.PLAYING
@@ -127,6 +129,7 @@ func _show_ending() -> void:
 	_hud.hide()
 	_ending.play()
 	if _rig != null:
+		_rig.sepia = true
 		_rig.captions.play_ending(_ending.fade_duration, _ending.scroll_duration)
 
 

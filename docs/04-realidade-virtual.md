@@ -31,11 +31,20 @@ verdade, na frente da criança. A versão já abriu num Quest 3 de verdade
   fora, e ali aparece a sala.
 - **Céu.** O fundo da caixa é pintado com a cor do céu da fase, com o sol e
   as nuvens na frente.
+- **Profundidade.** A caixa tem uns 0,9 m de fundo (14,5 unidades), para não
+  entrar nas paredes da sala. As fases foram feitas com enfeites até 20
+  unidades atrás do gato. Por isso, só no óculos, as colinas, as árvores e
+  outros enfeites em que o gato não encosta ficam com a metade da
+  profundidade.
 - **Tela de início e final.** As letras da tela de início e dos créditos
   ficam por cima da tela do computador e não aparecem no óculos. Por isso,
-  a maquete mostra as mesmas palavras em 3D dentro da caixa
-  (`scenes/xr/captions.tscn`), sem o tom sépia. Gatilho, A ou X começam o
-  jogo e voltam dos créditos. A música e os sons tocam igual.
+  a maquete mostra as mesmas palavras em 3D (`scenes/xr/captions.tscn`).
+  "Jogo do gato", "Você venceu!" e os créditos ficam em placas de madeira,
+  porque, sem nada sólido atrás, a sala aparece no lugar das letras. "Aperte
+  um botão" fica na frente da base, para não cobrir o gato. O tom sépia vem
+  do ajuste de cor do ambiente da fase e pinta também as palavras. Gatilho,
+  A ou X começam o jogo e voltam dos créditos. A música e os sons tocam
+  igual.
 
 ## Ver no computador, sem óculos
 

@@ -38,6 +38,16 @@ var passthrough_color: Color = Color(0, 0, 0, 0):
 		passthrough_color = value
 		_update()
 
+## Paints the whole level in shades of brown, like an old photo. The headset
+## uses it behind the title and the credits, where the flat sepia layer of
+## the screen does not show.
+var sepia: bool = false:
+	set(value):
+		sepia = value
+		_update()
+## The brown that the brightest parts turn into, like the screen's sepia.
+var sepia_tint: Color = Color(1.0, 0.86, 0.62)
+
 var _world_environment := WorldEnvironment.new()
 var _light := DirectionalLight3D.new()
 
@@ -50,6 +60,15 @@ func _init() -> void:
 	environment.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
 	environment.ambient_light_energy = 0.45
 	_world_environment.environment = environment
+	# Grey first, then each grey becomes a brown from black to the tint.
+	environment.adjustment_saturation = 0.0
+	environment.adjustment_brightness = 1.2
+	var gradient := Gradient.new()
+	gradient.set_color(0, Color.BLACK)
+	gradient.set_color(1, sepia_tint)
+	var ramp := GradientTexture1D.new()
+	ramp.gradient = gradient
+	environment.adjustment_color_correction = ramp
 	# The light comes from the top left, a little in front.
 	_light.rotation_degrees = Vector3(-55, -35, 0)
 	_light.light_energy = 0.15
@@ -66,4 +85,5 @@ func _update() -> void:
 	environment.fog_enabled = fog
 	environment.fog_light_color = sky_color
 	environment.fog_density = fog_density
+	environment.adjustment_enabled = sepia
 	_light.shadow_enabled = shadows

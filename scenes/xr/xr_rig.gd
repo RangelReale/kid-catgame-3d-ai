@@ -25,11 +25,22 @@ extends Node3D
 @export var recenter_hold: float = 1.0
 
 ## Where the sun and clouds go: just in front of the painted sky, smaller,
-## so they fit in the box.
-const SKY_OFFSET := Vector3(0, 1.8, -8.5)
+## so they fit in the box. They are 30 units back in the sky, which the scale
+## turns into 10.5, so they end up at z = -9.5, in front of the sky at -10.
+const SKY_OFFSET := Vector3(0, 1.8, 1.0)
+## How far back the scenery of the levels goes, in units, as made for the flat
+## camera. The box is shallower, so the scenery is pressed flatter to fit.
+const LEVEL_DEPTH := 20.0
 const SKY_SCALE := 0.35
 
+## Paints the level brown, behind the title and the credits. Main sets it.
+var sepia: bool = false:
+	set(value):
+		sepia = value
+		_apply_sepia()
+
 var _target: Node3D
+var _environment: Node
 var _limit_low := Vector2(-10000, -10000)
 var _limit_high := Vector2(10000, 10000)
 
@@ -115,7 +126,10 @@ func attach_level(level: Node) -> void:
 		sky.anchor = self
 		sky.anchor_offset = SKY_OFFSET
 		sky.anchor_scale = SKY_SCALE
+	_flatten_scenery(level)
 	var environment := level.get_node_or_null("Environment")
+	_environment = environment
+	_apply_sepia()
 	var floor_block := _find_floor(level)
 	if floor_block != null:
 		_stage.ground_color = floor_block.color
@@ -128,6 +142,26 @@ func attach_level(level: Node) -> void:
 	else:
 		_xr_camera.make_current()
 	_snap()
+
+
+func _apply_sepia() -> void:
+	if is_instance_valid(_environment) and "sepia" in _environment:
+		_environment.sepia = sepia
+
+
+## Presses the scenery of the level, like hills and far trees, closer to the
+## cat's plane, so it fits in the box instead of reaching into the room. Only
+## pieces the cat never touches change; the rest stays as the level made it.
+func _flatten_scenery(level: Node) -> void:
+	var squash: float = _stage.back_depth / LEVEL_DEPTH
+	if squash >= 1.0:
+		return
+	for child in level.get_children():
+		var scenery := child as Node3D
+		if scenery == null or scenery is CollisionObject3D or scenery is Camera3D 				or scenery is Light3D or scenery.name == "Sky" 				or not scenery.find_children("*", "CollisionObject3D").is_empty():
+			continue
+		scenery.position.z *= squash
+		scenery.scale.z *= squash
 
 
 ## The level's floor: the widest solid block. Its colour paints the ground

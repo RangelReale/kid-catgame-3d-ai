@@ -3,6 +3,9 @@ extends Node3D
 ## The words of the title and the ending, in 3D inside the diorama box. In the
 ## headset, the flat words of the screen do not show, so these take their
 ## place. The origin is the middle of the box window, like the rig's.
+##
+## Each group of words sits on a wooden board. In the headset, the room shows
+## through wherever nothing solid is behind the words, which hid them there.
 
 ## Seconds the "press a button" words take to fade out and back in.
 @export var blink_duration: float = 1.2

@@ -19,7 +19,7 @@ const FAR := 400.0
 		window_size = value
 		_update()
 ## How far behind the cat's plane the painted sky is, in units.
-@export var back_depth: float = 20.0:
+@export var back_depth: float = 10.0:
 	set(value):
 		back_depth = value
 		_update()
