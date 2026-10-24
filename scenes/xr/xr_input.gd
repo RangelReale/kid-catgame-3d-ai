@@ -13,11 +13,17 @@ const JUMP_BUTTONS: Array[String] = ["trigger_click"]
 ## The A button on the right controller and the X button on the left one.
 const FACE_BUTTON := "ax_button"
 
+## Emitted when a jump button, A, X or a trigger goes down. The title and
+## the ending listen to it, since pressed actions send no input events.
+signal button_pressed
+
 @export var controllers: Array[XRController3D] = []
 
 ## Actions this node is holding down, so it only lets go of its own and the
 ## keyboard still works at the same time.
 var _held := {}
+## True while any button of `button_pressed` is down.
+var _any_button: bool = false
 
 
 func _process(_delta: float) -> void:
@@ -38,6 +44,10 @@ func _process(_delta: float) -> void:
 				x_button = true
 			else:
 				jump = true
+	var any_button := jump or x_button
+	if any_button and not _any_button:
+		button_pressed.emit()
+	_any_button = any_button
 	apply(stick, jump, x_button, _player_swims())
 
 

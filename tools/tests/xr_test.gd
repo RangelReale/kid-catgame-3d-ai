@@ -22,6 +22,10 @@ func _run() -> void:
 	await _test_level_takeover(11, "Airplane")
 	await _test_controllers()
 	await _test_box_placement()
+	await _test_captions()
+	# The audio server lets go of the sounds that were playing a moment later.
+	for frame in 20:
+		await process_frame
 	print("FAILED: %d check(s)" % _failures if _failures > 0 else "ALL PASSED")
 	quit(1 if _failures > 0 else 0)
 
@@ -124,6 +128,33 @@ func _test_controllers() -> void:
 	input.free()
 	await process_frame
 
+
+
+## In the headset, the title and the ending show as 3D words in the box, and
+## the controller buttons press them.
+func _test_captions() -> void:
+	var main := MainScene.instantiate()
+	main.xr_preview = true
+	root.add_child(main)
+	await process_frame
+	var captions: Node3D = main.get_node("XRRig/Captions")
+	var title: TitleScreen = main.get_node("TitleScreen")
+	_check("the flat title words are hidden", not title.get_node("Visual").visible, null)
+	_check("the box shows the 3D title", captions.get_node("Visual/Title").visible, null)
+	main.get_node("XRRig/Input").button_pressed.emit()
+	await process_frame
+	_check("a controller button starts the game", main._state == main.State.PLAYING, main._state)
+	_check("the 3D title hides", not captions.get_node("Visual/Title").visible, null)
+	main._load_level(main.levels.size() - 1)
+	main._on_goal_reached()
+	await process_frame
+	_check("the box shows the 3D ending", captions.get_node("Visual/Ending").visible, null)
+	_check("the flat ending words are hidden",
+			not main.get_node("Ending/Visual").visible, null)
+	main.queue_free()
+	await process_frame
+	Input.action_release("move_right")
+	Input.action_release("jump")
 
 ## Wherever the head is when the game starts, the box ends up in front of it.
 func _test_box_placement() -> void:

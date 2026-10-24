@@ -27,6 +27,8 @@ enum State { TITLE, PLAYING, ENDING }
 var _state: State = State.TITLE
 var _level_index: int = 0
 var _level: Node
+## The diorama rig, in the headset and in its preview; null on a screen.
+var _rig: Node
 var _demo_index: int = 0
 var _demo_time: float = 0.0
 var _demo_jump_time: float = 0.0
@@ -83,6 +85,8 @@ func _show_title() -> void:
 	_state = State.TITLE
 	_hud.hide()
 	_title_screen.show()
+	if _rig != null:
+		_rig.captions.show_title()
 	# The cat's "boing" would play by itself, so the game sounds stay off.
 	# The title music plays on another bus.
 	AudioServer.set_bus_mute(AudioServer.get_bus_index("Sounds"), true)
@@ -103,6 +107,8 @@ func _start_game() -> void:
 	_release_demo_actions()
 	AudioServer.set_bus_mute(AudioServer.get_bus_index("Sounds"), false)
 	_title_screen.hide()
+	if _rig != null:
+		_rig.captions.hide_all()
 	_hud.show()
 	_state = State.PLAYING
 	_load_level.call_deferred(0)
@@ -120,6 +126,8 @@ func _show_ending() -> void:
 	_level.process_mode = Node.PROCESS_MODE_DISABLED
 	_hud.hide()
 	_ending.play()
+	if _rig != null:
+		_rig.captions.play_ending(_ending.fade_duration, _ending.scroll_duration)
 
 
 ## The number keys jump straight to a level, to test levels quickly: 1 is the
@@ -177,11 +185,24 @@ func _start_headset() -> bool:
 	return true
 
 
+## The flat words of the title and the ending do not show in the headset, so
+## the rig shows them in 3D, and its controller buttons press them.
 func _add_xr_rig(preview: bool) -> void:
-	var rig: Node = load("res://scenes/xr/xr_rig.tscn").instantiate()
-	rig.preview = preview
-	add_child(rig)
-	level_loaded.connect(rig.attach_level)
+	_rig = load("res://scenes/xr/xr_rig.tscn").instantiate()
+	_rig.preview = preview
+	add_child(_rig)
+	level_loaded.connect(_rig.attach_level)
+	_title_screen.overlay_visible = false
+	_ending.overlay_visible = false
+	_ending.credits_done.connect(_rig.captions.show_press_back)
+	_rig.controls.button_pressed.connect(_on_headset_button)
+
+
+func _on_headset_button() -> void:
+	if _state == State.TITLE:
+		_title_screen.press()
+	elif _state == State.ENDING:
+		_ending.press()
 
 
 func _on_goal_reached() -> void:

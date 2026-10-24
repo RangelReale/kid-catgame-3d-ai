@@ -18,6 +18,9 @@ func _initialize() -> void:
 func _run() -> void:
 	_test_start_events()
 	await _test_flow()
+	# The audio server lets go of the sounds that were playing a moment later.
+	for frame in 20:
+		await process_frame
 	print("FAILED: %d check(s)" % _failures if _failures > 0 else "ALL PASSED")
 	quit(1 if _failures > 0 else 0)
 
@@ -84,8 +87,6 @@ func _test_flow() -> void:
 	_check("a button after the credits goes back to the title",
 			title.visible and not ending.visible and main._state == main.State.TITLE, main._state)
 	main.free()
-	# The audio server lets go of the title tune a moment later.
-	await _frames(5)
 	Input.action_release("move_right")
 	Input.action_release("jump")
 

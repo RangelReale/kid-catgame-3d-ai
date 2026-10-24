@@ -31,6 +31,11 @@ verdade, na frente da criança. A versão já abriu num Quest 3 de verdade
   fora, e ali aparece a sala.
 - **Céu.** O fundo da caixa é pintado com a cor do céu da fase, com o sol e
   as nuvens na frente.
+- **Tela de início e final.** As letras da tela de início e dos créditos
+  ficam por cima da tela do computador e não aparecem no óculos. Por isso,
+  a maquete mostra as mesmas palavras em 3D dentro da caixa
+  (`scenes/xr/captions.tscn`), sem o tom sépia. Gatilho, A ou X começam o
+  jogo e voltam dos créditos. A música e os sons tocam igual.
 
 ## Ver no computador, sem óculos
 
@@ -81,6 +86,7 @@ do `adb logcat` mostra os quadros por segundo.
   caixa.
 - O direcional para baixo e o X descendo na água (fase 4) e no voo (fase 8).
 - A velocidade nas fases mais pesadas, como a 16.
+- O tamanho e a posição das palavras da tela de início e dos créditos.
 - O flash da foto das princesas (fase 14), que no óculos é uma bola branca
   em volta da cabeça.
 - No Retroid, se o jogo de tela abre sem erro. A exportação "Android" não

@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://scenes/xr/xr_rig.gd" id="1_rig"]
 [ext_resource type="Script" path="res://scenes/xr/stage.gd" id="2_stage"]
 [ext_resource type="Script" path="res://scenes/xr/xr_input.gd" id="3_input"]
+[ext_resource type="PackedScene" path="res://scenes/xr/captions.tscn" id="4_captions"]
 
 [node name="XRRig" type="Node3D"]
 script = ExtResource("1_rig")
@@ -29,3 +30,5 @@ tracker = &"right_hand"
 [node name="Input" type="Node" parent="." node_paths=PackedStringArray("controllers")]
 script = ExtResource("3_input")
 controllers = [NodePath("../XROrigin3D/LeftHand"), NodePath("../XROrigin3D/RightHand")]
+
+[node name="Captions" parent="." instance=ExtResource("4_captions")]

@@ -37,6 +37,10 @@ var _limit_high := Vector2(10000, 10000)
 var _placed: bool = false
 var _grip_time: float = 0.0
 
+## The 3D words of the title and the ending.
+@onready var captions: Node3D = $Captions
+## Turns the controllers into the game's actions.
+@onready var controls: Node = $Input
 @onready var _stage: Node3D = $Stage
 @onready var _preview_camera: Camera3D = $PreviewCamera
 @onready var _origin: XROrigin3D = $XROrigin3D

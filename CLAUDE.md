@@ -19,7 +19,8 @@ créditos, e um botão volta à tela de início. Os monstrinhos fazem "puf" ao
 sumir; o ratão e o monstro gigante fazem "bonk" nos pulos antes do último. As teclas de 1 a 9 e o 0 pulam para as fases 1 a 10; com Ctrl, para
 as fases 11 a 20. Os próximos passos estão no [roteiro](docs/03-roteiro.md).
 Há também uma versão para o Meta Quest 3, em que a fase vira uma maquete na
-sala ([docs/04-realidade-virtual.md](docs/04-realidade-virtual.md)); ela já
+sala ([docs/04-realidade-virtual.md](docs/04-realidade-virtual.md)); no óculos, as palavras
+da tela de início e dos créditos aparecem em 3D na maquete. Ela já
 abriu num Quest 3 de verdade. Atualize esta seção a cada marco.
 
 ## Quem pede as mudanças

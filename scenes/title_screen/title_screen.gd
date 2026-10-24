@@ -45,13 +45,6 @@ func _update_music() -> void:
 		_music.stop()
 
 
-## Lets go of the tune before the game closes, so it is not left in use.
-func _notification(what: int) -> void:
-	if what == NOTIFICATION_WM_CLOSE_REQUEST or what == NOTIFICATION_PREDELETE:
-		if is_instance_valid(_music):
-			_music.stop()
-
-
 func _update_overlay() -> void:
 	_sepia.visible = overlay_visible
 	_visual.visible = overlay_visible
