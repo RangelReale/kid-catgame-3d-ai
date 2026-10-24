@@ -222,6 +222,7 @@ surface_material_override/0 = SubResource("Mat_dark")
 
 [node name="JumpSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_jump")
+bus = &"Sounds"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 position = Vector3(0, 0.25, 0)

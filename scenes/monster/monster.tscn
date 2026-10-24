@@ -1,6 +1,7 @@
 [gd_scene format=3]
 
 [ext_resource type="Script" path="res://scenes/monster/monster.gd" id="1_monster"]
+[ext_resource type="AudioStream" path="res://assets/sounds/pop.wav" id="pop_sound"]
 
 [sub_resource type="StandardMaterial3D" id="Mat_body"]
 albedo_color = Color(0.35, 0.8, 0.85, 1)
@@ -96,3 +97,7 @@ initial_velocity_max = 3.125
 scale_amount_min = 1.0
 scale_amount_max = 1.5
 color_ramp = SubResource("Gradient_fade")
+
+[node name="PopSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("pop_sound")
+bus = &"Sounds"

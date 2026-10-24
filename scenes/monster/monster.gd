@@ -16,6 +16,7 @@ var _popped: bool = false
 
 @onready var _visual: Node3D = $Visual
 @onready var _poof: CPUParticles3D = $Poof
+@onready var _pop_sound: AudioStreamPlayer = $PopSound
 
 
 func _ready() -> void:
@@ -50,3 +51,4 @@ func _pop(player: Player) -> void:
 	_visual.hide()
 	player.bounce()
 	_poof.emitting = true
+	_pop_sound.play()

@@ -34,6 +34,8 @@ var _tint := StandardMaterial3D.new()
 @onready var _health_bar: Node3D = $HealthBar
 @onready var _health_fill: Node3D = $HealthBar/Fill
 @onready var _poof: CPUParticles3D = $Poof
+@onready var _stomp_sound: AudioStreamPlayer = $StompSound
+@onready var _pop_sound: AudioStreamPlayer = $PopSound
 
 
 func _ready() -> void:
@@ -83,9 +85,12 @@ func _hit(player: Player) -> void:
 		_visual.hide()
 		_health_bar.hide()
 		_poof.emitting = true
+		# Only the "puf" plays on the last hit, not the "bonk".
+		_pop_sound.play()
 		if goal != null:
 			goal.unlock()
 		return
+	_stomp_sound.play()
 	_tint.albedo_color.a = HURT_TINT
 	create_tween().tween_property(_tint, "albedo_color:a", 0.0, hurt_cooldown)
 

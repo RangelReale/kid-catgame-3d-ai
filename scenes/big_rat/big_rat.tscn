@@ -1,6 +1,8 @@
 [gd_scene format=3]
 
 [ext_resource type="Script" path="res://scenes/big_rat/big_rat.gd" id="1_big_rat"]
+[ext_resource type="AudioStream" path="res://assets/sounds/stomp.wav" id="stomp_sound"]
+[ext_resource type="AudioStream" path="res://assets/sounds/pop.wav" id="pop_sound"]
 
 [sub_resource type="StandardMaterial3D" id="Mat_fur"]
 albedo_color = Color(0.6, 0.6, 0.66, 1)
@@ -216,3 +218,11 @@ initial_velocity_max = 4.375
 scale_amount_min = 1.0
 scale_amount_max = 2.0
 color_ramp = SubResource("Gradient_fade")
+
+[node name="StompSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("stomp_sound")
+bus = &"Sounds"
+
+[node name="PopSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("pop_sound")
+bus = &"Sounds"
