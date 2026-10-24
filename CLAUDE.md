@@ -11,8 +11,12 @@ estrelinhas. O homem bravo, os passarinhos e as malas fazem a fase recomeçar.
 O ratão e o monstro gigante têm barra de vida e liberam a bandeira. A fase 11
 é o voo do avião sem controles. As princesas pegam o gato no colo, e a fase 16
 é o parque de diversões com roda-gigante, carrossel, camas elásticas,
-montanha-russa, torre e pescaria. Depois da última fase, o jogo volta à
-primeira. As teclas de 1 a 9 e o 0 pulam para as fases 1 a 10; com Ctrl, para
+montanha-russa, torre e pescaria. O jogo abre numa tela de início: "Jogo do
+gato" sobre fases que jogam sozinhas, em sépia, com música de bipes; qualquer
+botão (menos teclas especiais) começa a fase 1, e `--level N` pula essa tela.
+Depois da última fase, a imagem fica sépia, aparecem "Você venceu!" e os
+créditos, e um botão volta à tela de início. Os monstrinhos fazem "puf" ao
+sumir; o ratão e o monstro gigante fazem "bonk" nos pulos antes do último. As teclas de 1 a 9 e o 0 pulam para as fases 1 a 10; com Ctrl, para
 as fases 11 a 20. Os próximos passos estão no [roteiro](docs/03-roteiro.md).
 Há também uma versão para o Meta Quest 3, em que a fase vira uma maquete na
 sala ([docs/04-realidade-virtual.md](docs/04-realidade-virtual.md)); ela já
@@ -58,6 +62,7 @@ lugar de `godot` sempre que a saída importa.
 | Importar recursos | `godot --headless --path . --import` |
 | Testar o movimento | `godot --headless --path . -s tools/tests/movement_test.gd` |
 | Testar as peças das fases | o mesmo comando com `group_a_test.gd`, `group_b_test.gd` e `group_c_test.gd` |
+| Testar a tela de início e o final | o mesmo comando com `flow_test.gd` |
 | Ver se abre sem erros | `godot --path . --quit-after 120 -- --level N` |
 | Exportar para Android | `godot --headless --path . --export-debug "Android" build/android/catgame3d.apk` |
 | Ver a maquete do óculos na tela | `godot --path . -- --xr-preview` |

@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_main"]
 [ext_resource type="PackedScene" path="res://scenes/hud/hud.tscn" id="2_hud"]
+[ext_resource type="PackedScene" path="res://scenes/title_screen/title_screen.tscn" id="3_title"]
+[ext_resource type="PackedScene" path="res://scenes/ending/ending.tscn" id="4_ending"]
 [ext_resource type="PackedScene" path="res://scenes/levels/level_01.tscn" id="level_01"]
 [ext_resource type="PackedScene" path="res://scenes/levels/level_02.tscn" id="level_02"]
 [ext_resource type="PackedScene" path="res://scenes/levels/level_03.tscn" id="level_03"]
@@ -22,5 +24,10 @@
 [node name="Main" type="Node"]
 script = ExtResource("1_main")
 levels = Array[PackedScene]([ExtResource("level_01"), ExtResource("level_02"), ExtResource("level_03"), ExtResource("level_04"), ExtResource("level_05"), ExtResource("level_06"), ExtResource("level_07"), ExtResource("level_08"), ExtResource("level_09"), ExtResource("level_10"), ExtResource("level_11"), ExtResource("level_12"), ExtResource("level_13"), ExtResource("level_14"), ExtResource("level_15"), ExtResource("level_16")])
+demo_levels = Array[int]([0, 2, 6, 10, 11, 15])
 
 [node name="HUD" parent="." instance=ExtResource("2_hud")]
+
+[node name="TitleScreen" parent="." instance=ExtResource("3_title")]
+
+[node name="Ending" parent="." instance=ExtResource("4_ending")]

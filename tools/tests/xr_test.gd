@@ -66,6 +66,7 @@ func _test_window_limits() -> void:
 func _test_level_takeover(number: int, target_name: String) -> void:
 	var main := MainScene.instantiate()
 	main.xr_preview = true
+	main.show_title = false
 	root.add_child(main)
 	main._load_level(number - 1)
 	for frame in 10:

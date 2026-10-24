@@ -12,8 +12,13 @@ colinas ao fundo e sombras.
 ```
 project.godot          configuração: tela, ações de entrada, renderizador
 scenes/
-  main.tscn            a cena que o jogo abre; tem a lista de fases e os botões
+  main.tscn            a cena que o jogo abre; tem a lista de fases e os botões.
+                       O main.gd passa por três estados: tela de início (fases
+                       de demonstração que jogam sozinhas), jogo e final
   hud/                 botões de toque (2D, copiados do jogo 2D)
+  title_screen/        tela de início, com a música (2D, por cima do 3D)
+  ending/              "Você venceu!" e os créditos (2D, por cima do 3D)
+  sepia/               shader que pinta a tela de marrom, como foto antiga
   xr/                  a versão do óculos: a maquete (rig), a caixa e os controles
   camera/              a câmera que segue o gato
   level/               peças de fase: bloco, plataforma móvel de mão única,
@@ -23,7 +28,9 @@ scenes/
   monster/             o monstrinho
   goal/                a bandeira de chegada
   sun/, cloud/         o sol e as nuvens do céu
-assets/                ícone e sons
+assets/                ícone, sons e música. Os efeitos tocam no canal
+                       `Sounds`, mudo na tela de início; a música toca no `Master`
+tools/sounds/, tools/music/  scripts Python que geram os sons e a música
 tools/tests/           testes automáticos e passeio automático para gravar quadros
 tools/install_xr_plugin.sh  baixa o plugin OpenXR Vendors (fora do Git)
 addons/                plugin OpenXR Vendors, baixado pelo script acima

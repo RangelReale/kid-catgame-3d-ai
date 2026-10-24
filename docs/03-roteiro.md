@@ -23,6 +23,12 @@
    (`-- --xr-preview`) e a exportação "Quest". Veja
    [04-realidade-virtual.md](04-realidade-virtual.md).
 
+7. **Tela de início, final e sons novos** (vindos do jogo 2D). O jogo abre
+   com "Jogo do gato" sobre fases que jogam sozinhas, em sépia, com música
+   de bipes. Depois da última fase vêm "Você venceu!" e os créditos. Os
+   inimigos fazem "puf" ao sumir, e o ratão e o monstro gigante fazem
+   "bonk" nos pulos antes do último.
+
 ## Falta
 
 - Testar no Retroid e ver se precisa desligar as sombras.
