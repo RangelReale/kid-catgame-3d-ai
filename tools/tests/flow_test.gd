@@ -17,6 +17,7 @@ func _initialize() -> void:
 
 func _run() -> void:
 	_test_start_events()
+	await _test_language()
 	await _test_flow()
 	# The audio server lets go of the sounds that were playing a moment later.
 	for frame in 20:
@@ -45,6 +46,40 @@ func _test_start_events() -> void:
 	wheel.button_index = MOUSE_BUTTON_WHEEL_UP
 	wheel.pressed = true
 	_check("the mouse wheel does not start", not TitleScreen.is_start_event(wheel), null)
+
+
+## The L key changes the language and does not start the game. The words of
+## the title change with it, and the flag of the language in use lights up.
+func _test_language() -> void:
+	var first := Language.current()
+	var main := MainScene.instantiate()
+	root.add_child(main)
+	await _frames(2)
+	var title: TitleScreen = main.get_node("TitleScreen")
+	var press: Label = title.get_node("Visual/Press")
+	var l_key := _key(KEY_L, 108)
+	l_key.physical_keycode = KEY_L
+	_check("the L key does not start", not TitleScreen.is_start_event(l_key), null)
+	Language.choose("pt_BR")
+	await _frames(1)
+	_check("the title speaks Portuguese", press.tr(press.text) == "Aperte um botão para começar",
+			press.tr(press.text))
+	var english: LanguageFlag = title.get_node("Visual/Languages/English")
+	english.pressed.emit()
+	await _frames(1)
+	_check("the English flag changes to English", Language.current() == "en",
+			Language.current())
+	_check("the title speaks English", press.tr(press.text) == "Press a button to start",
+			press.tr(press.text))
+	_check("the English flag lights up", english.selected, null)
+	Language.choose_next()
+	_check("the language key goes to the next language", Language.current() == "pt_BR",
+			Language.current())
+	# Puts back the language that was saved before the test.
+	Language.choose(first)
+	main.free()
+	Input.action_release("move_right")
+	Input.action_release("jump")
 
 
 func _test_flow() -> void:

@@ -30,7 +30,7 @@ verdade, na frente da criança. A versão já abriu num Quest 3 de verdade
   desliga o modo de trocar de fase. Nesse modo, direita e esquerda no
   direcional vão para a próxima fase e para a anterior, como as teclas + e
   -, e o gato não anda. Enquanto o modo está ligado, a frente da base mostra
-  "<  Fase N  >" com o número da fase. Outro clique volta ao normal.
+  "<  Fase N  >" (ou "Level N", em inglês) com o número da fase. Outro clique volta ao normal.
 - **Corte nas bordas.** O chão e as colinas das fases são mais largos que a
   caixa. Painéis invisíveis em volta da caixa apagam o que fica do lado de
   fora, e ali aparece a sala.
@@ -50,6 +50,9 @@ verdade, na frente da criança. A versão já abriu num Quest 3 de verdade
   do ajuste de cor do ambiente da fase e pinta também as palavras. Gatilho,
   A ou X começam o jogo e voltam dos créditos. A música e os sons tocam
   igual.
+- **Idioma.** Na tela de início, B ou Y trocam entre português e inglês, como
+  a tecla L. As palavras da maquete mudam na hora. As bandeiras da tela do
+  computador não aparecem no óculos.
 
 ## Ver no computador, sem óculos
 

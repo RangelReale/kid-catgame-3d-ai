@@ -34,7 +34,7 @@ render_priority = 20
 outline_render_priority = 19
 modulate = Color(1, 0.85, 0.95, 1)
 outline_modulate = Color(0.35, 0.2, 0.1, 1)
-text = "Jogo do gato"
+text = "TITLE"
 font_size = 96
 outline_size = 24
 
@@ -46,7 +46,7 @@ render_priority = 20
 outline_render_priority = 19
 modulate = Color(1, 1, 1, 1)
 outline_modulate = Color(0.35, 0.2, 0.1, 1)
-text = "Aperte um botão para começar"
+text = "PRESS_TO_START"
 font_size = 48
 outline_size = 14
 
@@ -59,7 +59,7 @@ render_priority = 20
 outline_render_priority = 19
 modulate = Color(1, 0.95, 0.5, 1)
 outline_modulate = Color(0.35, 0.2, 0.1, 1)
-text = "<   Fase 1   >"
+text = "<   LEVEL   >"
 font_size = 56
 outline_size = 16
 
@@ -73,7 +73,7 @@ render_priority = 20
 outline_render_priority = 19
 modulate = Color(1, 0.95, 0.5, 1)
 outline_modulate = Color(0.35, 0.2, 0.1, 1)
-text = "Você venceu!"
+text = "YOU_WON"
 font_size = 88
 outline_size = 22
 
@@ -88,7 +88,7 @@ render_priority = 20
 outline_render_priority = 19
 modulate = Color(1, 1, 1, 1)
 outline_modulate = Color(0.35, 0.2, 0.1, 1)
-text = "Feito por"
+text = "MADE_BY"
 font_size = 48
 outline_size = 14
 
@@ -100,7 +100,7 @@ render_priority = 20
 outline_render_priority = 19
 modulate = Color(1, 0.85, 0.95, 1)
 outline_modulate = Color(0.35, 0.2, 0.1, 1)
-text = "Filha"
+text = "DAUGHTER"
 font_size = 80
 outline_size = 20
 
@@ -112,7 +112,7 @@ render_priority = 20
 outline_render_priority = 19
 modulate = Color(0.8, 0.95, 1, 1)
 outline_modulate = Color(0.35, 0.2, 0.1, 1)
-text = "Pai"
+text = "FATHER"
 font_size = 80
 outline_size = 20
 
@@ -124,7 +124,7 @@ render_priority = 20
 outline_render_priority = 19
 modulate = Color(1, 1, 1, 1)
 outline_modulate = Color(0.35, 0.2, 0.1, 1)
-text = "Aperte um botão para voltar"
+text = "PRESS_TO_GO_BACK"
 font_size = 48
 outline_size = 14
 

@@ -2,7 +2,8 @@ class_name TitleScreen
 extends CanvasLayer
 
 ## The game's name over levels that play by themselves, with a beeping tune.
-## Any key or button starts the game.
+## Any key or button starts the game. Two flags in the top corner change the
+## language, and so does the `change_language` action.
 
 ## Emitted when someone presses any key or button, or touches the screen.
 signal start_requested
@@ -25,6 +26,7 @@ var overlay_visible: bool = true:
 @onready var _visual: Control = $Visual
 @onready var _press_label: Label = $Visual/Press
 @onready var _music: AudioStreamPlayer = $Music
+@onready var _flags: Array[Node] = $Visual/Languages.get_children()
 
 
 func _ready() -> void:
@@ -36,6 +38,19 @@ func _ready() -> void:
 	visibility_changed.connect(_update_music)
 	_update_music()
 	_update_overlay()
+	for flag: LanguageFlag in _flags:
+		flag.pressed.connect(Language.choose.bind(flag.locale))
+	_update_flags()
+
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_TRANSLATION_CHANGED and is_node_ready():
+		_update_flags()
+
+
+func _update_flags() -> void:
+	for flag: LanguageFlag in _flags:
+		flag.selected = flag.locale == Language.current()
 
 
 func _update_music() -> void:
@@ -51,9 +66,25 @@ func _update_overlay() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if visible and is_start_event(event):
+	if not visible:
+		return
+	if event.is_action_pressed("change_language"):
+		get_viewport().set_input_as_handled()
+		Language.choose_next()
+		return
+	if is_start_event(event) and not _is_on_flag(event):
 		get_viewport().set_input_as_handled()
 		press()
+
+
+## True when a finger touches a language flag. The flag itself takes care of
+## it, so the game does not start.
+func _is_on_flag(event: InputEvent) -> bool:
+	if not overlay_visible or not event is InputEventScreenTouch:
+		return false
+	var position := (event as InputEventScreenTouch).position
+	return _flags.any(func(flag: Node) -> bool:
+			return (flag as Control).get_global_rect().has_point(position))
 
 
 ## Someone pressed a button: starts the game. The headset calls it for its
@@ -68,6 +99,8 @@ func press() -> void:
 ## controller's home button do not count.
 static func is_start_event(event: InputEvent) -> bool:
 	if not event.is_pressed() or event.is_echo():
+		return false
+	if event.is_action(&"change_language"):
 		return false
 	if event is InputEventKey:
 		var key := event as InputEventKey

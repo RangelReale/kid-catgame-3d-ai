@@ -29,6 +29,11 @@
    inimigos fazem "puf" ao sumir, e o ratão e o monstro gigante fazem
    "bonk" nos pulos antes do último.
 
+8. **Português e inglês** (vindo do jogo 2D). O jogo abre no idioma do
+   aparelho. Na tela de início, as bandeiras do Brasil e dos Estados Unidos,
+   a tecla L e o botão de voltar do controle trocam o idioma, e o jogo lembra
+   a escolha. No óculos, B ou Y trocam o idioma.
+
 ## Falta
 
 - Testar no Retroid e ver se precisa desligar as sombras.

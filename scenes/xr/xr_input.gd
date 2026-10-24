@@ -8,6 +8,8 @@ extends Node
 ## A click of the right thumbstick turns the level mode on and off. In it,
 ## left and right on a thumbstick go to the previous and the next level, like
 ## the - and + keys, instead of walking.
+##
+## B or Y changes the language on the title, like the L key.
 
 ## How far the thumbstick must be pushed to count, like the dead zone of the
 ## actions in project.godot.
@@ -18,12 +20,16 @@ const JUMP_BUTTONS: Array[String] = ["trigger_click"]
 const FACE_BUTTON := "ax_button"
 ## The click of the thumbstick, pressed down like a button.
 const STICK_CLICK := "primary_click"
+## The B button on the right controller and the Y button on the left one.
+const LANGUAGE_BUTTON := "by_button"
 
 ## Emitted when a jump button, A, X or a trigger goes down. The title and
 ## the ending listen to it, since pressed actions send no input events.
 signal button_pressed
 ## Emitted when a click of the right thumbstick turns the level mode on or off.
 signal level_mode_changed(on: bool)
+## Emitted when B or Y goes down.
+signal language_pressed
 
 @export var controllers: Array[XRController3D] = []
 
@@ -39,6 +45,8 @@ var _stick_click: bool = false
 ## Which way the thumbstick was pushed in level mode: -1, 0 or 1. One push
 ## changes one level; the stick must come back before the next one.
 var _level_push: int = 0
+## True while B or Y is down.
+var _language_button: bool = false
 
 
 func _process(_delta: float) -> void:
@@ -46,6 +54,7 @@ func _process(_delta: float) -> void:
 	var jump := false
 	var x_button := false
 	var stick_click := false
+	var language_button := false
 	for controller in controllers:
 		if controller == null or not controller.get_is_active():
 			continue
@@ -62,6 +71,11 @@ func _process(_delta: float) -> void:
 				jump = true
 		if controller.tracker == &"right_hand" and controller.is_button_pressed(STICK_CLICK):
 			stick_click = true
+		if controller.is_button_pressed(LANGUAGE_BUTTON):
+			language_button = true
+	if language_button and not _language_button:
+		language_pressed.emit()
+	_language_button = language_button
 	if stick_click and not _stick_click:
 		level_mode = not level_mode
 		level_mode_changed.emit(level_mode)

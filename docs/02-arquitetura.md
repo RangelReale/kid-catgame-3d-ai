@@ -17,6 +17,8 @@ scenes/
                        de demonstração que jogam sozinhas), jogo e final
   hud/                 botões de toque (2D, copiados do jogo 2D)
   title_screen/        tela de início, com a música (2D, por cima do 3D)
+  language/            o idioma em uso e a escolha salva (vindo do jogo 2D)
+  language_flag/       as bandeiras que trocam o idioma na tela de início
   ending/              "Você venceu!" e os créditos (2D, por cima do 3D)
   sepia/               shader que pinta a tela de marrom, como foto antiga
   xr/                  a versão do óculos: a maquete (rig), a caixa e os controles
@@ -28,7 +30,7 @@ scenes/
   monster/             o monstrinho
   goal/                a bandeira de chegada
   sun/, cloud/         o sol e as nuvens do céu
-assets/                ícone, sons e música. Os efeitos tocam no canal
+assets/                ícone, sons, música e textos traduzidos. Os efeitos tocam no canal
                        `Sounds`, mudo na tela de início; a música toca no `Master`
 tools/sounds/, tools/music/  scripts Python que geram os sons e a música
 tools/tests/           testes automáticos e passeio automático para gravar quadros
@@ -101,6 +103,31 @@ isso o chão das fases é mais largo que a fase.
 5. Coloque decoração ao fundo (z negativo) para dar profundidade.
 6. Ponha a fase na lista `levels` de `scenes/main.tscn`.
 
+## Idiomas
+
+O jogo fala português do Brasil e inglês, como o jogo 2D. Os textos da tela
+ficam em `assets/translations/strings.csv`, uma linha por texto, com uma
+chave (`TITLE`) e uma coluna por idioma. Nas cenas, cada `Label` e cada
+`Label3D` guarda a chave, e o Godot troca pela frase do idioma em uso. O
+Godot gera os arquivos `.translation` ao importar; eles ficam fora do Git.
+
+Na primeira vez, o jogo usa o idioma do aparelho. Se o aparelho não estiver
+em português nem em inglês, usa inglês. A classe `Language`
+(`scenes/language/language.gd`) troca o idioma e guarda a escolha em
+`user://settings.cfg`. No jogo 2D ela é um autoload. Aqui ela só tem funções
+estáticas, porque os testes compilam os scripts do jogo antes de o Godot
+criar os autoloads. Quando o idioma muda, o Godot avisa todos os nós com
+`NOTIFICATION_TRANSLATION_CHANGED`.
+
+Na tela de início, duas bandeiras no canto de cima (Brasil e Estados
+Unidos) mostram o idioma em uso. Tocar ou clicar numa bandeira troca o
+idioma. A ação `change_language` (tecla L ou botão de voltar do controle)
+passa para o próximo idioma. Nenhuma das duas começa o jogo. No óculos, B
+ou Y fazem o mesmo.
+
+Depois de criar uma classe nova (`class_name`), rode a importação uma vez.
+Sem isso, os testes não acham a classe.
+
 ## Versão do óculos
 
 Detalhes em [04-realidade-virtual.md](04-realidade-virtual.md). Em resumo:
@@ -127,6 +154,8 @@ Detalhes em [04-realidade-virtual.md](04-realidade-virtual.md). Em resumo:
   segue o gato e para nos limites, a câmera da fase desliga, o céu vai para
   o fundo da caixa, os controles apertam as ações e a caixa aparece na
   frente da cabeça.
+- `tools/tests/flow_test.gd` testa a tela de início, o final e a troca de
+  idioma. Ele devolve o idioma salvo ao que era antes.
 - `tools/tests/demo_drive.gd` joga sozinho por alguns segundos. Com o
   gravador de vídeo do Godot (`--write-movie`), ele grava quadros para ver o
   jogo sem jogar. O comando está no começo do arquivo.

@@ -38,9 +38,10 @@ var _demo_jump_time: float = 0.0
 @onready var _ending: CanvasLayer = $Ending
 
 
-## The game opens on the title. `godot --path . -- --level 3` skips it and
+## The game opens on the title, in the language chosen last time. `godot --path . -- --level 3` skips it and
 ## starts at the third level, to test it quickly.
 func _ready() -> void:
+	Language.load_saved()
 	_title_screen.start_requested.connect(_start_game)
 	_ending.finished.connect(_show_title)
 	var args := OS.get_cmdline_user_args()
@@ -202,6 +203,7 @@ func _add_xr_rig(preview: bool) -> void:
 	_ending.credits_done.connect(_rig.captions.show_press_back)
 	_rig.controls.button_pressed.connect(_on_headset_button)
 	_rig.controls.level_mode_changed.connect(_update_level_mode.unbind(1))
+	_rig.controls.language_pressed.connect(_on_headset_language_button)
 
 
 ## In the headset, shows the level number while the thumbstick changes
@@ -217,6 +219,12 @@ func _on_headset_button() -> void:
 		_title_screen.press()
 	elif _state == State.ENDING:
 		_ending.press()
+
+
+## On the title, B or Y changes the language, like the L key.
+func _on_headset_language_button() -> void:
+	if _state == State.TITLE:
+		Language.choose_next()
 
 
 func _on_goal_reached() -> void:

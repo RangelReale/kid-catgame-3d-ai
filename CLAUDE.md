@@ -16,7 +16,9 @@ gato" sobre fases que jogam sozinhas, em sépia, com música de bipes; qualquer
 botão (menos teclas especiais) começa a fase 1, e `--level N` pula essa tela.
 Depois da última fase, a imagem fica sépia, aparecem "Você venceu!" e os
 créditos, e um botão volta à tela de início. Os monstrinhos fazem "puf" ao
-sumir; o ratão e o monstro gigante fazem "bonk" nos pulos antes do último. As teclas de 1 a 9 e o 0 pulam para as fases 1 a 10; com Ctrl, para
+sumir; o ratão e o monstro gigante fazem "bonk" nos pulos antes do último. O jogo fala português e inglês: abre no idioma do aparelho, e duas
+bandeiras na tela de início (ou a tecla L; no óculos, B ou Y) trocam o
+idioma. As teclas de 1 a 9 e o 0 pulam para as fases 1 a 10; com Ctrl, para
 as fases 11 a 20. Os próximos passos estão no [roteiro](docs/03-roteiro.md).
 Há também uma versão para o Meta Quest 3, em que a fase vira uma maquete na
 sala ([docs/04-realidade-virtual.md](docs/04-realidade-virtual.md)); no óculos, as palavras

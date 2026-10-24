@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
 [ext_resource type="Script" path="res://scenes/title_screen/title_screen.gd" id="1_title"]
 [ext_resource type="Shader" path="res://scenes/sepia/sepia.gdshader" id="2_sepia"]
 [ext_resource type="AudioStream" path="res://assets/music/title.wav" id="3_music"]
+[ext_resource type="PackedScene" path="res://scenes/language_flag/language_flag.tscn" id="4_flag"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sepia"]
 shader = ExtResource("2_sepia")
@@ -40,7 +41,7 @@ theme_override_colors/font_color = Color(1, 0.85, 0.95, 1)
 theme_override_colors/font_outline_color = Color(0.35, 0.2, 0.1, 1)
 theme_override_constants/outline_size = 12
 theme_override_font_sizes/font_size = 56
-text = "Jogo do gato"
+text = "TITLE"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -58,9 +59,31 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0.35, 0.2, 0.1, 1)
 theme_override_constants/outline_size = 8
 theme_override_font_sizes/font_size = 20
-text = "Aperte um botão para começar"
+text = "PRESS_TO_START"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Languages" type="HBoxContainer" parent="Visual"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -78.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = 28.0
+grow_horizontal = 0
+mouse_filter = 2
+theme_override_constants/separation = 10
+alignment = 2
+
+[node name="Portuguese" parent="Visual/Languages" instance=ExtResource("4_flag")]
+layout_mode = 2
+locale = "pt_BR"
+
+[node name="English" parent="Visual/Languages" instance=ExtResource("4_flag")]
+layout_mode = 2
+locale = "en"
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_music")

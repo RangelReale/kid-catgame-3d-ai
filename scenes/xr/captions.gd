@@ -15,6 +15,7 @@ extends Node3D
 @export var credits_end_y: float = 1.2
 
 var _blink_tween: Tween
+var _level_number: int = 1
 var _ending_tween: Tween
 
 @onready var _title: Node3D = $Visual/Title
@@ -30,7 +31,12 @@ func _ready() -> void:
 	hide_all()
 
 
-## Shows "Jogo do gato" and blinks "press a button to start".
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_TRANSLATION_CHANGED and is_node_ready():
+		_update_level_mode_text()
+
+
+## Shows the game's name and blinks "press a button to start".
 func show_title() -> void:
 	hide_all()
 	_title.show()
@@ -61,7 +67,12 @@ func show_press_back() -> void:
 ## changes levels.
 func show_level_mode(on: bool, number: int) -> void:
 	_level_mode.visible = on
-	_level_mode.text = "<   Fase %d   >" % number
+	_level_number = number
+	_update_level_mode_text()
+
+
+func _update_level_mode_text() -> void:
+	_level_mode.text = "<   %s   >" % (tr("LEVEL") % _level_number)
 
 
 func hide_all() -> void:

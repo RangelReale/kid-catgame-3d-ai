@@ -171,12 +171,12 @@ func _test_level_mode() -> void:
 	input.process_mode = Node.PROCESS_MODE_DISABLED
 	input.level_mode = true
 	input.level_mode_changed.emit(true)
-	_check("the box shows the level mode", label.visible and label.text.contains("Fase 1"),
+	_check("the box shows the level mode", label.visible and label.text.contains(tr("LEVEL") % 1),
 			label.text)
 	input.change_level(Vector2(0.9, 0))
 	await _frames(3)
 	_check("right goes to the next level", main._level_index == 1, main._level_index)
-	_check("the level mode shows the new level", label.text.contains("Fase 2"), label.text)
+	_check("the level mode shows the new level", label.text.contains(tr("LEVEL") % 2), label.text)
 	input.change_level(Vector2(0.9, 0))
 	await _frames(3)
 	_check("holding the push does not skip more levels", main._level_index == 1,
