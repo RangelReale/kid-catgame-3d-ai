@@ -4,6 +4,10 @@ extends Node
 ## exactly as with a keyboard or a gamepad: either thumbstick walks left and
 ## right and swims down, and A or a trigger jumps. X jumps too, but when the
 ## cat swims or flies, X goes down instead, like a button for each way.
+##
+## A click of the right thumbstick turns the level mode on and off. In it,
+## left and right on a thumbstick go to the previous and the next level, like
+## the - and + keys, instead of walking.
 
 ## How far the thumbstick must be pushed to count, like the dead zone of the
 ## actions in project.godot.
@@ -12,6 +16,8 @@ const DEAD_ZONE := 0.5
 const JUMP_BUTTONS: Array[String] = ["trigger_click"]
 ## The A button on the right controller and the X button on the left one.
 const FACE_BUTTON := "ax_button"
+## The click of the thumbstick, pressed down like a button.
+const STICK_CLICK := "primary_click"
 
 ## Emitted when a jump button, A, X or a trigger goes down. The title and
 ## the ending listen to it, since pressed actions send no input events.
@@ -24,12 +30,20 @@ signal button_pressed
 var _held := {}
 ## True while any button of `button_pressed` is down.
 var _any_button: bool = false
+## True while the thumbstick changes levels instead of walking.
+var level_mode: bool = false
+## True while the right thumbstick is clicked down.
+var _stick_click: bool = false
+## Which way the thumbstick was pushed in level mode: -1, 0 or 1. One push
+## changes one level; the stick must come back before the next one.
+var _level_push: int = 0
 
 
 func _process(_delta: float) -> void:
 	var stick := Vector2.ZERO
 	var jump := false
 	var x_button := false
+	var stick_click := false
 	for controller in controllers:
 		if controller == null or not controller.get_is_active():
 			continue
@@ -44,6 +58,14 @@ func _process(_delta: float) -> void:
 				x_button = true
 			else:
 				jump = true
+		if controller.tracker == &"right_hand" and controller.is_button_pressed(STICK_CLICK):
+			stick_click = true
+	if stick_click and not _stick_click:
+		level_mode = not level_mode
+	_stick_click = stick_click
+	if level_mode:
+		change_level(stick)
+		stick = Vector2.ZERO
 	var any_button := jump or x_button
 	if any_button and not _any_button:
 		button_pressed.emit()
@@ -59,6 +81,29 @@ func apply(stick: Vector2, jump: bool, x_button: bool = false, swims: bool = fal
 	_hold("move_right", stick.x > DEAD_ZONE)
 	_hold("move_down", stick.y > DEAD_ZONE or (x_button and swims))
 	_hold("jump", jump or (x_button and not swims))
+
+
+## In level mode: a push to the right goes to the next level, and a push to
+## the left to the previous one.
+func change_level(stick: Vector2) -> void:
+	var push := 0
+	if stick.x > DEAD_ZONE:
+		push = 1
+	elif stick.x < -DEAD_ZONE:
+		push = -1
+	if push != 0 and push != _level_push:
+		_tap("go_to_next_level" if push > 0 else "go_to_previous_level")
+	_level_push = push
+
+
+## Sends a press and a release of an action as input events, so main sees
+## them like the keys.
+func _tap(action: String) -> void:
+	for pressed in [true, false]:
+		var event := InputEventAction.new()
+		event.action = action
+		event.pressed = pressed
+		Input.parse_input_event(event)
 
 
 ## True when the cat of the current level is a mermaid or flies freely.

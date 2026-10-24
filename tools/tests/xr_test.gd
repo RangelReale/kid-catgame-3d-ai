@@ -23,6 +23,7 @@ func _run() -> void:
 	await _test_controllers()
 	await _test_box_placement()
 	await _test_captions()
+	await _test_level_mode()
 	# The audio server lets go of the sounds that were playing a moment later.
 	for frame in 20:
 		await process_frame
@@ -155,6 +156,35 @@ func _test_captions() -> void:
 	await process_frame
 	Input.action_release("move_right")
 	Input.action_release("jump")
+
+
+## In level mode, a push of the thumbstick changes the level once.
+func _test_level_mode() -> void:
+	var main := MainScene.instantiate()
+	main.xr_preview = true
+	main.show_title = false
+	root.add_child(main)
+	await process_frame
+	var input: Node = main.get_node("XRRig/Input")
+	input.change_level(Vector2(0.9, 0))
+	await _frames(3)
+	_check("right goes to the next level", main._level_index == 1, main._level_index)
+	input.change_level(Vector2(0.9, 0))
+	await _frames(3)
+	_check("holding the push does not skip more levels", main._level_index == 1,
+			main._level_index)
+	input.change_level(Vector2.ZERO)
+	input.change_level(Vector2(-0.9, 0))
+	await _frames(3)
+	_check("left goes back a level", main._level_index == 0, main._level_index)
+	input.change_level(Vector2.ZERO)
+	main.queue_free()
+	await process_frame
+
+
+func _frames(count: int) -> void:
+	for frame in count:
+		await process_frame
 
 ## Wherever the head is when the game starts, the box ends up in front of it.
 func _test_box_placement() -> void:
