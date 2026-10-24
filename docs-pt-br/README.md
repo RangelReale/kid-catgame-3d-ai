@@ -1,5 +1,7 @@
 # Documentos
 
+[English](../docs-en/README.md) | **Português**
+
 1. [Tecnologia](01-tecnologia.md): por que o jogo 3D usa o Godot.
 2. [Arquitetura](02-arquitetura.md): pastas, medidas, câmera e como passar
    uma fase do jogo 2D para o 3D.

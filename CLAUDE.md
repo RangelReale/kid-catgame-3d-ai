@@ -2,7 +2,7 @@
 
 Um jogo de plataforma lateral em 3D (2.5D) com um gato, feito por um pai e
 sua filha de 6 anos. É a nova versão do jogo 2D `rr-catgame-poc1`, que fica
-na pasta ao lado. Os detalhes estão em [docs/](docs/README.md).
+na pasta ao lado. Os detalhes estão em [docs-pt-br/](docs-pt-br/README.md) (em inglês, em [docs-en/](docs-en/README.md)).
 
 **Estado atual:** as 16 fases do jogo 2D estão prontas em 3D. O gato
 arco-íris anda, pula com cambalhota, bate as asas três vezes no ar, nada como
@@ -19,9 +19,9 @@ créditos, e um botão volta à tela de início. Os monstrinhos fazem "puf" ao
 sumir; o ratão e o monstro gigante fazem "bonk" nos pulos antes do último. O jogo fala português e inglês: abre no idioma do aparelho, e duas
 bandeiras na tela de início (ou a tecla L; no óculos, B ou Y) trocam o
 idioma. As teclas de 1 a 9 e o 0 pulam para as fases 1 a 10; com Ctrl, para
-as fases 11 a 20. Os próximos passos estão no [roteiro](docs/03-roteiro.md).
+as fases 11 a 20. Os próximos passos estão no [roteiro](docs-pt-br/03-roteiro.md).
 Há também uma versão para o Meta Quest 3, em que a fase vira uma maquete na
-sala ([docs/04-realidade-virtual.md](docs/04-realidade-virtual.md)); no óculos, as palavras
+sala ([docs-pt-br/04-realidade-virtual.md](docs-pt-br/04-realidade-virtual.md)); no óculos, as palavras
 da tela de início e dos créditos aparecem em 3D na maquete. Ela já
 abriu num Quest 3 de verdade. Atualize esta seção a cada marco.
 
@@ -40,7 +40,12 @@ erros de transcrição e sem detalhes.
 
 ## Idioma
 
-- Respostas, documentos e commits: português.
+- Respostas e commits: português. Toda conversa com a IA neste repositório
+  continua em português, mesmo com os documentos em dois idiomas, para que a
+  filha possa continuar pedindo mudanças.
+- Documentos: em português (`docs-pt-br/`, `README.pt-br.md`) e em inglês
+  (`docs-en/`, `README.md`). Ao mudar um documento, mude também a versão no
+  outro idioma. As imagens ficam só em `docs-en/images/`.
 - Código, nomes de arquivos, nós e ações: inglês.
 
 ## Tecnologia
@@ -73,7 +78,7 @@ lugar de `godot` sempre que a saída importa.
 | Baixar o plugin do óculos (uma vez) | `sh tools/install_xr_plugin.sh` |
 | Exportar para o Quest 3 | `godot --headless --path . --install-android-build-template --export-debug "Quest" build/quest/catgame3d-quest.apk` |
 | Exportar para Windows | `godot --headless --path . --export-release "Windows" build/windows/catgame3d.exe` |
-| Publicar uma versão | no GitHub, Actions > Release > Run workflow ([docs/05-versoes.md](docs/05-versoes.md)) |
+| Publicar uma versão | no GitHub, Actions > Release > Run workflow ([docs-pt-br/05-versoes.md](docs-pt-br/05-versoes.md)) |
 
 Para ver o jogo sem jogar, grave quadros com o passeio automático. O comando
 está no começo de `tools/tests/demo_drive.gd`.
@@ -87,7 +92,7 @@ está no começo de `tools/tests/demo_drive.gd`.
 - O gato, os monstrinhos e a bandeira ficam no plano z = 0. A profundidade é
   só para a aparência.
 - 1 unidade vale 32 pixels do jogo 2D, e y cresce para cima. As fórmulas
-  estão em [docs/02-arquitetura.md](docs/02-arquitetura.md).
+  estão em [docs-pt-br/02-arquitetura.md](docs-pt-br/02-arquitetura.md).
 - Não leia a câmera da tela nem o tamanho da tela no código do jogo. No
   óculos, a câmera é a cabeça. Use a câmera da fase só como dados (alvo e
   limites), como faz o rig em `scenes/xr/`.

@@ -5,7 +5,7 @@ maquete, uma caixa de madeira de 1 m de largura que flutua na sala de
 verdade, na frente da criança. A versão já abriu num Quest 3 de verdade
 (veja [Teste no óculos](#teste-no-óculos)).
 
-![A fase 16 como maquete: uma caixa de madeira com o parque de diversões dentro e o céu pintado no fundo](images/diorama.png)
+![A fase 16 como maquete: uma caixa de madeira com o parque de diversões dentro e o céu pintado no fundo](../docs-en/images/diorama.png)
 
 ## Como funciona
 

@@ -1,18 +1,30 @@
 # rr-catgame-poc2
 
-O jogo do gato em 3D. É uma nova versão do
-[rr-catgame-poc1](../rr-catgame-poc1), o jogo 2D de plataforma feito por pai e
-filha com a ajuda do Claude. O jogo usa o motor Godot 4.7 e roda em Windows,
-Android e Mac.
+**English** | [Português](README.pt-br.md)
 
-![O gato arco-íris em 3D em cima de uma caixa, com um monstrinho, colinas, o sol e as nuvens](docs/images/screenshot.png)
+The cat game in 3D. It is a new version of
+[rr-catgame-poc1](../rr-catgame-poc1), the 2D platform game made by a father
+and daughter with help from Claude. The game uses the Godot 4.7 engine and runs
+on Windows, Android and Mac.
 
-O gato continua andando só para os lados e para cima, como no jogo 2D. A
-diferença é que tudo agora é feito de formas 3D, com luz e sombra, e a câmera
-fica um pouco inclinada para mostrar a profundidade. As 16 fases
-do jogo 2D estão prontas, do gramado até o parque de diversões.
+![The rainbow cat in 3D on top of a box, with a little monster, hills, the sun and the clouds](docs-en/images/screenshot.png)
 
-Para jogar, rode `godot --path .` na raiz do repositório. Ande com as setas ou
-com A e D, e pule com a barra de espaço. Aperte o pulo de novo no ar para
-bater as asas. Um controle também funciona. Os detalhes estão no
-[índice dos documentos](docs/README.md).
+The cat still moves only sideways and up, as in the 2D game. The difference is
+that everything is now made of 3D shapes, with light and shadow, and the camera
+is tilted a little to show depth. All 16 levels of the 2D game are done, from
+the lawn to the amusement park.
+
+To play, run `godot --path .` at the repository root. Walk with the arrow keys
+or with A and D, and jump with the space bar. Press jump again in the air to
+flap the wings. A gamepad also works. The details are in the
+[document index](docs-en/README.md).
+
+## Languages and AI
+
+The documents exist in English ([docs-en](docs-en/README.md)) and in Brazilian
+Portuguese ([docs-pt-br](docs-pt-br/README.md)). When you change one, change
+the other.
+
+Conversations with AI assistants in this repository (Claude and others) stay
+in Brazilian Portuguese. This way the daughter can keep asking for changes to
+the game. The rules for the AI are in [CLAUDE.md](CLAUDE.md).

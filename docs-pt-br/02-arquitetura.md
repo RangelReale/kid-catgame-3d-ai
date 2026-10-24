@@ -36,7 +36,8 @@ tools/sounds/, tools/music/  scripts Python que geram os sons e a música
 tools/tests/           testes automáticos e passeio automático para gravar quadros
 tools/install_xr_plugin.sh  baixa o plugin OpenXR Vendors (fora do Git)
 addons/                plugin OpenXR Vendors, baixado pelo script acima
-docs/                  estes documentos (o Godot ignora a pasta)
+docs-pt-br/, docs-en/  estes documentos, em português e em inglês (o Godot
+                       ignora as pastas)
 ```
 
 ## Medidas
