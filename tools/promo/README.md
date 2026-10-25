@@ -5,7 +5,7 @@
 These files rebuild the 46-second promo video of the 3D game, in Portuguese
 (`build/promo/jogo_do_gato_promo.mp4`) and in English
 (`build/promo/cat_game_promo.mp4`). Both use the same gameplay. They follow
-the promo video of the 2D game, in `../rr-catgame-poc1/tools/promo/`: same
+the promo video of the 2D game, in `../kid-catgame-ai/tools/promo/`: same
 clips, same titles and same music.
 
 - `autopilot.gd`: skips the title screen and plays by itself. It shows a

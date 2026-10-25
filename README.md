@@ -1,9 +1,9 @@
-# rr-catgame-poc2
+# kid-catgame-3d-ai
 
 **English** | [Português](README.pt-br.md)
 
 The cat game in 3D. It is a new version of
-[rr-catgame-poc1](../rr-catgame-poc1), the 2D platform game made by a father
+[kid-catgame-ai](../kid-catgame-ai), the 2D platform game made by a father
 and daughter with help from Claude. The game uses the Godot 4.7 engine and runs
 on Windows, Android and Mac.
 

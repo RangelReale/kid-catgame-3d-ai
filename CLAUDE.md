@@ -1,7 +1,7 @@
 # Jogo do gato 3D
 
 Um jogo de plataforma lateral em 3D (2.5D) com um gato, feito por um pai e
-sua filha de 6 anos. É a nova versão do jogo 2D `rr-catgame-poc1`, que fica
+sua filha de 6 anos. É a nova versão do jogo 2D `kid-catgame-ai`, que fica
 na pasta ao lado. Os detalhes estão em [docs-pt-br/](docs-pt-br/README.md) (em inglês, em [docs-en/](docs-en/README.md)).
 
 **Estado atual:** as 16 fases do jogo 2D estão prontas em 3D. O gato

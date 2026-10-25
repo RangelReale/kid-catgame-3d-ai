@@ -5,7 +5,7 @@
 Estes arquivos refazem o vídeo de promoção de 46 segundos do jogo 3D, em
 português (`build/promo/jogo_do_gato_promo.mp4`) e em inglês
 (`build/promo/cat_game_promo.mp4`). Os dois usam a mesma jogada. Eles seguem
-o vídeo de promoção do jogo 2D, em `../rr-catgame-poc1/tools/promo/`: os
+o vídeo de promoção do jogo 2D, em `../kid-catgame-ai/tools/promo/`: os
 mesmos trechos, os mesmos títulos e a mesma música.
 
 - `autopilot.gd`: pula a tela de início e joga sozinho. Ele mostra alguns
