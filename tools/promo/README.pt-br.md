@@ -5,8 +5,8 @@
 Estes arquivos refazem o vídeo de promoção de 46 segundos do jogo 3D, em
 português (`build/promo/jogo_do_gato_promo.mp4`) e em inglês
 (`build/promo/cat_game_promo.mp4`). Os dois usam a mesma jogada. Eles seguem
-o vídeo de promoção do jogo 2D, em `../kid-catgame-ai/tools/promo/`: os
-mesmos trechos, os mesmos títulos e a mesma música.
+o [vídeo de promoção do jogo 2D](https://github.com/RangelReale/kid-catgame-ai/tree/master/tools/promo):
+os mesmos trechos, os mesmos títulos e a mesma música.
 
 - `autopilot.gd`: pula a tela de início e joga sozinho. Ele mostra alguns
   segundos de várias fases, uma depois da outra. A lista `CLIPS` diz qual
@@ -50,9 +50,8 @@ lugar de `godot`.
    No PowerShell, troque `mkdir -p build/promo` por
    `New-Item -ItemType Directory -Force build/promo`.
 
-3. Baixe a música e copie a fonte. Se o jogo 2D estiver na pasta ao lado e
-   o vídeo dele já tiver sido feito, dá para copiar o
-   `build/promo/music.wav` de lá em vez de baixar.
+3. Baixe a música e copie a fonte. Se você já fez o vídeo do jogo 2D,
+   dá para copiar o `build/promo/music.wav` de lá em vez de baixar.
 
    ```sh
    curl -L -o build/promo/music.wav "https://opengameart.org/sites/default/files/Cat%20Song%201.2.wav"

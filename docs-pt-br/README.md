@@ -12,4 +12,6 @@
    Windows e os APKs do Android e do Quest.
 
 O ambiente de trabalho (instalar o Godot, o Android e o Retroid) é o mesmo do
-jogo 2D. Veja o `docs/02-ambiente.md` do kid-catgame-ai.
+jogo 2D. Veja o
+[02-ambiente.md](https://github.com/RangelReale/kid-catgame-ai/blob/master/docs-pt-br/02-ambiente.md)
+do kid-catgame-ai.

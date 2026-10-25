@@ -16,5 +16,8 @@ local/
 # Cópias de trabalho dos agentes do Claude Code
 .claude/worktrees/
 
+# Instruções do Claude Code só para este computador
+CLAUDE.local.md
+
 # Plugin do óculos, baixado por tools/install_xr_plugin.sh
 /addons/godotopenxrvendors/
