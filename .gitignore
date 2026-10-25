@@ -11,6 +11,7 @@
 # Sistema
 .DS_Store
 Thumbs.db
+local/
 
 # Cópias de trabalho dos agentes do Claude Code
 .claude/worktrees/
