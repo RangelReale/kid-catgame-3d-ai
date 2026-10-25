@@ -3,7 +3,7 @@
 [English](README.md) | **Português**
 
 O jogo do gato em 3D. É uma nova versão do
-[kid-catgame-ai](../kid-catgame-ai), o jogo 2D de plataforma feito por pai e
+[kid-catgame-ai](https://github.com/RangelReale/kid-catgame-ai), o jogo 2D de plataforma feito por pai e
 filha com a ajuda do Claude. O jogo usa o motor Godot 4.7 e roda em Windows,
 Android e Mac.
 
