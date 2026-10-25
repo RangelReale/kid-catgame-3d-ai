@@ -23,6 +23,8 @@ bandeiras na tela de início (ou a tecla L; no óculos, B ou Y) trocam o
 idioma. As teclas de 1 a 9 e o 0 pulam para as fases 1 a 10; com Ctrl, para
 as fases 11 a 20. Há um vídeo de promoção em português e outro em inglês,
 como no jogo 2D ([tools/promo/](tools/promo/README.pt-br.md)). Os próximos passos estão no [roteiro](docs-pt-br/03-roteiro.md).
+A versão web roda no GitHub Pages (https://rangelreale.github.io/kid-catgame-3d-ai/) e
+é publicada a cada push em `master`.
 Há também uma versão para o Meta Quest 3, em que a fase vira uma maquete na
 sala ([docs-pt-br/04-realidade-virtual.md](docs-pt-br/04-realidade-virtual.md)); no óculos, as palavras
 da tela de início e dos créditos aparecem em 3D na maquete. Ela já

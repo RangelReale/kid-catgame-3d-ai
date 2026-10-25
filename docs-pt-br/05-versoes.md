@@ -27,6 +27,17 @@ O workflow (`.github/workflows/release.yml`) faz o resto:
 - monta o instalador com o NSIS (`tools/installer/catgame3d.nsi`);
 - cria a tag e o release, com as notas geradas pelo GitHub.
 
+## O jogo no navegador
+
+A versão web também fica no GitHub Pages, em
+[https://rangelreale.github.io/kid-catgame-3d-ai/](https://rangelreale.github.io/kid-catgame-3d-ai/). O workflow
+`.github/workflows/pages.yml` exporta e publica o jogo a cada push em
+`master` que muda o jogo. Mudanças só nos documentos não publicam. Para
+publicar à mão, abra **Actions** > **Pages** > **Run workflow**.
+
+A exportação web não usa threads. Por isso ela roda no GitHub Pages, que não
+manda os cabeçalhos especiais (COOP e COEP) que as threads pedem.
+
 ## A chave de assinatura
 
 Os dois APKs são assinados com a mesma chave de release. O Android só

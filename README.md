@@ -16,7 +16,9 @@ the lawn to the amusement park. The list of the daughter's ideas for the game,
 in the order she asked for them, is in the
 [README of the 2D game](https://github.com/RangelReale/kid-catgame-ai#the-daughters-requests).
 
-To play, run `godot --path .` at the repository root. Walk with the arrow keys
+To play in the browser, open
+[https://rangelreale.github.io/kid-catgame-3d-ai/](https://rangelreale.github.io/kid-catgame-3d-ai/).
+To play on the computer, run `godot --path .` at the repository root. Walk with the arrow keys
 or with A and D, and jump with the space bar. Press jump again in the air to
 flap the wings. A gamepad also works. The details are in the
 [document index](docs-en/README.md).

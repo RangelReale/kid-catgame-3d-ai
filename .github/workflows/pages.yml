@@ -1,0 +1,82 @@
+# Exports the web version and publishes it on GitHub Pages, at
+# https://rangelreale.github.io/kid-catgame-3d-ai/.
+# It runs on every push to master that changes the game, and by hand from the
+# Actions tab ("Pages" > "Run workflow").
+# The web export has no threads, so it runs without the special headers
+# (COOP and COEP) that GitHub Pages cannot send.
+name: Pages
+
+on:
+  push:
+    branches: [master]
+    paths-ignore:
+      - "**.md"
+      - "docs-en/**"
+      - "docs-pt-br/**"
+      - "tools/promo/**"
+      - ".github/workflows/release.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# A newer push replaces a publish that has not finished yet.
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+env:
+  GODOT_VERSION: 4.7.2
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Cache Godot
+        id: cache-godot
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/godot
+            ~/.local/share/godot/export_templates
+          key: godot-${{ env.GODOT_VERSION }}
+
+      - name: Download Godot and its export templates
+        if: steps.cache-godot.outputs.cache-hit != 'true'
+        run: |
+          base="https://github.com/godotengine/godot-builds/releases/download/$GODOT_VERSION-stable"
+          mkdir -p ~/godot
+          curl -fsSL -o /tmp/godot.zip "$base/Godot_v$GODOT_VERSION-stable_linux.x86_64.zip"
+          unzip -q /tmp/godot.zip -d ~/godot
+          curl -fsSL -o /tmp/templates.tpz "$base/Godot_v$GODOT_VERSION-stable_export_templates.tpz"
+          unzip -q /tmp/templates.tpz -d /tmp/templates
+          mkdir -p ~/.local/share/godot/export_templates
+          mv /tmp/templates/templates ~/.local/share/godot/export_templates/$GODOT_VERSION.stable
+
+      - name: Export Web
+        run: |
+          GODOT="$HOME/godot/Godot_v$GODOT_VERSION-stable_linux.x86_64"
+          mkdir -p build/web
+          "$GODOT" --headless --path . --import
+          "$GODOT" --headless --path . --export-release "Web" build/web/index.html
+          test -f build/web/index.html
+          rm -f build/web/*.import
+          ls -l build/web
+
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: build/web
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
