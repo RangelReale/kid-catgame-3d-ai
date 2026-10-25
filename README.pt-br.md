@@ -19,6 +19,15 @@ com A e D, e pule com a barra de espaço. Aperte o pulo de novo no ar para
 bater as asas. Um controle também funciona. Os detalhes estão no
 [índice dos documentos](docs-pt-br/README.md).
 
+## Meta Quest 3
+
+No Meta Quest 3, a fase vira uma maquete em pé na sala: uma caixa de madeira
+com a fase dentro e o céu pintado no fundo. A imagem mostra a maquete na tela
+do computador, com `godot --path . -- --xr-preview`. Os detalhes estão em
+[Realidade virtual](docs-pt-br/04-realidade-virtual.md).
+
+![A fase 16 como maquete: uma caixa de madeira com o parque de diversões dentro e o céu pintado no fundo](docs-en/images/diorama.png)
+
 ## Idiomas e IA
 
 Os documentos existem em português ([docs-pt-br](docs-pt-br/README.md)) e em
