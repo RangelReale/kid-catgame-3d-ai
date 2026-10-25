@@ -3,7 +3,8 @@
 # It creates the tag v<version> on the commit it ran on and attaches:
 #   - the Windows installer;
 #   - the Android APK (Retroid and phones);
-#   - the Meta Quest 3 APK.
+#   - the Meta Quest 3 APK;
+#   - the web version, as a zip to put on any web server.
 # The APKs are signed with the release key from the secrets
 # ANDROID_KEYSTORE_BASE64, ANDROID_KEYSTORE_USER and ANDROID_KEYSTORE_PASSWORD.
 name: Release
@@ -106,16 +107,18 @@ jobs:
             export_presets.cfg
           grep -E "^(version|application/(file|product)_version)" export_presets.cfg
 
-      # The Windows and Android games are exported before the headset plugin
-      # is downloaded, so they do not carry it.
-      - name: Export Windows and Android
+      # The Windows, Android and web games are exported before the headset
+      # plugin is downloaded, so they do not carry it.
+      - name: Export Windows, Android and Web
         run: |
-          mkdir -p build/windows build/android build/quest build/release
+          mkdir -p build/windows build/android build/quest build/web build/release
           "$GODOT" --headless --path . --import
           "$GODOT" --headless --path . --export-release "Windows" build/windows/catgame3d.exe
           "$GODOT" --headless --path . --export-release "Android" build/android/catgame3d.apk
+          "$GODOT" --headless --path . --export-release "Web" build/web/index.html
           test -f build/windows/catgame3d.exe
           test -f build/android/catgame3d.apk
+          test -f build/web/index.html
 
       # On Linux, Godot can crash while quitting once the headset plugin is
       # loaded. The work is done by then, so the step checks the results
@@ -130,13 +133,14 @@ jobs:
           test -f build/quest/catgame3d-quest.apk
           unzip -l build/quest/catgame3d-quest.apk | grep libgodotopenxrvendors.so
 
-      - name: Build the Windows installer
+      - name: Build the Windows installer and gather the files
         run: |
           makensis -DVERSION="$VERSION" -DEXE="$PWD/build/windows/catgame3d.exe" \
             -DOUTFILE="$PWD/build/release/catgame3d-$VERSION-windows-setup.exe" \
             tools/installer/catgame3d.nsi
           cp build/android/catgame3d.apk "build/release/catgame3d-$VERSION-android.apk"
           cp build/quest/catgame3d-quest.apk "build/release/catgame3d-$VERSION-quest.apk"
+          (cd build/web && zip -qr "$GITHUB_WORKSPACE/build/release/catgame3d-$VERSION-web.zip" .)
           ls -l build/release
 
       - name: Create the release

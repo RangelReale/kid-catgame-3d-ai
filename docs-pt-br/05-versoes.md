@@ -1,12 +1,15 @@
 # Publicar uma versão
 
-Uma versão é um release no GitHub com três arquivos:
+Uma versão é um release no GitHub com quatro arquivos:
 
 - `catgame3d-<versão>-windows-setup.exe`: o instalador do Windows. Ele
   instala o jogo só para o usuário atual, sem pedir administrador, e cria
   atalhos no menu Iniciar e na área de trabalho.
 - `catgame3d-<versão>-android.apk`: o jogo para o Retroid e celulares.
 - `catgame3d-<versão>-quest.apk`: o jogo para o Meta Quest 3.
+- `catgame3d-<versão>-web.zip`: o jogo para o navegador. Descompacte e
+  ponha os arquivos em qualquer servidor web; o jogo abre pelo `index.html`.
+  Ele não abre direto do disco (`file://`), só por um servidor.
 
 ## Como publicar
 
@@ -19,7 +22,7 @@ O workflow (`.github/workflows/release.yml`) faz o resto:
 - põe a versão nas exportações. O número interno do Android é
   `maior × 10000 + menor × 100 + correção`, então 1.2.3 vira 10203. Por
   isso, o menor e a correção ficam abaixo de 100;
-- exporta o Windows e o Android, depois baixa o plugin do óculos e exporta
+- exporta o Windows, o Android e a versão web, depois baixa o plugin do óculos e exporta
   o Quest;
 - monta o instalador com o NSIS (`tools/installer/catgame3d.nsi`);
 - cria a tag e o release, com as notas geradas pelo GitHub.
