@@ -91,7 +91,7 @@ está no começo de `tools/tests/demo_drive.gd`.
 ## Regras
 
 - Neste repositório, não crie branches. Faça os commits direto em `master`.
-  Faça o push só quando o pai pedir.
+  Depois de cada commit, faça o push de `master`, como no jogo 2D.
 - Não edite a pasta `.godot/` nem os arquivos `.import`. O Godot os gera.
 - Fases são dados: cada fase é um `.tscn`. Não monte fases por código.
 - O gato, os monstrinhos e a bandeira ficam no plano z = 0. A profundidade é
