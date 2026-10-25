@@ -46,6 +46,15 @@ func _process(delta: float) -> void:
 	_place(_focus)
 
 
+## Jumps straight to the target, without gliding there. Use it after the
+## target moves to another spot all at once.
+func snap() -> void:
+	if target == null:
+		return
+	_focus = _clamped(target.global_position + look_offset)
+	_place(_focus)
+
+
 func _place(focus: Vector3) -> void:
 	var pitch := deg_to_rad(pitch_degrees)
 	var yaw := deg_to_rad(yaw_degrees)
