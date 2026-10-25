@@ -34,6 +34,7 @@ assets/                icon, sounds, music and translated text. Effects play on 
                        `Sounds` bus, muted on the title screen; music plays on `Master`
 tools/sounds/, tools/music/  Python scripts that generate the sounds and the music
 tools/tests/           automated tests and the auto-drive that records frames
+tools/promo/           autopilot and ffmpeg filters for the promo videos
 tools/install_xr_plugin.sh  downloads the OpenXR Vendors plugin (outside Git)
 addons/                OpenXR Vendors plugin, downloaded by the script above
 docs-en/, docs-pt-br/  these documents, in English and in Portuguese (Godot

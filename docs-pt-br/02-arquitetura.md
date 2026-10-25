@@ -34,6 +34,7 @@ assets/                ícone, sons, música e textos traduzidos. Os efeitos toc
                        `Sounds`, mudo na tela de início; a música toca no `Master`
 tools/sounds/, tools/music/  scripts Python que geram os sons e a música
 tools/tests/           testes automáticos e passeio automático para gravar quadros
+tools/promo/           piloto automático e filtros do ffmpeg dos vídeos de promoção
 tools/install_xr_plugin.sh  baixa o plugin OpenXR Vendors (fora do Git)
 addons/                plugin OpenXR Vendors, baixado pelo script acima
 docs-pt-br/, docs-en/  estes documentos, em português e em inglês (o Godot
