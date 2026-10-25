@@ -32,13 +32,8 @@ detalhes estão no [índice dos documentos](docs-pt-br/README.md).
 | Subir, nadando ou voando | barra de espaço ou seta ↑ | botão A |
 | Descer, nadando ou voando | seta ↓ ou S | direcional ou alavanca para baixo |
 | Trocar o idioma, na tela de início | L | botão Select (ou Back) |
-| Ir para as fases 1 a 10 | 1 a 9 e 0 | |
-| Ir para as fases 11 a 20 | Ctrl com 1 a 9 e 0 | |
-| Ir para a próxima fase | = (ou + no teclado numérico) ou Page Down | |
-| Voltar para a fase anterior | - ou Page Up | |
 
-Os números também funcionam no teclado numérico. No celular, o jogo mostra
-botões na tela.
+No celular, o jogo mostra botões na tela.
 
 ## Meta Quest 3
 

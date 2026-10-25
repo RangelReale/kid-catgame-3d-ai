@@ -32,13 +32,8 @@ details are in the [document index](docs-en/README.md).
 | Go up, swimming or flying | space bar or ↑ arrow | A button |
 | Go down, swimming or flying | ↓ arrow or S | D-pad or left stick down |
 | Change the language, on the title screen | L | Select (or Back) button |
-| Go to levels 1 to 10 | 1 to 9 and 0 | |
-| Go to levels 11 to 20 | Ctrl with 1 to 9 and 0 | |
-| Go to the next level | = (or + on the numeric keypad) or Page Down | |
-| Go back to the previous level | - or Page Up | |
 
-The numbers also work on the numeric keypad. On a phone, the game shows
-buttons on the screen.
+On a phone, the game shows buttons on the screen.
 
 ## Meta Quest 3
 
