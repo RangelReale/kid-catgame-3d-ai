@@ -5,7 +5,7 @@
 O jogo do gato em 3D. É uma nova versão do
 [kid-catgame-ai](https://github.com/RangelReale/kid-catgame-ai), o jogo 2D de plataforma feito por pai e
 filha com a ajuda do Claude. O jogo usa o motor Godot 4.7 e roda em Windows,
-Android e Mac.
+Android, Mac e Meta Quest 3.
 
 ![O gato arco-íris em 3D em cima de uma caixa, com um monstrinho, colinas, o sol e as nuvens](docs-en/images/screenshot.png)
 

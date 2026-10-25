@@ -5,7 +5,7 @@
 The cat game in 3D. It is a new version of
 [kid-catgame-ai](https://github.com/RangelReale/kid-catgame-ai), the 2D platform game made by a father
 and daughter with help from Claude. The game uses the Godot 4.7 engine and runs
-on Windows, Android and Mac.
+on Windows, Android, Mac and Meta Quest 3.
 
 ![The rainbow cat in 3D on top of a box, with a little monster, hills, the sun and the clouds](docs-en/images/screenshot.png)
 
