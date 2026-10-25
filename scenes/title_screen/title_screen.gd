@@ -14,6 +14,9 @@ signal start_requested
 ## Actions whose keys count as a start, besides the keys that type something.
 const START_ACTIONS: Array[StringName] = [&"jump", &"move_left", &"move_right", &"move_down"]
 
+## On the web, the browser mutes all sound until the first key or click.
+static var _audio_unlocked: bool = not OS.has_feature("web")
+
 ## Whether the brown picture and the words show on the screen. In the headset
 ## they do not, and the diorama shows its own 3D words; the tune still plays.
 var overlay_visible: bool = true:
@@ -40,6 +43,7 @@ func _ready() -> void:
 	_update_overlay()
 	for flag: LanguageFlag in _flags:
 		flag.pressed.connect(Language.choose.bind(flag.locale))
+		flag.pressed.connect(_unlock_audio)
 	_update_flags()
 
 
@@ -70,6 +74,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	if event.is_action_pressed("change_language"):
 		get_viewport().set_input_as_handled()
+		_unlock_audio()
 		Language.choose_next()
 		return
 	if is_start_event(event) and not _is_on_flag(event):
@@ -88,10 +93,21 @@ func _is_on_flag(event: InputEvent) -> bool:
 
 
 ## Someone pressed a button: starts the game. The headset calls it for its
-## controller buttons.
+## controller buttons. On the web, the first press only turns the tune on.
 func press() -> void:
-	if visible:
+	if visible and not _unlock_audio():
 		start_requested.emit()
+
+
+## Starts the tune over the first time someone presses something on the web,
+## because the browser kept it silent until then. Returns true when it did.
+func _unlock_audio() -> bool:
+	if _audio_unlocked:
+		return false
+	_audio_unlocked = true
+	if visible:
+		_music.play()
+	return true
 
 
 ## True for a real press of a key, a controller button, the mouse or a finger.

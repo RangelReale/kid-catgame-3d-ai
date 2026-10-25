@@ -14,6 +14,8 @@ O ratão e o monstro gigante têm barra de vida e liberam a bandeira. A fase 11
 montanha-russa, torre e pescaria. O jogo abre numa tela de início: "Jogo do
 gato" sobre fases que jogam sozinhas, em sépia, com música de bipes; qualquer
 botão (menos teclas especiais) começa a fase 1, e `--level N` pula essa tela.
+Na web, o primeiro botão só liga a música, porque o navegador deixa o som
+mudo até lá; o segundo começa a fase 1.
 Depois da última fase, a imagem fica sépia, aparecem "Você venceu!" e os
 créditos, e um botão volta à tela de início. Os monstrinhos fazem "puf" ao
 sumir; o ratão e o monstro gigante fazem "bonk" nos pulos antes do último. O jogo fala português e inglês: abre no idioma do aparelho, e duas
