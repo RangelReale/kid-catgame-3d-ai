@@ -18,10 +18,27 @@ in the order she asked for them, is in the
 
 To play in the browser, open
 [https://rangelreale.github.io/kid-catgame-3d-ai/](https://rangelreale.github.io/kid-catgame-3d-ai/).
-To play on the computer, run `godot --path .` at the repository root. Walk with the arrow keys
-or with A and D, and jump with the space bar. Press jump again in the air to
-flap the wings. A gamepad also works. The details are in the
-[document index](docs-en/README.md).
+To play on the computer, run `godot --path .` at the repository root. The
+details are in the [document index](docs-en/README.md).
+
+## Controls
+
+| What it does | Keyboard | Gamepad |
+| --- | --- | --- |
+| Start the game, on the title screen | any key | any button |
+| Walk | ← and → arrows, or A and D | D-pad or left stick |
+| Jump | space bar or ↑ arrow | A button (the bottom button) |
+| Flap the wings | jump again, in the air | jump again, in the air |
+| Go up, swimming or flying | space bar or ↑ arrow | A button |
+| Go down, swimming or flying | ↓ arrow or S | D-pad or left stick down |
+| Change the language, on the title screen | L | Select (or Back) button |
+| Go to levels 1 to 10 | 1 to 9 and 0 | |
+| Go to levels 11 to 20 | Ctrl with 1 to 9 and 0 | |
+| Go to the next level | = (or + on the numeric keypad) or Page Down | |
+| Go back to the previous level | - or Page Up | |
+
+The numbers also work on the numeric keypad. On a phone, the game shows
+buttons on the screen.
 
 ## Meta Quest 3
 

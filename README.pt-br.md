@@ -18,10 +18,27 @@ ideias da filha para o jogo, na ordem em que ela pediu, está no
 
 Para jogar no navegador, abra
 [https://rangelreale.github.io/kid-catgame-3d-ai/](https://rangelreale.github.io/kid-catgame-3d-ai/).
-Para jogar no computador, rode `godot --path .` na raiz do repositório. Ande com as setas ou
-com A e D, e pule com a barra de espaço. Aperte o pulo de novo no ar para
-bater as asas. Um controle também funciona. Os detalhes estão no
-[índice dos documentos](docs-pt-br/README.md).
+Para jogar no computador, rode `godot --path .` na raiz do repositório. Os
+detalhes estão no [índice dos documentos](docs-pt-br/README.md).
+
+## Teclas
+
+| O que faz | Teclado | Controle |
+| --- | --- | --- |
+| Começar o jogo, na tela de início | qualquer tecla | qualquer botão |
+| Andar | setas ← e →, ou A e D | direcional ou alavanca esquerda |
+| Pular | barra de espaço ou seta ↑ | botão A (o botão de baixo) |
+| Bater as asas | o pulo de novo, no ar | o pulo de novo, no ar |
+| Subir, nadando ou voando | barra de espaço ou seta ↑ | botão A |
+| Descer, nadando ou voando | seta ↓ ou S | direcional ou alavanca para baixo |
+| Trocar o idioma, na tela de início | L | botão Select (ou Back) |
+| Ir para as fases 1 a 10 | 1 a 9 e 0 | |
+| Ir para as fases 11 a 20 | Ctrl com 1 a 9 e 0 | |
+| Ir para a próxima fase | = (ou + no teclado numérico) ou Page Down | |
+| Voltar para a fase anterior | - ou Page Up | |
+
+Os números também funcionam no teclado numérico. No celular, o jogo mostra
+botões na tela.
 
 ## Meta Quest 3
 
