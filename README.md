@@ -12,7 +12,9 @@ on Windows, Android, Mac and Meta Quest 3.
 The cat still moves only sideways and up, as in the 2D game. The difference is
 that everything is now made of 3D shapes, with light and shadow, and the camera
 is tilted a little to show depth. All 16 levels of the 2D game are done, from
-the lawn to the amusement park.
+the lawn to the amusement park. The list of the daughter's ideas for the game,
+in the order she asked for them, is in the
+[README of the 2D game](https://github.com/RangelReale/kid-catgame-ai#the-daughters-requests).
 
 To play, run `godot --path .` at the repository root. Walk with the arrow keys
 or with A and D, and jump with the space bar. Press jump again in the air to

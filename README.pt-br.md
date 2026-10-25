@@ -12,7 +12,9 @@ Android, Mac e Meta Quest 3.
 O gato continua andando só para os lados e para cima, como no jogo 2D. A
 diferença é que tudo agora é feito de formas 3D, com luz e sombra, e a câmera
 fica um pouco inclinada para mostrar a profundidade. As 16 fases
-do jogo 2D estão prontas, do gramado até o parque de diversões.
+do jogo 2D estão prontas, do gramado até o parque de diversões. A lista das
+ideias da filha para o jogo, na ordem em que ela pediu, está no
+[README do jogo 2D](https://github.com/RangelReale/kid-catgame-ai/blob/master/README.pt-br.md#pedidos-da-filha).
 
 Para jogar, rode `godot --path .` na raiz do repositório. Ande com as setas ou
 com A e D, e pule com a barra de espaço. Aperte o pulo de novo no ar para
