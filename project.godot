@@ -18,6 +18,8 @@ config/name_localized={
 "en": "Cat Game 3D",
 "pt_BR": "Jogo do gato 3D"
 }
+boot_splash/image="res://assets/icons/splash.png"
+boot_splash/bg_color=Color(0.53, 0.81, 0.92, 1)
 
 [display]
 

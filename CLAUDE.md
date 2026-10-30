@@ -84,6 +84,7 @@ lugar de `godot` sempre que a saída importa.
 | Exportar para o Quest 3 | `godot --headless --path . --install-android-build-template --export-debug "Quest" build/quest/catgame3d-quest.apk` |
 | Exportar para Windows | `godot --headless --path . --export-release "Windows" build/windows/catgame3d.exe` |
 | Exportar para a web | `godot --headless --path . --export-release "Web" build/web/index.html` |
+| Refazer a imagem de abertura | `godot --path . -s tools/make_splash.gd` |
 | Fazer os vídeos de promoção | os passos estão em [tools/promo/README.pt-br.md](tools/promo/README.pt-br.md) |
 | Publicar uma versão | no GitHub, Actions > Release > Run workflow ([docs-pt-br/05-versoes.md](docs-pt-br/05-versoes.md)) |
 
